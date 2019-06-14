@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.user.dao.UserDao">
+
+
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+	<select id="getUserAll" parameterType="String"
+		resultType="com.muze.core.app.user.model.UserModel">
+		select a.doc_id,
+		a.doc_name,
+		a.login_name,
+		a.gender,
+		a.birth_date,
+		DATE_FORMAT(a.req_time,'%Y-%m-%d %H:%i:%S') req_time,
+		a.qq,
+		a.cardid,
+		a.tel,
+		a.phone,
+		c.org_name
+		from
+		hrip_doc a
+		left join
+		hrip_org_doc b
+		on
+		a.doc_id = b.doc_id
+		left join hrip_org c
+		on b.org_id = c.org_id
+		<where>
+			c.org_query_id like CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+			<if test="doc_name !=null and doc_name != '' ">
+				and a.doc_name = #{doc_name,jdbcType=VARCHAR}
+			</if>
+			<if test="tel !=null and tel != '' ">
+				and a.phone = #{tel,jdbcType=VARCHAR}
+			</if>
+			and a.doc_id != 'superAdmin'
+		</where>
+		order by a.doc_name
+	</select>
+
+	<insert id="addUser" parameterType="java.util.Map">
+		insert into
+		hrip_doc(DOC_ID,DOC_NAME,LOGIN_NAME,LOGIN_PWD,GENDER,CARDID,BIRTH_DATE,REQ_TIME,QQ,TEL,PHONE,TYPE,STATUS,UPDATE_TIME,VERSION)
+		values(#{randomID,jdbcType=VARCHAR},
+		#{permissionUserName,jdbcType=VARCHAR},
+		#{permissionLoginName,jdbcType=VARCHAR},
+		#{permissionPassword,jdbcType=VARCHAR},
+		#{permissionGender,jdbcType=DECIMAL},
+		#{permissionCardid,jdbcType=VARCHAR},
+		DATE_FORMAT(#{UserBrithday,jdbcType=VARCHAR},'%Y-%m-%d'),
+		now(),
+		#{permissionQQ,jdbcType=VARCHAR},
+		#{permissionTel,jdbcType=VARCHAR},
+		#{permissionPhone,jdbcType=VARCHAR},
+		1,
+		1,
+		now(),
+		'1'
+		)
+	</insert>
+
+	<insert id="add_org_user" parameterType="java.util.Map">
+		insert into
+		hrip_org_doc(ID,DOC_ID,ORG_ID,CREATE_TIME,VERSION)
+		values(
+		#{random_ORG_DOC,jdbcType=VARCHAR},
+		#{randomID,jdbcType=VARCHAR},
+		#{permissionUserOrg,jdbcType=VARCHAR},
+		now(),
+		'1'
+		)
+	</insert>
+
+	<select id="getDocCount" resultType="int">
+
+		select count(1) from hrip_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+
+	</select>
+
+	<select id="getDoc_Org_count" resultType="int">
+
+		select count(1) from hrip_org_doc
+		<where>
+			id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<select id="getLoginCount" resultType="int">
+
+		select count(1) from hrip_doc
+		<where>
+			login_name = trim(#{permissionLoginName,jdbcType=VARCHAR})
+		</where>
+	</select>
+
+	<update id="updUser" parameterType="java.util.Map">
+		update hrip_doc
+		set DOC_NAME=#{permissionUserName,jdbcType=VARCHAR},
+		LOGIN_NAME=#{permissionLoginName,jdbcType=VARCHAR},
+		LOGIN_PWD=#{permissionPassword,jdbcType=VARCHAR},
+		GENDER=#{permissionGender,jdbcType=DECIMAL},
+		CARDID=#{permissionCardid,jdbcType=VARCHAR},
+		BIRTH_DATE=DATE_FORMAT(#{UserBrithday,jdbcType=VARCHAR},'%Y-%m-%d'),
+		QQ=#{permissionQQ,jdbcType=VARCHAR},
+		TEL=#{permissionTel,jdbcType=VARCHAR},
+		PHONE=#{permissionPhone,jdbcType=VARCHAR},
+		UPDATE_TIME=now()
+		<where>
+			DOC_ID = #{doctor_ID,jdbcType=VARCHAR}
+		</where>
+	</update>
+
+	<delete id="delUser">
+		delete from hrip_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+
+	</delete>
+
+	<delete id="del_org_user">
+		delete from hrip_org_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+	</delete>
+
+	<delete id="del_role_user">
+		delete from hrip_role_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+	</delete>
+	
+	<delete id="del_role_user_forupdate">
+		delete from hrip_role_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+		<foreach collection="all" item="item" index="index" open=" and role_id in(" separator="," close=")">
+		     #{item.role_id,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+
+	<delete id="del_group_user">
+		delete from hrip_group_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+		</where>
+	</delete>
+	
+	<delete id="del_group_user_forupdate">
+		delete from hrip_group_doc
+		<where>
+			doc_id = #{random_ID,jdbcType=VARCHAR}
+			<foreach collection="all" index="index" item="item" open=" and GROUP_ID in(" separator="," close=")">
+			   #{item.group_id,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<select id="get_user_roles" resultType="java.util.Map">
+		select e.doc_id doc_id,e.role_id role_id,e.role_name role_name,e.remark role_remark,IFNULL(e.ID,'n')  ischecked from (
+		select a.doc_id,b.*,c.ID,d.ORG_NAME from hrip_org_doc a
+		INNER join hrip_role b
+		on a.ORG_ID = b.ORG_ID
+		INNER JOIN hrip_org d
+		on a.ORG_ID = d.ORG_ID
+		left join hrip_role_doc c
+		on c.ROLE_ID = b.ROLE_ID
+		and c.DOC_ID = #{random_ID,jdbcType=VARCHAR}
+		where a.DOC_ID = #{random_ID,jdbcType=VARCHAR}
+		ORDER BY b.ROLE_ID
+		) e
+
+	</select>
+
+    <insert id="saveUserRoles" >
+      insert into hrip_role_doc(id,doc_id,role_id,create_time,version)
+      <foreach collection="list" index="index" item="item" open="select * from (" separator="union all" close=") a">
+      select #{item.id,jdbcType=VARCHAR} id ,
+             #{item.doc_id,jdbcType=VARCHAR} doc_id,
+             #{item.role_id,jdbcType=VARCHAR} role_id,
+      		 now() create_time,
+      		 '1' version
+      </foreach>
+    </insert>
+    
+    <select id="get_user_groups" resultType="java.util.Map">
+    
+        select e.doc_id doc_id,e.group_id group_id,e.group_name group_name,e.remarks remarks,IFNULL(e.id,'n') ischecked
+		FROM (
+			select a.DOC_ID,b.*,c.id from hrip_org_doc a
+			inner join hrip_user_group b
+			on a.ORG_ID = b.ORG_ID
+			LEFT JOIN hrip_group_doc c
+			on b.GROUP_ID = c.GROUP_ID
+			and c.DOC_ID = #{random_ID,jdbcType=VARCHAR}
+			where a.DOC_ID = #{random_ID,jdbcType=VARCHAR}
+			order by b.GROUP_ID
+		) e
+    </select>
+    
+    <insert id="saveUserGroups" >
+      insert into hrip_group_doc(id,doc_id,group_id,create_time,version)
+      <foreach collection="list" index="index" item="item" open="select * from (" separator="union all" close=") a">
+      select #{item.id,jdbcType=VARCHAR} id ,
+             #{item.doc_id,jdbcType=VARCHAR} doc_id,
+             #{item.group_id,jdbcType=VARCHAR} group_id,
+      		 now() create_time,
+      		 '1' version
+      </foreach>
+    </insert>
+
+</mapper>

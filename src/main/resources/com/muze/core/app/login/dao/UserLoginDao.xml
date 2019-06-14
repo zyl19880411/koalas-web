@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.login.dao.UserLoginDao">
+
+     <select id="getUserInfo" resultType="com.muze.core.app.login.model.LoginModel">
+          select distinct 
+          a.LOGIN_NAME 'loginName', 
+          a.LOGIN_PWD 'loginPassword',
+          e.NAME 'name',
+          e.CODE 'code',
+          e.ICON 'icon',
+          e.ELEMENT_TYPE 'elementType',
+          e.URL 'url',
+          e.PARENT_ID 'parentID',
+          e.SORT 'sort'
+          from hrip_doc a 
+          inner join hrip_role_doc b on  a.DOC_ID = b.DOC_ID and a.LOGIN_NAME = #{userCode,jdbcType=VARCHAR}
+		  inner join hrip_role c on b.ROLE_ID = c.ROLE_ID 
+		  inner join hrip_role_permission d on d.ROLE_ID= c.ROLE_ID
+		  inner join hrip_permission e on e.PERMISSION_ID = d.PERMISSION_ID and e.ELEMENT_TYPE in('1','2')
+		  order by e.SORT
+     </select>
+     
+     <select id="getUser" resultType="com.muze.core.app.login.model.UserModel">
+     select doc_name 'userName',
+            login_name 'userCode',
+            login_pwd 'userPassword',
+            type 'type',
+            doc_id 'id'
+            from hrip_doc
+            where login_name = #{userCode,jdbcType=VARCHAR} 
+     </select>
+
+     <select id="getUserPermissions" resultType="String" parameterType="String">
+     
+     select distinct 
+          e.code code
+          from hrip_doc a 
+          inner join hrip_role_doc b on  a.DOC_ID = b.DOC_ID and a.LOGIN_NAME = #{userCode,jdbcType=VARCHAR}
+		  inner join hrip_role c on b.ROLE_ID = c.ROLE_ID 
+		  inner join hrip_role_permission d on d.ROLE_ID= c.ROLE_ID
+		  inner join hrip_permission e on e.PERMISSION_ID = d.PERMISSION_ID
+		  order by e.SORT
+     </select>
+
+</mapper>

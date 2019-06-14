@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.permission.dao.PermissionDao">
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+	<resultMap type="com.muze.core.app.permission.model.PermissionModel"
+		id="PerrmissionResultMap">
+ 
+		<result column="PERMISSION_ID" property="permissionID" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="_parentId" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="ICON" property="iconCls" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR" />
+		<result column="ELEMENT_TYPE" property="elementType" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+ 
+	</resultMap>
+
+	<select id="getPermission" resultMap="PerrmissionResultMap">
+	   select b.PERMISSION_ID,
+	   b.NAME,
+	   b.CODE,
+	   b.ICON,
+	   b.URL,
+	   b.PARENT_ID,
+	   DATE_FORMAT(b.CREATE_TIME,'%Y-%m-%d %H:%i:%S') CREATE_TIME,
+	   ELEMENT_TYPE,
+	   b.REMARK
+	   from hrip_org_permission a
+	   inner join hrip_permission b 
+	   on a.permission_id = b.PERMISSION_ID
+       where a.ORG_ID = #{org_id,jdbcType=VARCHAR}
+       ORDER BY b.sort
+	</select>
+	
+	<insert id="insertPermission">
+	  insert into hrip_permission(
+	  PERMISSION_ID,
+	  NAME,
+	  CODE,
+	  ICON,
+	  OPEN_METHOD,
+	  ELEMENT_TYPE,
+	  URL,
+	  PARENT_ID,
+	  SORT,
+	  STATUE,
+	  CREATE_TIME,
+	  VERSION,
+	  REMARK)
+	  values(
+	  #{randomId,jdbcType=VARCHAR},
+	  #{perName,jdbcType=VARCHAR},
+	  #{perCode,jdbcType=VARCHAR},
+	  #{perIcon,jdbcType=VARCHAR},
+	  '1',
+	  #{elementType,jdbcType=VARCHAR},
+	  <choose>
+		  <when test="elementType != 2">
+		      null,
+		  </when>
+		  <otherwise>
+		      #{perUrl,jdbcType=VARCHAR},
+		  </otherwise>
+	  </choose>
+	  #{permissionID,jdbcType=VARCHAR},
+      #{sort,jdbcType=DECIMAL},
+      '1',
+      now(),
+	  '1',
+	  #{perRemark,jdbcType=VARCHAR}
+	  )
+	</insert>
+
+    <insert id="insertOrgPer">
+     insert into hrip_org_permission(ID,ORG_ID,PERMISSION_ID,CREATE_TIME,VERSION)
+     values(
+      #{randomOrgPerId,jdbcType=VARCHAR},
+      'superAdmin',
+      #{randomId,jdbcType=VARCHAR},
+      now(),
+      '1'
+     )
+    
+    </insert>
+
+    <insert id="insertRolePer">
+     insert into hrip_role_permission(ID,ROLE_ID,PERMISSION_ID,CREATE_TIME,VERSION)
+     values(
+      #{randomRolePerId,jdbcType=VARCHAR},
+      'superAdmin',
+      #{randomId,jdbcType=VARCHAR},
+      now(),
+      '1'
+     )
+    
+    </insert>
+
+    <select id="getFristPerPosition" resultType="int" >
+      select IFNULL(max(sort),0) + 10000 from hrip_permission a
+      where a.element_type='1'
+    </select>
+
+    <select id="getsecondPerPosition" resultType="int">
+    
+     select case when max(a.sort) is null then -1
+     ELSE max(a.sort)+ 50 end
+     from hrip_permission a 
+      where a.parent_id= #{permissionID,jdbcType=VARCHAR}
+      and a.element_type='2'
+    </select>
+
+    <select id="getnullsecondPerPosition" resultType="int">
+    
+      select a.sort
+      from hrip_permission a 
+      where a.PERMISSION_ID= #{permissionID,jdbcType=VARCHAR}
+ 
+    </select>
+
+
+    <select id="getthirdPerPosition" resultType="int">
+      select case when max(a.sort) is null then -1
+      ELSE max(a.sort)+ 1 end
+      from hrip_permission a 
+      where a.parent_id= #{permissionID,jdbcType=VARCHAR}
+      and a.element_type='3'
+    </select>
+    
+    <update id="updatePermission">
+      update hrip_permission
+      <set>
+      name =#{perName,jdbcType=VARCHAR},
+      icon =#{perIcon,jdbcType=VARCHAR},
+      url =#{perUrl,jdbcType=VARCHAR},
+      remark =#{perRemark,jdbcType=VARCHAR}
+      </set>
+      <where>
+        PERMISSION_ID= #{permissionID,jdbcType=VARCHAR}
+      </where>
+    </update>
+    
+    <delete id="delPermission">
+      delete from hrip_permission
+	   <where>
+	      PERMISSION_ID 
+	      <foreach collection="list" item="item" index="index" open="in(" separator="," close=")">
+	         #{item,jdbcType=VARCHAR}
+	      </foreach>
+	   </where>
+    </delete>
+    
+    <delete id="delOrgPermission">
+      delete from hrip_org_permission
+	   <where>
+	      PERMISSION_ID 
+	      <foreach collection="list" item="item" index="index" open="in(" separator="," close=")">
+	         #{item,jdbcType=VARCHAR}
+	      </foreach>
+	   </where>
+    </delete>
+    
+    <delete id="delRolePermission">
+      delete from hrip_role_permission
+	   <where>
+	      PERMISSION_ID 
+	      <foreach collection="list" item="item" index="index" open="in(" separator="," close=")">
+	         #{item,jdbcType=VARCHAR}
+	      </foreach>
+	   </where>
+    </delete>
+    
+    <select id="getIcon" resultType="String">
+    select icon_code from hrip_icon where state = '1'
+    </select>
+
+</mapper>

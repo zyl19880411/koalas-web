@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.common.dao.CommonDao">
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+	<select id="getbtnPermission" resultType="java.util.HashMap">
+		select
+		name,code,icon,permission_id from hrip_permission a
+		where a.parent_id =
+		#{parent_id,jdbcType=VARCHAR}
+		and a.statue = '1'
+		order by sort
+	</select>
+
+	<select id="getOrg" resultType="java.util.HashMap">
+		select org_id 'value',org_name 'text' from hrip_org
+		<where>
+			org_query_id like CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+		</where>
+	</select>
+
+	<select id="getUserOrg" resultType="String">
+		select c.org_query_id from
+		hrip_doc a inner join hrip_org_doc b on a.doc_id
+		= b.doc_id
+		inner join
+		hrip_org c on c.org_id = b.org_id
+		where a.login_name =
+		#{login_name,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getOrgQueryIDcount" resultType="int">
+		select count(1) from hrip_org
+		<where>
+			org_query_id = #{org_query_id,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<select id="getQueryIdByOrgId" resultType="String">
+		select org_query_id from hrip_org
+		<where>
+			org_id = #{org_id,jdbcType=VARCHAR}
+		</where>
+	</select>
+	
+	<select id="getOrgIdByLoginName" resultType="String">
+	 select b.org_id from hrip_doc a
+	 inner join hrip_org_doc b
+	 on a.doc_id = b.doc_id
+	 where a.login_name =#{userName,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

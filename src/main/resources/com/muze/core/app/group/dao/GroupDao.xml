@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.group.dao.GroupDao">
+
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+   <resultMap type="com.muze.core.app.group.model.GroupModel" id="baseGetGroups">
+      <id column="GROUP_ID" property="group_id" />
+      <result column="GROUP_NAME" property="group_name" jdbcType="VARCHAR"/>
+      <result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR"/>
+      <result column="REMARKS" property="remark" jdbcType="VARCHAR"/>
+      <result column="ORG_ID" property="org_id" jdbcType="VARCHAR"/>
+      <result column="ORG_NAME" property="org_name" jdbcType="VARCHAR"/>   
+   </resultMap>
+ 
+	<sql id="Base_Column_List">
+		a.GROUP_ID,a.ORG_ID,a.GROUP_NAME,a.REMARKS,DATE_FORMAT(a.CREATE_TIME,'%Y-%m-%d %H:%i:%S') CREATE_TIME,b.ORG_NAME
+	</sql>
+
+   <select id="getGroups" resultMap="baseGetGroups">
+     select 
+     <include refid="Base_Column_List"></include>
+     from hrip_user_group a
+     inner join hrip_org b
+     on a.ORG_ID = b.ORG_ID
+     and b.ORG_QUERY_ID like CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+     order by b.ORG_QUERY_ID
+   </select>
+
+   <insert id="addGroup">
+   insert into hrip_user_group(GROUP_ID,ORG_ID,GROUP_NAME,REMARKS,CREATE_TIME,STATUS,VERSION)
+   values(
+        #{randomId,jdbcType=VARCHAR},
+        #{permissiongroupOrg,jdbcType=VARCHAR},
+        #{permissiongroupName,jdbcType=VARCHAR},
+        #{permissiongroupremark,jdbcType=VARCHAR},
+        now(),
+        1,
+        1
+   )
+   </insert>
+
+   <update id="updateGroup">
+   update hrip_user_group set
+   GROUP_NAME =#{permissiongroupName,jdbcType=VARCHAR},
+   REMARKS = #{permissiongroupremark,jdbcType=VARCHAR}
+   where GROUP_ID =  #{group_ID,jdbcType=VARCHAR}
+   </update>
+
+   <delete id="delGroupDoc">
+     delete from hrip_group_doc where group_id = #{group_id,jdbcType=VARCHAR}
+   </delete>
+
+   <delete id="delGroup">
+     delete from hrip_user_group where group_id = #{group_id,jdbcType=VARCHAR}
+   </delete>
+   
+</mapper>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.org.dao.OrgDao">
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+	<resultMap type="com.muze.core.app.org.model.OrgModel" id="OrgResultMap">
+
+		<id column="ORG_ID" property="org_id" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="_parentId" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="org_name" jdbcType="VARCHAR" />
+		<result column="TEL" property="tel" jdbcType="VARCHAR" />
+		<result column="LINK_NAME" property="link_name" jdbcType="VARCHAR" />
+		<result column="LINK_PHONE" property="link_phone" jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.muze.core.app.org.model.OrgPermissionModel"
+		id="OrgPermissionResultMap">
+		<id column="PERMISSION_ID" property="permissionID" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="_parentId" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="ICON" property="iconCls" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IS_CHECK" property="ischeck" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ORG_ID, CASE WHEN ORG_ID= #{org_id,jdbcType=VARCHAR} THEN NULL ELSE PARENT_ID  END  PARENT_ID,ORG_NAME,TEL,LINK_NAME,LINK_PHONE,ADDRESS,DATE_FORMAT(CREATE_TIME,'%Y-%m-%d
+		%H:%i:%S') CREATE_TIME
+	</sql>
+
+	<select id="getOrg" resultMap="OrgResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from hrip_org
+		where ORG_QUERY_ID like
+		CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+	</select>
+
+	<insert id="insertOrg">
+		insert into hrip_org
+		(ORG_ID,
+		ORG_NAME,
+		ADMIN_CODE,
+		ORG_PWD,
+		PARENT_ID,
+		ORG_QUERY_ID,
+		TEL,
+		LINK_NAME,
+		LINK_PHONE,
+		ADDRESS,
+		CREATE_TIME,
+		UPDATE_TIME,
+		VERSION)
+		values(
+		#{id,jdbcType=VARCHAR},
+		#{permissionOrgName,jdbcType=VARCHAR},
+		#{permissionadmincode,jdbcType=VARCHAR},
+		#{permissionOrgPassword,jdbcType=VARCHAR},
+		#{parentid,jdbcType=VARCHAR},
+		#{queryID,jdbcType=VARCHAR},
+		#{permissionOrgTel,jdbcType=VARCHAR},
+		#{permissionOrgLinkName,jdbcType=VARCHAR},
+		#{permissionOrgLinkPhone,jdbcType=VARCHAR},
+		#{permissionOrgAddress,jdbcType=VARCHAR},
+		now(),
+		now(),
+		'1')
+	</insert>
+
+	<update id="updOrg">
+		update hrip_org
+		<set>
+			ORG_NAME = #{permissionOrgName,jdbcType=VARCHAR},
+			ADMIN_CODE=
+			#{permissionadmincode,jdbcType=VARCHAR},
+			ORG_PWD=
+			#{permissionOrgPassword,jdbcType=VARCHAR},
+			TEL=
+			#{permissionOrgTel,jdbcType=VARCHAR},
+			LINK_NAME=
+			#{permissionOrgLinkName,jdbcType=VARCHAR},
+			LINK_PHONE=
+			#{permissionOrgLinkPhone,jdbcType=VARCHAR},
+			ADDRESS=
+			#{permissionOrgAddress,jdbcType=VARCHAR},
+			UPDATE_TIME = now()
+			<where>
+				ORG_ID=#{parentid,jdbcType=VARCHAR}
+			</where>
+
+		</set>
+	</update>
+
+	<select id="getChildOrgId" resultType="String">
+		select org_id from hrip_org
+		<where>
+			org_query_id like CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+		</where>
+	</select>
+
+	<select id="selectDelGroup" resultType="String">
+		select group_id from hrip_user_group
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</select>
+
+	<delete id="delGroup">
+		delete from hrip_user_group
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delDocGroup">
+		delete from hrip_group_doc
+		<where>
+			GROUP_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<select id="selectDelDoc" resultType="String">
+		select doc_id from hrip_org_doc
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</select>
+
+	<delete id="delDoc">
+		delete from hrip_doc
+		<where>
+			DOC_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delDocRole">
+		delete from hrip_role_doc
+		<where>
+			DOC_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delDocOrg">
+		delete from hrip_org_doc
+		<where>
+			DOC_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<select id="selectDelRole" resultType="String">
+		select role_id from hrip_role
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</select>
+
+	<delete id="delRole">
+		delete from hrip_role
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delRolePerrmission">
+		delete from hrip_role_permission
+		<where>
+			ROLE_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delOrgPerrmission">
+		delete from hrip_org_permission
+		<where>
+			ORG_ID
+			<foreach collection="list" open="in(" index="index" item="item"
+				close=")" separator=",">
+				#{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+
+	<delete id="delOrg">
+		delete from hrip_org
+		<where>
+			org_query_id like CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+		</where>
+	</delete>
+
+	<select id="getOrgPerrmission" resultMap="OrgPermissionResultMap">
+		SELECT c.PERMISSION_ID,
+		c.`NAME`,
+		c.`CODE`,
+		c.ICON,
+		c.URL,
+		c.PARENT_ID,
+		DATE_FORMAT(c.CREATE_TIME,'%Y-%m-%d %H:%i:%S') CREATE_TIME,
+		c.REMARK,
+		IFNULL(b.id,'n') IS_CHECK
+		FROM `hrip_org_permission` a
+		INNER JOIN hrip_permission c
+		on a.PERMISSION_ID = c.PERMISSION_ID
+		LEFT JOIN hrip_org_permission b
+		on a.PERMISSION_ID = b.PERMISSION_ID
+		and b.ORG_ID = #{org_id,jdbcType=VARCHAR}
+		where a.ORG_ID = #{parentID,jdbcType=VARCHAR}
+		order by c.SORT
+	</select>
+
+	<delete id="setOrgPerrmission">
+		delete from hrip_org_permission
+		<where>
+			org_id = #{org_id,jdbcType=VARCHAR}
+		</where>
+	</delete>
+
+	<insert id="saveOrgPerrmisssion">
+		insert into
+		hrip_org_permission(ID,ORG_ID,PERMISSION_ID,CREATE_TIME,VERSION)
+		<foreach collection="list" item="item" index="index" open="select * from("
+			separator="union all" close=") as aaa">
+			select #{item.id,jdbcType=VARCHAR} ID,
+			#{item.org_id,jdbcType=VARCHAR} ORG_ID,
+			#{item.perrmission_id,jdbcType=VARCHAR} PERMISSION_ID,
+			now() CREATE_TIME,
+			'1' VERSION
+		</foreach>
+	</insert>
+	
+	<delete id="setChildOrgPerrmission">
+		delete from hrip_org_permission
+		<where>
+			org_id = #{org_id,jdbcType=VARCHAR}
+			and permission_id 
+			<foreach collection="list" item="item" index="index" open="not in(" separator="," close=")">
+			     #{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+	
+	<select id="getRoleByOrgID" resultType="String">
+		select role_id from hrip_role
+		<where>
+		  org_id = #{org_id,jdbcType=VARCHAR}
+		</where>
+	</select>
+	
+	
+	<delete id="setChildRolePerrmission">
+	   delete from hrip_role_permission
+	   <where>
+			role_id = #{role_id,jdbcType=VARCHAR}
+			and permission_id 
+			<foreach collection="list" item="item" index="index" open="not in(" separator="," close=")">
+			     #{item,jdbcType=VARCHAR}
+			</foreach>
+		</where>
+	</delete>
+	
+	<delete id="setRolePerrmission">
+	 delete  from hrip_role_permission 
+	 <where>
+	    role_id = #{role_id,jdbcType=VARCHAR}
+	 </where>
+	</delete>
+
+</mapper>

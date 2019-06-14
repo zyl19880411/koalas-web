@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.role.dao.RoleDao">
+
+	<cache eviction="FIFO" flushInterval="60000" size="1024"
+		readOnly="true" />
+
+	<resultMap type="com.muze.core.app.role.model.RoleModel" id="rolesResultMap">
+
+		<id column="ROLE_ID" property="role_id" jdbcType="VARCHAR" />
+		<result column="ROLE_NAME" property="role_name" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="org_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<resultMap type="com.muze.core.app.role.model.RolePermissionModel"
+		id="rolesPerMissionResultMap">
+		<id column="PERMISSION_ID" property="permission_id" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ICON" property="iconCls" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="_parentId" jdbcType="VARCHAR" />
+		<result column="STATUE" property="state" jdbcType="VARCHAR" />
+		<result column="ISCHECK" property="isCheck" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+
+	<sql id="Base_Column_List">
+		a.ROLE_ID,a.ROLE_NAME,a.REMARK,
+		DATE_FORMAT(a.CREATE_TIME,'%Y-%m-%d %H:%i:%S') CREATE_TIME,
+		b.ORG_NAME
+	</sql>
+
+	<select id="getRoleAll" resultMap="rolesResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		hrip_role
+		a
+		inner join hrip_org b
+		on a.ORG_ID = b.ORG_ID
+		where
+		b.ORG_QUERY_ID like
+		CONCAT(#{org_query_id,jdbcType=VARCHAR},'%')
+		and a.role_id != 'superAdmin'
+	</select>
+
+	<insert id="addRole">
+		insert into
+		hrip_role(ROLE_ID,ROLE_NAME,REMARK,CREATE_TIME,UPDATE_TIME,ORG_ID,STATUS,VERSION)
+		values(#{randomId,jdbcType=VARCHAR},
+		#{permissionRoleCode,jdbcType=VARCHAR},
+		#{permissionRoleName,jdbcType=VARCHAR},
+		now(),
+		now(),
+		#{permissionRoleOrg,jdbcType=VARCHAR},
+		1,
+		1)
+	</insert>
+
+	<update id="updRole">
+		update hrip_role
+		set ROLE_NAME = #{permissionRoleCode,jdbcType=VARCHAR},
+		REMARK = #{permissionRoleName,jdbcType=VARCHAR},
+		UPDATE_TIME = now()
+		where ROLE_ID = #{role_ID,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delRole">
+		delete from hrip_role
+		where ROLE_ID = #{randomId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="delRoleDoc">
+		delete from hrip_role_doc
+		where ROLE_ID = #{randomId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="delRolePermission">
+		delete from hrip_role_permission
+		where ROLE_ID = #{randomId,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getRolePermission" resultMap="rolesPerMissionResultMap">
+		select
+		e.PERMISSION_ID,e.NAME,e.CODE,e.URL,e.PARENT_ID,e.REMARK,e.CREATE_TIME,e.STATUE,e.ICON,IFNULL(e.ID,'n')
+		ISCHECK FROM
+		(
+		select
+		c.PERMISSION_ID,c.`NAME`,c.`CODE`,c.URL,c.PARENT_ID,c.REMARK,
+		DATE_FORMAT(c.CREATE_TIME,'%Y-%m-%d %H:%i:%s') CREATE_TIME
+		,c.ICON,c.STATUE,d.ID from hrip_role a
+		inner join hrip_org_permission b
+		on a.ORG_ID =b.ORG_ID
+		inner join hrip_permission c
+		on b.PERMISSION_ID
+		=c.PERMISSION_ID
+		left join hrip_role_permission d
+		on d.ROLE_ID =
+		#{randomId,jdbcType=VARCHAR}
+		and d.PERMISSION_ID = c.PERMISSION_ID
+		where a.ROLE_ID =
+		#{randomId,jdbcType=VARCHAR}
+		ORDER BY c.SORT
+		) e
+	</select>
+
+	<insert id="saveRolePermission">
+
+		insert into
+		hrip_role_permission(ID,ROLE_ID,PERMISSION_ID,CREATE_TIME,VERSION)
+
+		<foreach collection="list" index="index" item="item" open="select * from (" separator="union all" close=") a">
+			select #{item.RandomId,jdbcType=VARCHAR} ID ,
+			#{roleId,jdbcType=VARCHAR} ROLE_ID,
+			#{item.PerMissionId,jdbcType=VARCHAR} PERMISSION_ID,
+			now() CREATE_TIME,
+			'1' VERSION
+		</foreach>
+
+	</insert>
+</mapper>

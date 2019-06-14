@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+					    http://www.springframework.org/schema/aop 
+					    http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+					    http://www.springframework.org/schema/tx  
+					    http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+					    http://www.springframework.org/schema/context
+					    http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+					    
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:properties/app_config.properties" />
+
+    <!--连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+		destroy-method="close" lazy-init="false">
+		<property name="driverClassName" value="${muze.doc.driver}" />
+		<property name="url" value="${muze.doc.url}" />
+		<property name="username" value="${muze.doc.username}" />
+		<property name="password" value="${muze.doc.password}" />
+		<property name="initialSize" value="${muze.doc.initialSize}" />
+		<property name="maxActive" value="${muze.doc.maxActive}" />
+		<property name="minIdle" value="${muze.doc.minIdle}" />
+		<property name="maxIdle" value="${muze.doc.maxIdle}" />
+		<property name="maxWait" value="${muze.doc.maxWait}" />
+		<property name="validationQuery" value="select 1" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="filters" value="stat,wall" />
+	</bean>
+	
+	<!--连接池 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" lazy-init="false">
+		<property name="driverClassName" value="${muze.uploaddata.driver}" />
+		<property name="url" value="${muze.uploaddata.url}" />
+		<property name="username" value="${muze.uploaddata.username}" />
+		<property name="password" value="${muze.uploaddata.password}" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="select 1" />
+		<property name="poolPreparedStatements" value="true" />
+	</bean> -->
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- Session Factory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean name="MapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="com.muze.core.app.**.dao" />
+	</bean>
+	
+	<!-- 声明任务工厂 -->  
+    <bean id="scheduler" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        <property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:properties/quartz.properties" />
+		<!--applicationContextSchedulerContextKey： 
+		是org.springframework.scheduling.quartz.SchedulerFactoryBean这个类中
+		把spring上下 文以key/value的方式存放在了quartz的上下文中了，
+		可以用applicationContextSchedulerContextKey所定义的key得到对应的spring上下文-->  
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>    
+    </bean>
+
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muze.core.app.task.dao.TaskDao">
+
+   <resultMap type="com.muze.core.app.task.model.TaskModel" id="TaskModel">
+     <id column="job_name" property="task_id"/>
+     <result column="job_class_name" property="task_url"/>
+     <result column="description" property="task_name"/>
+     <result column="trigger_state" property="task_state"/>
+     <result column="cron_expression" property="task_expression"/>
+   </resultMap>
+   
+   <select id="getTasks" resultMap="TaskModel">
+	    select a.job_name,a.job_class_name, a.description,b.trigger_state,c.cron_expression from  qrtz_job_details a
+	    inner join qrtz_triggers b on a.job_name = b.job_name
+	    inner join qrtz_cron_triggers c on c.trigger_name = b.job_name
+	    order by a.job_name
+   </select>
+
+</mapper>
