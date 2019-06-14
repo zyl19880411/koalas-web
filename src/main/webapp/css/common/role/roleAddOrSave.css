@@ -1,0 +1,33 @@
+#RoleADDFrom {
+	margin: 0;
+	padding: 10px 30px;
+	margin: 10px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 20px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 100px;
+	margin-left: 20px;
+	text-align: right;
+	margin-right: 20px;
+}
+
+.fitem .errorLabel {
+	display: inline-block;
+	width: 150px;
+	margin-left: 20px;
+	text-align: left;
+	display:none;
+}
