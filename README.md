@@ -6,7 +6,6 @@
 
 基于数据库表的spring 定时任务 支持集群部署 可制定执行任务和执行时间,删除添加操作等等，使用方式，下载之后clena install，tomcat7 -run直接可以运行，或者打war包部署到tomcat中，sql文件在resources里面。超级管理员账户:admin,密码123456
 
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0614/182051_0a76e930_536094.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0619/130516_894032dd_536094.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0619/130536_804b37c6_536094.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0619/130550_f1a35217_536094.png "屏幕截图.png")
