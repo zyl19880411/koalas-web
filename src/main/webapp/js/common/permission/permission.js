@@ -201,8 +201,8 @@ $(document).ready(function() {
 		   //显示dilog
 		   $('#permissiondialog').dialog({
 			    title: title,
-			    width: 700,
-			    height: 600,
+			    width: 600,
+			    height: 230,
 			    closed: false,
 			    cache: false,
 			    href:encodeURI(encodeURI('PermissionController/' + saveOrAdd + 
@@ -276,31 +276,21 @@ $(document).ready(function() {
 	   
 	   function checkPerInfo(){
 		   
-		   var isTrue = true;
-		    //菜单名称验证
+ 		    //菜单名称验证
 		   var perName = $("#perName").val();
 		   var reg= /^[\u4e00-\u9fa5a-zA-Z0-9]{2,30}$/;
 		   if(!reg.test(perName)){
-			   $("#errorLabelperName").css("display","inline");
-			   $("#errorLabelperName").html("*请输入正确的菜单名称");
-			   isTrue=false;
+               $.messager.alert('请输入正确的菜单名称','请输入正确的菜单名称!','info');
+               return false;
 		   }
-		   else{
-			   $("#errorLabelperName").css("display","none");
-			   $("#errorLabelperName").html("");
-		   }
+
 		   
 		 //菜单图片验证
 		   var perIcon = $("#perIcon").val();
 		   reg= /^[a-zA-Z0-9\-\_]{2,30}$/;
 		   if(!reg.test(perIcon)){
-			   $("#errorLabeperIcon").css("display","inline");
-			   $("#errorLabeperIcon").html("*请输入正确的图片名称");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabeperIcon").css("display","none");
-			   $("#errorLabeperIcon").html("");
+               $.messager.alert('请输入正确的图片名称','请输入正确的图片名称!','info');
+               return false;
 		   }
 		   
 		   if(elementType == 2){
@@ -308,13 +298,8 @@ $(document).ready(function() {
 			   var perUrl = $("#perUrl").val();
 			   reg= /^[a-zA-Z0-9\/]{2,30}\.do$/;
 			   if(!reg.test(perUrl)){
-				   $("#errorLabeperUrl").css("display","inline");
-				   $("#errorLabeperUrl").html("*请输入正确的菜单路径");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabeperUrl").css("display","none");
-				   $("#errorLabeperUrl").html("");
+                   $.messager.alert('请输入正确的菜单路径','请输入正确的菜单路径!','info');
+                   return false;
 			   }
 		   }
 		   
@@ -322,16 +307,10 @@ $(document).ready(function() {
 		   var perRemark = $("#perRemark").val();
 		   reg= /^[\u4e00-\u9fa5a-zA-Z0-9]{0,30}$/;
 		   if(!reg.test(perRemark)){
-			   $("#errorLabeperRemark").css("display","inline");
-			   $("#errorLabeperRemark").html;("*请输入正确的菜单说明");
-			   isTrue=false;
+               $.messager.alert('请输入正确的菜单说明','请输入正确的菜单说明!','info');
+               return false;
 		   }
-		   else{
-			   $("#errorLabeperRemark").css("display","none");
-			   $("#errorLabeperRemark").html("");
-		   }
-		   
-		   return isTrue;
+		   return true;
 	   }
  
 });

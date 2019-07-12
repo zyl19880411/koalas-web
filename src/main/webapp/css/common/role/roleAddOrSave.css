@@ -1,33 +1,22 @@
-#RoleADDFrom {
-	margin: 0;
-	padding: 10px 30px;
-	margin: 10px;
+table.dataintable {
+	margin:auto;
+	border-collapse:collapse;
+	border:1px solid #aaa;
+	width:90%;
+	height:90%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	vertical-align: middle;
 }
-
-.ftitle {
-	font-size: 14px;
-	font-weight: bold;
-	padding: 5px 0;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #ccc;
+td i{font-family:"微软雅黑",Times,serif;font-style:normal;font-size:14px;}
+table.dataintable td {
+	vertical-align:middle;
+	padding:6px 6px 6px 6px;
+	border:1px solid #aaa;
 }
-
-.fitem {
-	margin-bottom: 20px;
-}
-
-.fitem label {
-	display: inline-block;
-	width: 100px;
-	margin-left: 20px;
-	text-align: right;
-	margin-right: 20px;
-}
-
-.fitem .errorLabel {
-	display: inline-block;
-	width: 150px;
-	margin-left: 20px;
-	text-align: left;
-	display:none;
+table.dataintable td:nth-child(odd) {
+	background-color:#ecf3ff;
 }

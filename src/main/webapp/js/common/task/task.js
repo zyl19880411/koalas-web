@@ -211,7 +211,7 @@ $(document).ready(function() {
 			    cache: false,
 			    //href:"TaskController/addReturn.do",
 			    iconCls: 'icon-save',
-			    content: "修改任务表达式:<input type='text' id = 'taskUpd' value ='"+row.task_expression+"'/>",
+			    content: "修改任务表达式:<input style='margin-top: 10px;' type='text' id = 'taskUpd' value ='"+row.task_expression+"'/>",
 			    toolbar: [{
 					text:'取消',
 					iconCls:'icon-remove',
@@ -289,7 +289,7 @@ $(document).ready(function() {
 		   $('#taskAdddialog').dialog({
 			    title: "添加任务",
 			    width: 600,
-			    height: 400,
+			    height: 230,
 			    closed: false,
 			    cache: false,
 			    href:"TaskController/addReturn.do",
@@ -364,45 +364,31 @@ $(document).ready(function() {
 	 
 	//*****************************添加保存验证begin*****************************
 	 function checkTaskAddInfo(){
-		 var isTrue =true;
 		 
 		//判断任务名称
 		 var taskName = $("#taskName").val();
 		 reg= /^[\u4e00-\u9fa50-9\.A-Za-z]{2,30}$/;
 		 if(!reg.test(taskName)){
-			   $("#errorLabeltaskName").css("display","inline");
-			   $("#errorLabeltaskName").html("*请输入任务名称");
-			   isTrue=false;
-		  } else{
-			   $("#errorLabeltaskName").css("display","none");
-			   $("#errorLabeltaskName").html("");
+             $.messager.alert('请输入任务名称','请输入任务名称!','info');
+             return;
 		  }
-		 
+
 		 //判断任务路径
 		 var taskUrl = $("#taskUrl").val();
 		 reg= /^[0-9\.A-Za-z]{2,50}$/;
 		  if(!reg.test(taskUrl)){
-			   $("#errorLabeltaskUrl").css("display","inline");
-			   $("#errorLabeltaskUrl").html("*请输入任务路径");
-			   isTrue=false;
-		  } else {
-			   $("#errorLabeltaskUrl").css("display","none");
-			   $("#errorLabeltaskUrl").html("");
+              $.messager.alert('请输入任务路径','请输入任务路径!','info');
+              return;
 		  }
-		  
+
 		//判断表达式
 		 var taskExpression = $("#taskExpression").val();
 		
 		 if(!cronValidate(taskExpression)){
-			  $("#errorLabeltaskExpression").css("display","inline");
-			  $("#errorLabeltaskExpression").html("*请输入正确的表达式");
-			  isTrue=false;
-		  } else {
-			  $("#errorLabeltaskExpression").css("display","none");
-			  $("#errorLabeltaskExpression").html("");
+             $.messager.alert('请输入正确的表达式','请输入正确的表达式!','info');
+             return;
 		  }
-
-		 return isTrue;
+		 return true;
 	 }
 	//*****************************添加保存验证end*****************************
 })

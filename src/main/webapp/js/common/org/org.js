@@ -272,7 +272,7 @@ $(document).ready(function() {
 			   $('#orgdialog').dialog({
 				    title: title,
 				    width: 700,
-				    height: 600,
+				    height: 280,
 				    closed: false,
 				    cache: false,
 				    href:href,
@@ -339,100 +339,64 @@ $(document).ready(function() {
 		  }
 
 		  function checkOrgInfo(){
-			  var isTrue = true;
-			   //机构名称验证
+ 			   //机构名称验证
 			   var orgName = $("#permissionOrgName").val();
 			   var reg= /^[\u4e00-\u9fa5a-zA-Z0-9]{2,30}$/;
 			   if(!reg.test(orgName)){
-				   $("#errorLabelOrgName").css("display","inline");
-				   $("#errorLabelOrgName").html("*请输入正确的姓名");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabelOrgName").css("display","none");
-				   $("#errorLabelOrgName").html("");
+                   $.messager.alert('请输入正确的机构名','请输入正确的机构名!','info');
+                   return false;
 			   }
 			  
 			   //机构验证编码验证
 			   var adminCode = $("#permissionadmincode").val();
 			   reg=/^[a-zA-Z0-9]{5,10}$/;
 			   if(!reg.test(adminCode)){
-				   $("#errorLabeladmincode").css("display","inline");
-				   $("#errorLabeladmincode").html("*请输入验证编码");
-				   isTrue=false;
+                   $.messager.alert('请输入正确5-10位验证编码','请输入正确5-10位验证编码!','info');
+                   return false;
 			   }
-			   else{
-				   $("#errorLabeladmincode").css("display","none");
-				   $("#errorLabeladmincode").html("");
-			   }
-			   
+
 			 //密码验证
 			   var pwd = $("#permissionOrgPassword").val();
 			   reg=/[0-9]+/;
 			   var regA=/[a-zA-Z]+/;
 			   var regB=/^.{5,10}$/;
 			   if(!reg.test(pwd) || !regA.test(pwd) || !regB.test(pwd)){
-				   $("#errorLabelorgpwd").css("display","inline");
-				   $("#errorLabelorgpwd").html("*请输入5-10位数字字母组合");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabelorgpwd").css("display","none");
-				   $("#errorLabelorgpwd").html("");
+                   $.messager.alert('请输入5-10位数字字母密码组合','请输入5-10位数字字母密码组合!','info');
+                   return false;
 			   }
 
 			 //座机验证
 			   var permissionOrgTel = $("#permissionOrgTel").numberbox("getValue");
 			   reg=/^[0-9]{7,10}$/;
 			   if(!reg.test(permissionOrgTel)){
-				   $("#errorLabelOrgTel").css("display","inline");
-				   $("#errorLabelOrgTel").html("*座机格式错误");
-				   isTrue=false; 
-			   }
-			   else{
-				   $("#errorLabelOrgTel").css("display","none");
-				   $("#errorLabelOrgTel").html(""); 
+                   $.messager.alert('座机格式错误','座机格式错误!','info');
+                   return false;
 			   }
 
 			   //判断联系人姓名验证
 			   var permissionOrgLinkName = $("#permissionOrgLinkName").val();
 			   var reg= /^[\u4e00-\u9fa5·]{2,}$/;
 			   if(!reg.test(permissionOrgLinkName)){
-				   $("#errorLabelOrgLinkName").css("display","inline");
-				   $("#errorLabelOrgLinkName").html("*请输入正确的姓名");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabelOrgLinkName").css("display","none");
-				   $("#errorLabelOrgLinkName").html("");
+                   $.messager.alert('请输入正确的联系人姓名','请输入正确的联系人!','info');
+                   return false;
 			   }
 			   
 			   //手机验证
 			   var permissionOrgLinkPhone = $("#permissionOrgLinkPhone").numberbox("getValue");
 			   reg=/^[0-9]{11}$/;
 			   if(!reg.test(permissionOrgLinkPhone)){
-				   $("#errorLabelOrgLinkPhone").css("display","inline");
-				   $("#errorLabelOrgLinkPhone").html("*手机格式错误");
-				   isTrue=false; 
-			   }
-			   else{
-				   $("#errorLabelOrgLinkPhone").css("display","none");
-				   $("#errorLabelOrgLinkPhone").html(""); 
+                   $.messager.alert('手机格式错误','手机格式错误!','info');
+                   return false;
 			   }
 			   
 			   //机构地址验证
 			   var permissionOrgAddress = $("#permissionOrgAddress").val();
 			   var reg= /^[\u4e00-\u9fa50-9A-Za-z]{2,30}$/;
 			   if(!reg.test(permissionOrgAddress)){
-				   $("#errorLabelOrgAddress").css("display","inline");
-				   $("#errorLabelOrgAddress").html("*机构地址错误");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabelOrgAddress").css("display","none");
-				   $("#errorLabelOrgAddress").html("");
+                   $.messager.alert('机构地址错误','机构地址错误!','info');
+                   return false;
 			   }
 
-			  return isTrue;
+			  return true;
 		  }	  
 });

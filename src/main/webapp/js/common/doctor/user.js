@@ -346,8 +346,8 @@ $(document).ready(function() {
 		   //显示dilog
 		   $('#userdialog').dialog({
 			    title: title,
-			    width: 700,
-			    height: 600,
+			    width: 600,
+			    height: 400,
 			    closed: false,
 			    cache: false,
 			    href:href,
@@ -423,21 +423,12 @@ $(document).ready(function() {
 	   
 	   
 	   function checkUserInfo(){
-		   
-		   var isTrue = true;
-		   //判断组织机构是否选择
-           
+
 		   if($("#permissionUserOrg").length>=1){
 			   var org = $("#permissionUserOrg").combobox("getValue");
-
 			   if(org=='' || org==null){
-				   $("#errorLabelOrg").css("display","inline");
-				   $("#errorLabelOrg").html("*请选择组织机构");
-				   isTrue=false;
-			   }
-			   else{
-				   $("#errorLabelOrg").css("display","none");
-				   $("#errorLabelOrg").html("");
+                   $.messager.alert('请选择组织机构','请选择组织机构!','info');
+                   return false;
 			   }
 		   }
 		   
@@ -445,26 +436,16 @@ $(document).ready(function() {
 		   var user = $("#permissionUserName").val();
 		   var reg= /^[\u4e00-\u9fa5·]{2,}$/;
 		   if(!reg.test(user)){
-			   $("#errorLabelUserName").css("display","inline");
-			   $("#errorLabelUserName").html("*请输入正确的姓名");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelUserName").css("display","none");
-			   $("#errorLabelUserName").html("");
+               $.messager.alert('请输入正确的姓名','请输入正确的姓名!','info');
+               return false;
 		   }
 
 		   //判断登录名是否正确
 		   var userName = $("#permissionLoginName").val();
 		   reg=/^[a-zA-Z0-9]{5,10}$/;
 		   if(!reg.test(userName)){
-			   $("#errorLabelLoginName").css("display","inline");
-			   $("#errorLabelLoginName").html("*请输入5-10位数字或者字母");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelLoginName").css("display","none");
-			   $("#errorLabelLoginName").html("");
+               $.messager.alert('请输入5-10位数字或者字母','请输入5-10位数字或者字母!','info');
+               return false;
 		   }
  
 		   //判断密码
@@ -473,118 +454,69 @@ $(document).ready(function() {
 		   var regA=/[a-zA-Z]+/;
 		   var regB=/^.{5,10}$/;
 		   if(!reg.test(pwd) || !regA.test(pwd) || !regB.test(pwd)){
-			   $("#errorLabelpwd").css("display","inline");
-			   $("#errorLabelpwd").html("*请输入5-10位数字字母组合");
-			   isTrue=false;
+               $.messager.alert('请输入5-10位数字字母组合','请输入5-10位数字字母组合!','info');
+               return false;
 		   }
-		   else{
-			   $("#errorLabelpwd").css("display","none");
-			   $("#errorLabelpwd").html("");
-		   }
-		   
+
 		   //验证密码
 		   var checkpwd = $("#permissionCheckPassword").val();
 		   if(pwd!=checkpwd){
-			   $("#errorCheckpwd").css("display","inline");
-			   $("#errorCheckpwd").html("*两次输入的密码不匹配");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorCheckpwd").css("display","none");
-			   $("#errorCheckpwd").html("");
-		   }
+               $.messager.alert('两次输入的密码不匹配','两次输入的密码不匹配','info');
+               return false;
+           }
+
 
 		   //判断性别是否选择
 		   var gender = $("#permissionGender").combobox("getValue");
 
 		   if(gender=='' || gender==null){
-			   $("#errorLabelGender").css("display","inline");
-			   $("#errorLabelGender").html("*请选择性别");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelGender").css("display","none");
-			   $("#errorLabelGender").html("");
+               $.messager.alert('请选择性别','请选择性别','info');
+               return false;
 		   }
 		   
 		   //生日验证
 		   var permissionBrithday = $("#permissionBrithday").datebox("getValue");
 		   reg=/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 		   if(!reg.test(permissionBrithday)){
-			   $("#errorLabelBrithday").css("display","inline");
-			   $("#errorLabelBrithday").html("*请输入正确的日期格式");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelBrithday").css("display","none");
-			   $("#errorLabelBrithday").html("");
+               $.messager.alert('请输入正确的日期格式','请输入正确的日期格式','info');
+               return false;
 		   }
 
 		   //身份证号验证
 		   var cardId= $("#permissionCardid").val();
 		   reg=/^(\d{18,18}|\d{15,15}|\d{17,17}x)$/;
 		   if(!reg.test(cardId)){
-			   $("#errorLabelCardid").css("display","inline");
-			   $("#errorLabelCardid").html("*身份证格式错误");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelCardid").css("display","none");
-			   $("#errorLabelCardid").html("");
+               $.messager.alert('身份证格式错误','身份证格式错误','info');
+               return false;
 		   }
 		   
 		   //QQ验证
 		   var permissionQQ = $("#permissionQQ").numberbox("getValue");
 		   reg=/^[0-9]{5,}$/;
-
 		   if(permissionQQ != '' && permissionQQ != null){
 			   if(!reg.test(permissionQQ)){
-				   $("#errorLabelQQ").css("display","inline");
-				   $("#errorLabelQQ").html("*QQ格式错误");
-				   isTrue=false; 
-			   }
-			   else{
-				   $("#errorLabelQQ").css("display","none");
-				   $("#errorLabelQQ").html(""); 
+                   $.messager.alert('QQ格式错误','QQ格式错误','info');
+                   return false;
 			   }
 		   }
-		   else{
-			   $("#errorLabelQQ").css("display","none");
-			   $("#errorLabelQQ").html(""); 
-		   }
-		   
 		  //座机验证
 		   var permissionTel = $("#permissionTel").numberbox("getValue");
 		   reg=/^[0-9]{7,10}$/;
 		   if(permissionTel != '' && permissionTel != null){
 			   if(!reg.test(permissionTel)){
-				   $("#errorLabelTel").css("display","inline");
-				   $("#errorLabelTel").html("*座机格式错误");
-				   isTrue=false; 
+                   $.messager.alert('座机格式错误','座机格式错误','info');
+                   return false;
 			   }
-			   else{
-				   $("#errorLabelTel").css("display","none");
-				   $("#errorLabelTel").html(""); 
-			   }
-		   }else{
-			   $("#errorLabelTel").css("display","none");
-			   $("#errorLabelTel").html(""); 
 		   }
 		   
 		   //手机验证
 		   var permissionTel = $("#permissionPhone").numberbox("getValue");
 		   reg=/^[0-9]{11}$/;
 		   if(!reg.test(permissionTel)){
-			   $("#errorLabelPhone").css("display","inline");
-			   $("#errorLabelPhone").html("*手机格式错误");
-			   isTrue=false; 
+               $.messager.alert('手机格式错误','手机格式错误','info');
+               return false;
 		   }
-		   else{
-			   $("#errorLabelPhone").css("display","none");
-			   $("#errorLabelPhone").html(""); 
-		   }
-		   
-		   return isTrue;
+		   return true;
 	   }
 
    //*****************************添加或者修改end*****************************///	       

@@ -12,43 +12,32 @@ var groupAddOrSave = '${groupAddOrSave}';
 <script type="text/javascript" src="<%=basePath%>js/common/group/groupAddOrSave.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/common/group/groupAddOrSave.css" type="text/css">  
 
-<div style="width:90%; height:70%; padding: 10px 10px;">
-<div class="ftitle">
-<c:choose>
-		<c:when test="${groupAddOrSave=='add'}">
-			添加团队
-		</c:when>
-		<c:otherwise>
-			修改团队
-		</c:otherwise>
-</c:choose>
-</div>
 
 <form id="groupADDFrom" method="post">
+	<table class="dataintable">
+		<input id="group_ID" name="group_ID" type="hidden" value="${group_id}">
 
-  <input id="group_ID" name="group_ID" type="hidden" value="${group_id}">
- 
-   <c:if test="${groupAddOrSave=='add'}">
-      <div class="fitem">
-		<label> 组织机构</label> 
-		<input id="permissiongroupOrg" name="permissiongroupOrg">
-		<label id='errorLabelgroupOrg'  class='errorLabel' style="color: red; font-size: 12 " >*请选择组织机构 </label></td>
-	</div>
-   </c:if>
+		<tr>
+			<td style="width: 12%"><i>组织机构</i></td>
+			<td style="width: 15%">
+				<c:if test="${groupAddOrSave=='add'}">
+					<div class="fitem">
+						<input id="permissiongroupOrg" style="width: 90%" name="permissiongroupOrg">
+					</div>
+				</c:if>
+ 			</td>
+			<td style="width: 12%"><i>团队名称</i></td>
+			<td style="width: 15%">
+				<input id='permissiongroupName' style="width: 90%" name="permissiongroupName" class="easyui-validatebox" value="${group_name}"/>
+			</td>
+			<td style="width: 12%"><i>团队说明</i></td>
+			<td>
+				<input id='permissiongroupremark' style="width: 90%" name="permissiongroupremark" class="easyui-validatebox" value="${remark}"/>
 
-	<div class="fitem">
-		<label> 团队名称 </label> 
-		<input id='permissiongroupName' name="permissiongroupName" class="easyui-validatebox" value="${group_name}"/>
-		<label id='errorLabelgroupName' class='errorLabel' style="color: red; font-size: 12">*团队名称错误</label></td>
-	</div>
-	
-	<div class="fitem">
-		<label> 团队说明 </label> 
-		<input id='permissiongroupremark' name="permissiongroupremark" class="easyui-validatebox" value="${remark}"/>
-		<label id='errorLabelgroupremark' class='errorLabel' style="color: red; font-size: 12">*团队说明错误</label></td>
-	</div>
+			</td>
+		</tr>
+
+	</table>
 
 </form>
-
-</div>
 

@@ -229,8 +229,8 @@ $(document).ready(function() {
 		   //显示dilog
 		   $('#roledialog').dialog({
 			    title: title,
-			    width: 700,
-			    height: 400,
+			    width: 500,
+			    height: 230,
 			    closed: false,
 			    cache: false,
 			    href:href,
@@ -302,21 +302,14 @@ $(document).ready(function() {
 	   
     //*****************************添加修改check begin*****************************///
 	  function checkRoleInfo(){
-		 var isTrue =true;
-		 
 		 //判断组织机构是否选择
          
 	   if($("#permissionRoleOrg").length>=1){
 		   var org = $("#permissionRoleOrg").combobox("getValue");
 
 		   if(org=='' || org==null){
-			   $("#errorLabelRoleOrg").css("display","inline");
-			   $("#errorLabelRoleOrg").html("*请选择组织机构");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelRoleOrg").css("display","none");
-			   $("#errorLabelRoleOrg").html("");
+               $.messager.alert('请选择组织机构','请选择组织机构!','info');
+               return false;
 		   }
 	   }
 		   
@@ -324,28 +317,18 @@ $(document).ready(function() {
 		 var roleCode = $("#permissionRoleCode").val();
 		 var reg=/^[a-zA-Z0-9]{5,30}$/;
 		 if(!reg.test(roleCode)){
-			   $("#errorLabelRoleCode").css("display","inline");
-			   $("#errorLabelRoleCode").html("*请输入5-30位角色编号");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelRoleCode").css("display","none");
-			   $("#errorLabelRoleCode").html("");
-		   }
-		 
+             $.messager.alert('请输入5-30位角色编号','请输入5-30位角色编号','info');
+             return false;
+		 }
+
 		//判断角色名称是否正确
 		 var roleName = $("#permissionRoleName").val();
 		 reg= /^[\u4e00-\u9fa5]{2,30}$/;
 		 if(!reg.test(roleName)){
-			   $("#errorLabelRoleName").css("display","inline");
-			   $("#errorLabelRoleName").html("*请输入2-30位角色名称");
-			   isTrue=false;
+             $.messager.alert('请输入2-30位角色名称','请输入2-30位角色名称','info');
+             return false;
 		   }
-		   else{
-			   $("#errorLabelRoleName").css("display","none");
-			   $("#errorLabelRoleName").html("");
-		   }
-		 return isTrue;
+		 return true;
 	  }
     //*****************************添加修改check end*****************************///   
 })

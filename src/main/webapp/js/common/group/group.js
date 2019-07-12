@@ -153,7 +153,7 @@ $(document).ready(function() {
 		   $('#groupdialog').dialog({
 			    title: title,
 			    width: 700,
-			    height: 400,
+			    height: 200,
 			    closed: false,
 			    cache: false,
 			    href:href,
@@ -226,21 +226,15 @@ $(document).ready(function() {
 	
 	 //*****************************添加修改check begin*****************************///
 	  function checkGroupInfo(){
-		 var isTrue =true;
-		 
+
 		 //判断组织机构是否选择
         
 	   if($("#permissiongroupOrg").length>=1){
 		   var org = $("#permissiongroupOrg").combobox("getValue");
 
 		   if(org=='' || org==null){
-			   $("#errorLabelgroupOrg").css("display","inline");
-			   $("#errorLabelgroupOrg").html("*请选择组织机构");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelgroupOrg").css("display","none");
-			   $("#errorLabelgroupOrg").html("");
+               $.messager.alert('请选择组织机构','请选择组织机构!','info');
+               return false;
 		   }
 	   }
 		   
@@ -248,28 +242,18 @@ $(document).ready(function() {
 		 var groupName = $("#permissiongroupName").val();
 		 reg= /^[\u4e00-\u9fa50-9]{2,30}$/;
 		 if(!reg.test(groupName)){
-			   $("#errorLabelgroupName").css("display","inline");
-			   $("#errorLabelgroupName").html("*请输入团队名称");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelgroupName").css("display","none");
-			   $("#errorLabelgroupName").html("");
+             $.messager.alert('请输入团队名称','请输入团队名称!','info');
+             return false;
 		   }
 		 
 		//判断团队说明
 		 var groupRemak = $("#permissiongroupremark").val();
 		 reg= /^[\u4e00-\u9fa50-9]{2,30}$/;
 		 if(!reg.test(groupRemak)){
-			   $("#errorLabelgroupremark").css("display","inline");
-			   $("#errorLabelgroupremark").html("*请输入团队说明");
-			   isTrue=false;
-		   }
-		   else{
-			   $("#errorLabelgroupremark").css("display","none");
-			   $("#errorLabelgroupremark").html("");
-		   }
-		 return isTrue;
+             $.messager.alert('请输入团队说明','请输入团队说明!','info');
+             return false;
+		 }
+		 return true;
 	  }
    //*****************************添加修改check end*****************************/// 
  

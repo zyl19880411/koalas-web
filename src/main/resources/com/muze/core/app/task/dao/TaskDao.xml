@@ -11,9 +11,9 @@
    </resultMap>
    
    <select id="getTasks" resultMap="TaskModel">
-	    select a.job_name,a.job_class_name, a.description,b.trigger_state,c.cron_expression from  qrtz_job_details a
-	    inner join qrtz_triggers b on a.job_name = b.job_name
-	    inner join qrtz_cron_triggers c on c.trigger_name = b.job_name
+	    select a.job_name,a.job_class_name, a.description,b.trigger_state,c.cron_expression from  QRTZ_JOB_DETAILS a
+	    inner join QRTZ_TRIGGERS b on a.job_name = b.job_name
+	    inner join QRTZ_CRON_TRIGGERS c on c.trigger_name = b.job_name
 	    order by a.job_name
    </select>
 
