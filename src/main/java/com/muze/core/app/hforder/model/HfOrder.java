@@ -1,6 +1,7 @@
 package com.muze.core.app.hforder.model;
 
-import com.thinkgem.jeesite.common.utils.excel.annotation.ExcelField;
+
+import com.muze.core.app.utils.excel.annotation.ExcelField;
 
 import java.util.Date;
 import java.util.List;

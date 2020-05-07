@@ -1,11 +1,11 @@
 /**
  * Copyright &copy; 2018
  */
-package com.thinkgem.jeesite.common.utils.excel;
+package com.muze.core.app.utils.excel;
 
 import com.google.common.collect.Lists;
 import com.muze.core.app.utils.Reflections;
-import com.thinkgem.jeesite.common.utils.excel.annotation.ExcelField;
+import com.muze.core.app.utils.excel.annotation.ExcelField;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class ImportExcel {
 	
-	private static Logger log = LoggerFactory.getLogger(ImportExcel.class);
+	private static Logger log = LoggerFactory.getLogger( ImportExcel.class);
 			
 	/**
 	 * 工作薄对象
@@ -356,7 +356,7 @@ public class ImportExcel {
 	 */
 	public static void main(String[] args) throws Throwable {
 		
-		ImportExcel ei = new ImportExcel("C:\\Users\\Administrator\\Desktop\\userTemplate.xlsx", 1);
+		ImportExcel ei = new ImportExcel ("C:\\Users\\Administrator\\Desktop\\userTemplate.xlsx", 1);
 		
 		for (int i = ei.getDataRowNum(); i < ei.getLastDataRowNum(); i++) {
 			Row row = ei.getRow(i);

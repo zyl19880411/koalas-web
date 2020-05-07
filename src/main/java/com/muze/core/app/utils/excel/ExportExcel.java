@@ -1,12 +1,12 @@
 /**
  * Copyright &copy; 2018
  */
-package com.thinkgem.jeesite.common.utils.excel;
+package com.muze.core.app.utils.excel;
 
 import com.google.common.collect.Lists;
 import com.muze.core.app.utils.Encodes;
 import com.muze.core.app.utils.Reflections;
-import com.thinkgem.jeesite.common.utils.excel.annotation.ExcelField;
+import com.muze.core.app.utils.excel.annotation.ExcelField;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class ExportExcel {
 	
-	private static Logger log = LoggerFactory.getLogger(ExportExcel.class);
+	private static Logger log = LoggerFactory.getLogger( ExportExcel.class);
 			
 	/**
 	 * 工作薄对象
@@ -484,15 +484,15 @@ public class ExportExcel {
 	}
 
 	public static class Export{
-		@ExcelField (title="姓名",align=1)
+		@ExcelField(title="姓名",align=1)
 		private String name;
-		@ExcelField (title="年龄",align=1)
+		@ExcelField(title="年龄",align=1)
 		private Integer age;
-		@ExcelField (title="日期",align=1)
+		@ExcelField(title="日期",align=1)
 		private Date date;
-		@ExcelField (title="备注",align=1)
+		@ExcelField(title="备注",align=1)
 		private String back;
-		@ExcelField (title="测试值",align=1,fieldType = ValueConvert.class)
+		@ExcelField(title="测试值",align=1,fieldType = ValueConvert.class)
 		private String val;
 
 		public String getName() {
