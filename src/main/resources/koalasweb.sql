@@ -1,49 +1,314 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : koalasweb
  Source Server Type    : MySQL
- Source Server Version : 50720
- Source Host           : localhost:3306
- Source Schema         : doc
+ Source Server Version : 50721
+ Source Host           : 10.24.99.228:5002
+ Source Schema         : koalasweb
 
  Target Server Type    : MySQL
- Target Server Version : 50720
+ Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 17/07/2018 22:28:09
+ Date: 07/05/2020 14:20:52
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for QRTZ_BLOB_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_BLOB_TRIGGERS`;
+CREATE TABLE `QRTZ_BLOB_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `BLOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  CONSTRAINT `QRTZ_BLOB_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_BLOB_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_CALENDARS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_CALENDARS`;
+CREATE TABLE `QRTZ_CALENDARS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `CALENDAR_NAME` varchar(200) NOT NULL,
+  `CALENDAR` blob NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_CALENDARS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_CRON_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_CRON_TRIGGERS`;
+CREATE TABLE `QRTZ_CRON_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `CRON_EXPRESSION` varchar(200) NOT NULL,
+  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  CONSTRAINT `QRTZ_CRON_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_CRON_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_FIRED_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_FIRED_TRIGGERS`;
+CREATE TABLE `QRTZ_FIRED_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `ENTRY_ID` varchar(95) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `FIRED_TIME` bigint(13) NOT NULL,
+  `SCHED_TIME` bigint(13) NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `STATE` varchar(16) NOT NULL,
+  `JOB_NAME` varchar(200) DEFAULT NULL,
+  `JOB_GROUP` varchar(200) DEFAULT NULL,
+  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
+  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_FIRED_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_JOB_DETAILS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_JOB_DETAILS`;
+CREATE TABLE `QRTZ_JOB_DETAILS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `JOB_CLASS_NAME` varchar(250) NOT NULL,
+  `IS_DURABLE` varchar(1) NOT NULL,
+  `IS_NONCONCURRENT` varchar(1) NOT NULL,
+  `IS_UPDATE_DATA` varchar(1) NOT NULL,
+  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_JOB_DETAILS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_LOCKS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_LOCKS`;
+CREATE TABLE `QRTZ_LOCKS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `LOCK_NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_LOCKS
+-- ----------------------------
+BEGIN;
+INSERT INTO `QRTZ_LOCKS` VALUES ('scheduler', 'STATE_ACCESS');
+INSERT INTO `QRTZ_LOCKS` VALUES ('scheduler', 'TRIGGER_ACCESS');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_LOG
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_LOG`;
+CREATE TABLE `QRTZ_LOG` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` varchar(32) DEFAULT NULL,
+  `task_name` varchar(200) DEFAULT NULL,
+  `task_begin_time` datetime DEFAULT NULL,
+  `task_end_time` datetime DEFAULT NULL,
+  `task_result` char(1) DEFAULT NULL,
+  `task_running_message` text,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `task_id` (`task_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_LOG
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_PAUSED_TRIGGER_GRPS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_PAUSED_TRIGGER_GRPS`;
+CREATE TABLE `QRTZ_PAUSED_TRIGGER_GRPS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_PAUSED_TRIGGER_GRPS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_SCHEDULER_STATE
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_SCHEDULER_STATE`;
+CREATE TABLE `QRTZ_SCHEDULER_STATE` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
+  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_SCHEDULER_STATE
+-- ----------------------------
+BEGIN;
+INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('scheduler', 'zhangyulongdeMacBook-Pro.local1588832396557', 1588832397059, 15000);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_SIMPLE_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_SIMPLE_TRIGGERS`;
+CREATE TABLE `QRTZ_SIMPLE_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `REPEAT_COUNT` bigint(7) NOT NULL,
+  `REPEAT_INTERVAL` bigint(12) NOT NULL,
+  `TIMES_TRIGGERED` bigint(10) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  CONSTRAINT `QRTZ_SIMPLE_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_SIMPLE_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_SIMPROP_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_SIMPROP_TRIGGERS`;
+CREATE TABLE `QRTZ_SIMPROP_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `STR_PROP_1` varchar(512) DEFAULT NULL,
+  `STR_PROP_2` varchar(512) DEFAULT NULL,
+  `STR_PROP_3` varchar(512) DEFAULT NULL,
+  `INT_PROP_1` int(11) DEFAULT NULL,
+  `INT_PROP_2` int(11) DEFAULT NULL,
+  `LONG_PROP_1` bigint(20) DEFAULT NULL,
+  `LONG_PROP_2` bigint(20) DEFAULT NULL,
+  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
+  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
+  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
+  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  CONSTRAINT `QRTZ_SIMPROP_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_SIMPROP_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for QRTZ_TRIGGERS
+-- ----------------------------
+DROP TABLE IF EXISTS `QRTZ_TRIGGERS`;
+CREATE TABLE `QRTZ_TRIGGERS` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `TRIGGER_STATE` varchar(16) NOT NULL,
+  `TRIGGER_TYPE` varchar(8) NOT NULL,
+  `START_TIME` bigint(13) NOT NULL,
+  `END_TIME` bigint(13) DEFAULT NULL,
+  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
+  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`) USING BTREE,
+  KEY `SCHED_NAME` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`) USING BTREE,
+  CONSTRAINT `QRTZ_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `QRTZ_JOB_DETAILS` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of QRTZ_TRIGGERS
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for hf_listen
 -- ----------------------------
 DROP TABLE IF EXISTS `hf_listen`;
-CREATE TABLE `hf_listen`  (
+CREATE TABLE `hf_listen` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_id` bigint(20) NOT NULL COMMENT '订单ID',
-  `area` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地区',
-  `nj` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '年级',
-  `listen_subject` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '试听科目',
-  `listen_time` timestamp(0) NULL DEFAULT NULL COMMENT '试听时间',
-  `teacher` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '授课老师',
-  `teacher_phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '老师电话',
-  `teacher_info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '老师详情',
-  `if_bounced` tinyint(1) NULL DEFAULT NULL COMMENT '是否跳票',
-  `ifbounced_time` timestamp(0) NULL DEFAULT NULL COMMENT '跳票时间',
-  `c_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '邀约时间',
-  `u_time` timestamp(0) NULL DEFAULT NULL COMMENT '上次更新时间',
-  `valid` int(11) NULL DEFAULT NULL COMMENT '是否有效',
+  `area` varchar(50) DEFAULT NULL COMMENT '地区',
+  `nj` varchar(10) DEFAULT NULL COMMENT '年级',
+  `listen_subject` varchar(50) DEFAULT NULL COMMENT '试听科目',
+  `listen_time` timestamp NULL DEFAULT NULL COMMENT '试听时间',
+  `teacher` varchar(50) NOT NULL COMMENT '授课老师',
+  `teacher_phone` varchar(11) NOT NULL COMMENT '老师电话',
+  `teacher_info` text COMMENT '老师详情',
+  `if_bounced` tinyint(1) DEFAULT NULL COMMENT '是否跳票',
+  `ifbounced_time` timestamp NULL DEFAULT NULL COMMENT '跳票时间',
+  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '邀约时间',
+  `u_time` timestamp NULL DEFAULT NULL COMMENT '上次更新时间',
+  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id`(`order_id`) USING BTREE,
-  INDEX `c_time`(`c_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `order_id` (`order_id`) USING BTREE,
+  KEY `c_time` (`c_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hf_listen
 -- ----------------------------
+BEGIN;
 INSERT INTO `hf_listen` VALUES (5, 21, '北京海淀区30号', '1', '1', '2018-07-10 00:39:27', '张老师', '13011114521', '部分突然想到官方通过', 1, '2018-07-10 00:54:22', '2018-07-13 12:31:50', NULL, 0);
 INSERT INTO `hf_listen` VALUES (6, 23, '北京海淀区1', '0', '0', '2018-07-15 21:44:42', '张老师', '13011114521', '111', 1, '2018-07-14 20:00:15', '2018-07-14 20:00:15', '2018-07-14 18:52:54', 1);
 INSERT INTO `hf_listen` VALUES (7, 22, '北京海淀区', '11', '8', '2018-07-11 00:55:33', '张老师', '13011114521', '111', 1, '2018-07-11 23:46:45', '2018-07-11 23:47:04', NULL, 1);
@@ -53,39 +318,41 @@ INSERT INTO `hf_listen` VALUES (10, 21, '111111111111', '2', '3', '2018-07-05 12
 INSERT INTO `hf_listen` VALUES (11, 20, '111111111111', '1', '1', '2018-06-13 12:35:32', 'aaaa', '11111111111', '1\r\n1\r\n1', 1, NULL, '2018-07-13 12:35:41', NULL, 1);
 INSERT INTO `hf_listen` VALUES (12, 25, '北京海淀区1', '2', '3', '2018-07-03 01:05:35', 'aaaa', '11111111111', '111', 1, NULL, '2018-07-14 01:05:43', NULL, 1);
 INSERT INTO `hf_listen` VALUES (13, 26, '111111111111', '3', '2', '2018-07-14 18:25:06', 'aaaa', '11111111111', '11', 1, '2018-07-14 20:01:19', '2018-07-14 20:01:19', NULL, 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hf_order
 -- ----------------------------
 DROP TABLE IF EXISTS `hf_order`;
-CREATE TABLE `hf_order`  (
+CREATE TABLE `hf_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `doc_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '销售ID',
-  `student_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生编号',
-  `student_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生姓名',
-  `student_phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '电话号码',
-  `gaokao_year` timestamp(0) NULL DEFAULT NULL COMMENT '高考年份',
-  `love_subject` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '意向课程',
-  `channel` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道',
-  `if_listener` tinyint(1) NULL DEFAULT NULL COMMENT '是否试听',
-  `if_success` tinyint(1) NULL DEFAULT NULL COMMENT '是否成单',
-  `if_error` tinyint(1) NULL DEFAULT NULL COMMENT '是否无效数据',
-  `if_introduction` tinyint(1) NULL DEFAULT NULL COMMENT '是否转介绍',
-  `introduction_type` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '转介绍类型',
-  `introduction_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '转介绍人姓名',
-  `backup` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
-  `u_time` timestamp(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `c_time` timestamp(0) NOT NULL COMMENT '录入时间',
-  `valid` int(11) NULL DEFAULT NULL COMMENT '是否有效',
+  `doc_id` varchar(32) NOT NULL COMMENT '销售ID',
+  `student_id` varchar(20) NOT NULL COMMENT '学生编号',
+  `student_name` varchar(20) NOT NULL COMMENT '学生姓名',
+  `student_phone` char(11) NOT NULL COMMENT '电话号码',
+  `gaokao_year` timestamp NULL DEFAULT NULL COMMENT '高考年份',
+  `love_subject` varchar(50) DEFAULT NULL COMMENT '意向课程',
+  `channel` varchar(32) DEFAULT NULL COMMENT '渠道',
+  `if_listener` tinyint(1) DEFAULT NULL COMMENT '是否试听',
+  `if_success` tinyint(1) DEFAULT NULL COMMENT '是否成单',
+  `if_error` tinyint(1) DEFAULT NULL COMMENT '是否无效数据',
+  `if_introduction` tinyint(1) DEFAULT NULL COMMENT '是否转介绍',
+  `introduction_type` varchar(1) DEFAULT NULL COMMENT '转介绍类型',
+  `introduction_name` varchar(255) DEFAULT NULL COMMENT '转介绍人姓名',
+  `backup` text COMMENT '备注',
+  `u_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+  `c_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '录入时间',
+  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index_doc_id`(`doc_id`) USING BTREE,
-  INDEX `index_student_id`(`student_id`) USING BTREE,
-  INDEX `c_time`(`c_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `index_doc_id` (`doc_id`) USING BTREE,
+  KEY `index_student_id` (`student_id`) USING BTREE,
+  KEY `c_time` (`c_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hf_order
 -- ----------------------------
+BEGIN;
 INSERT INTO `hf_order` VALUES (18, 'superAdmin', '1234560', '张玉龙', '11111111111', '2018-08-30 00:00:00', '3', '网络', 0, 0, 0, 0, NULL, NULL, '1111', '2018-06-30 14:27:53', '2018-06-30 14:27:36', 1);
 INSERT INTO `hf_order` VALUES (19, 'superAdmin', '123456111', '张玉龙123', '13011117056', '2018-08-11 00:00:00', '2', '111', 0, 1, 1, 1, '1', '厉害呀123456', '111\r\n111', '2018-07-11 23:48:46', '2018-06-30 19:03:17', 1);
 INSERT INTO `hf_order` VALUES (20, 'superAdmin', '1234560111', '张玉龙', '13011117056', NULL, NULL, NULL, 1, 1, 1, 0, NULL, NULL, NULL, NULL, '2018-06-30 19:04:57', 1);
@@ -98,76 +365,82 @@ INSERT INTO `hf_order` VALUES (26, 'superAdmin', '111111', '张玉龙', '1301111
 INSERT INTO `hf_order` VALUES (27, 'superAdmin', '1111111434', '张玉龙', '13011117056', '2018-08-14 00:00:00', '4', 'kkhu', 0, 0, 0, 0, NULL, NULL, '432432', NULL, '2018-07-14 20:02:44', 1);
 INSERT INTO `hf_order` VALUES (28, 'superAdmin', '111111111', '张玉龙', '13011117056', '2018-07-15 00:00:00', '2', 'kkhu', 0, 0, 0, 0, NULL, NULL, '1111', NULL, '2018-07-15 14:41:06', 1);
 INSERT INTO `hf_order` VALUES (29, 'superAdmin', '1111111q11', '张玉龙', '13011117056', '2018-08-15 00:00:00', '2', 'kkhu', 0, 0, 1, 0, NULL, NULL, '11', NULL, '2018-07-15 19:15:32', 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hf_order_error
 -- ----------------------------
 DROP TABLE IF EXISTS `hf_order_error`;
-CREATE TABLE `hf_order_error`  (
+CREATE TABLE `hf_order_error` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单编号',
-  `error_id` int(11) NULL DEFAULT NULL COMMENT '错误类型',
-  `error_text` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `c_time` timestamp(0) NULL DEFAULT NULL COMMENT '操作时间',
-  `valid` int(11) NULL DEFAULT NULL COMMENT '是否有效',
+  `order_id` bigint(20) DEFAULT NULL COMMENT '订单编号',
+  `error_id` int(11) DEFAULT NULL COMMENT '错误类型',
+  `error_text` text,
+  `c_time` timestamp NULL DEFAULT NULL COMMENT '操作时间',
+  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id`(`order_id`) USING BTREE,
-  INDEX `c_time`(`c_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `order_id` (`order_id`) USING BTREE,
+  KEY `c_time` (`c_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hf_order_error
 -- ----------------------------
+BEGIN;
 INSERT INTO `hf_order_error` VALUES (3, 18, 1, NULL, '2018-06-30 14:27:44', 1);
 INSERT INTO `hf_order_error` VALUES (4, 27, 3, NULL, '2018-07-14 20:03:05', 1);
 INSERT INTO `hf_order_error` VALUES (5, 28, 2, NULL, '2018-07-15 14:41:14', 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hf_success
 -- ----------------------------
 DROP TABLE IF EXISTS `hf_success`;
-CREATE TABLE `hf_success`  (
+CREATE TABLE `hf_success` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_id` bigint(20) NOT NULL COMMENT '订单ID',
-  `close_v_time` timestamp(0) NULL DEFAULT NULL COMMENT '关单录音时间',
-  `contract_numbe` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '合同编号',
-  `class_hour` int(11) NULL DEFAULT NULL COMMENT '课时',
-  `order_money` decimal(15, 2) NULL DEFAULT NULL COMMENT '成单金额',
-  `gift` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '赠品',
-  `pay_status` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付方式',
-  `c_time` timestamp(0) NULL DEFAULT NULL COMMENT '成单时间',
-  `pay_time` timestamp(0) NULL DEFAULT NULL COMMENT '支付时间',
-  `valid` int(11) NULL DEFAULT NULL COMMENT '是否有效',
+  `close_v_time` timestamp NULL DEFAULT NULL COMMENT '关单录音时间',
+  `contract_numbe` varchar(32) DEFAULT NULL COMMENT '合同编号',
+  `class_hour` int(11) DEFAULT NULL COMMENT '课时',
+  `order_money` decimal(15,2) DEFAULT NULL COMMENT '成单金额',
+  `gift` varchar(255) DEFAULT NULL COMMENT '赠品',
+  `pay_status` varchar(10) DEFAULT NULL COMMENT '支付方式',
+  `c_time` timestamp NULL DEFAULT NULL COMMENT '成单时间',
+  `pay_time` timestamp NULL DEFAULT NULL COMMENT '支付时间',
+  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id`(`order_id`) USING BTREE,
-  INDEX ```c_time```(`c_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `order_id` (`order_id`) USING BTREE,
+  KEY ```c_time``` (`c_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hf_success
 -- ----------------------------
+BEGIN;
 INSERT INTO `hf_success` VALUES (5, 20, '2018-07-04 00:40:16', '1234567', 250, 666.66, '气球', '微信', '2018-07-01 00:40:38', '2018-07-01 00:40:28', 1);
 INSERT INTO `hf_success` VALUES (6, 19, '2018-07-05 23:49:04', '123456', 195, 666.66, '气球', '微信', '2018-07-11 23:49:18', '2018-07-13 23:49:12', 1);
 INSERT INTO `hf_success` VALUES (7, 26, '2018-07-19 00:58:52', '6546546', 305, 666.00, '测试', '支付宝', '2018-07-15 00:59:20', '2018-07-05 00:59:14', 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_area
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_area`;
-CREATE TABLE `hrip_area`  (
+CREATE TABLE `hrip_area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` char(9) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parentId` char(9) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `level` tinyint(1) NULL DEFAULT NULL,
+  `code` char(9) DEFAULT NULL,
+  `parentId` char(9) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `level` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `parentId`(`parentId`) USING BTREE,
-  INDEX `code`(`code`, `parentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47498 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '全国省市区街道' ROW_FORMAT = Dynamic;
+  KEY `parentId` (`parentId`) USING BTREE,
+  KEY `code` (`code`,`parentId`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=47498 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='全国省市区街道';
 
 -- ----------------------------
 -- Records of hrip_area
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_area` VALUES (1, '11', '0', '北京市', 1);
 INSERT INTO `hrip_area` VALUES (2, '1101', '11', '市辖区', 2);
 INSERT INTO `hrip_area` VALUES (3, '110101', '1101', '东城区', 3);
@@ -47665,54 +47938,58 @@ INSERT INTO `hrip_area` VALUES (47494, '81', '0', '香港特别行政区', 1);
 INSERT INTO `hrip_area` VALUES (47495, '82', '0', '澳门特别行政区', 1);
 INSERT INTO `hrip_area` VALUES (47496, '440309', '4403', '龙华新区', 3);
 INSERT INTO `hrip_area` VALUES (47497, '440310', '4403', '光明新区', 3);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_doc
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_doc`;
-CREATE TABLE `hrip_doc`  (
-  `DOC_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '医生编号',
-  `DOC_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '医生名称',
-  `LOGIN_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登陆名',
-  `LOGIN_PWD` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登陆密码',
-  `GENDER` decimal(1, 0) NULL DEFAULT NULL COMMENT '性别',
-  `CARDID` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BIRTH_DATE` date NULL DEFAULT NULL COMMENT '生日',
-  `REQ_TIME` datetime(0) NULL DEFAULT NULL COMMENT '注册时间',
-  `QQ` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'qq',
-  `TEL` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'tel',
-  `PHONE` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'phone',
-  `TYPE` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户类型',
-  `STATUS` decimal(1, 0) NULL DEFAULT NULL COMMENT '状态',
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'v.1.0.0' COMMENT '版本',
+CREATE TABLE `hrip_doc` (
+  `DOC_ID` varchar(32) NOT NULL COMMENT '医生编号',
+  `DOC_NAME` varchar(30) DEFAULT NULL COMMENT '医生名称',
+  `LOGIN_NAME` varchar(30) DEFAULT NULL COMMENT '登陆名',
+  `LOGIN_PWD` varchar(30) DEFAULT NULL COMMENT '登陆密码',
+  `GENDER` decimal(1,0) DEFAULT NULL COMMENT '性别',
+  `CARDID` varchar(18) DEFAULT NULL,
+  `BIRTH_DATE` date DEFAULT NULL COMMENT '生日',
+  `REQ_TIME` datetime DEFAULT NULL COMMENT '注册时间',
+  `QQ` varchar(15) DEFAULT NULL COMMENT 'qq',
+  `TEL` varchar(15) DEFAULT NULL COMMENT 'tel',
+  `PHONE` varchar(15) DEFAULT NULL COMMENT 'phone',
+  `TYPE` varchar(15) DEFAULT NULL COMMENT '用户类型',
+  `STATUS` decimal(1,0) DEFAULT NULL COMMENT '状态',
+  `UPDATE_TIME` datetime DEFAULT NULL COMMENT '修改时间',
+  `VERSION` varchar(30) DEFAULT 'v.1.0.0' COMMENT '版本',
   PRIMARY KEY (`DOC_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'ҽ����Ϣ' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='ҽ����Ϣ';
 
 -- ----------------------------
 -- Records of hrip_doc
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_doc` VALUES ('q8d44QVBGIicxZCiZRsb3XJePgmZvroy', '东东', 'qazwsx', 'OVK1PFW4eS', 1, '21012419770205321x', '2015-11-01', '2015-11-26 16:06:17', '', '', '13910516532', '1', 1, '2015-12-14 18:24:21', '1');
 INSERT INTO `hrip_doc` VALUES ('rsAOQAUeIbD6HFEFAXp864NssT823SLA', '测试', 'huayuancun', 'aVG0O1S3Pi', 1, '210106198804113617', '2015-12-09', '2015-12-09 15:18:18', '89874521', '89875222', '13011117406', '1', 1, '2015-12-09 15:18:18', '1');
 INSERT INTO `hrip_doc` VALUES ('superAdmin', '张玉龙', 'admin', 'OVK1PFW4', 1, '210106198804113617', '1988-04-11', '2015-10-12 12:59:53', '492926917', '123456789', '13011117406', '1', 1, '2015-10-12 13:00:15', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_group_doc
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_group_doc`;
-CREATE TABLE `hrip_group_doc`  (
-  `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '医生编号',
-  `GROUP_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '团队编号',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
-  INDEX `DOC_ID`(`DOC_ID`) USING BTREE,
-  INDEX `GROUP_ID`(`GROUP_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `hrip_group_doc` (
+  `ID` varchar(32) DEFAULT NULL COMMENT '编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `GROUP_ID` varchar(32) DEFAULT NULL COMMENT '团队编号',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
+  KEY `DOC_ID` (`DOC_ID`) USING BTREE,
+  KEY `GROUP_ID` (`GROUP_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_group_doc
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_group_doc` VALUES ('JEQrJqO4F6tiMdhW5tnxQa1oBruLUHmv', NULL, NULL, '2018-06-19 22:51:15', '1');
 INSERT INTO `hrip_group_doc` VALUES ('2bQwQwNuF6SkBqYVGR0Tv58FnVb5oJlZ', NULL, NULL, '2018-06-19 22:51:26', '1');
 INSERT INTO `hrip_group_doc` VALUES ('gyacKUFDjKC500uZkC28LP8rNQz1d5Lh', NULL, NULL, '2018-06-19 22:51:26', '1');
@@ -47720,21 +47997,23 @@ INSERT INTO `hrip_group_doc` VALUES ('OdFnuqnWKrG4pzxqNWeZlKGLR8jtn8Bj', NULL, N
 INSERT INTO `hrip_group_doc` VALUES ('wqKjjiPUGMl8oM2famyivqehPFCNKrHm', NULL, NULL, '2018-06-19 22:58:19', '1');
 INSERT INTO `hrip_group_doc` VALUES ('xiP3YNIngyrBvzQa0Gl5Jl5ZtAaNzGWo', 'rsAOQAUeIbD6HFEFAXp864NssT823SLA', 'cExYhuCIFSoqRzblQPxtg04dDeE4xyDK', '2018-06-19 23:26:22', '1');
 INSERT INTO `hrip_group_doc` VALUES ('sA4UF7d5SvDFCAFOfaYnQ77XWvEfrcvq', 'rsAOQAUeIbD6HFEFAXp864NssT823SLA', 'lZapoL7iLRDOG0wWIGPzv2s55Tt6zwTg', '2018-06-19 23:26:22', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_icon
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_icon`;
-CREATE TABLE `hrip_icon`  (
-  `ICON_CODE` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片编码',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `STATE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片状态',
+CREATE TABLE `hrip_icon` (
+  `ICON_CODE` varchar(50) NOT NULL COMMENT '图片编码',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `STATE` varchar(255) DEFAULT NULL COMMENT '图片状态',
   PRIMARY KEY (`ICON_CODE`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图片表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='图片表';
 
 -- ----------------------------
 -- Records of hrip_icon
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_icon` VALUES ('icon-accept', '2015-09-23 17:44:32', '1');
 INSERT INTO `hrip_icon` VALUES ('icon-add', '2015-09-23 17:44:32', '1');
 INSERT INTO `hrip_icon` VALUES ('icon-anchor', '2015-09-23 17:44:32', '1');
@@ -48760,76 +49039,82 @@ INSERT INTO `hrip_icon` VALUES ('icon-xhtml_valid', '2015-09-23 17:44:32', '1');
 INSERT INTO `hrip_icon` VALUES ('icon-zoom', '2015-09-23 17:44:32', '1');
 INSERT INTO `hrip_icon` VALUES ('icon-zoom_in', '2015-09-23 17:44:32', '1');
 INSERT INTO `hrip_icon` VALUES ('icon-zoom_out', '2015-09-23 17:44:32', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_org
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_org`;
-CREATE TABLE `hrip_org`  (
-  `ORG_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '结构编号',
-  `ORG_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结构名称',
-  `ADMIN_CODE` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结构登陆名',
-  `ORG_PWD` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登陆密码',
-  `PARENT_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父菜单',
-  `ORG_QUERY_ID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '主机构查询ID',
-  `TEL` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'tel',
-  `LINK_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结构联系人',
-  `LINK_PHONE` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人电话',
-  `ADDRESS` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+CREATE TABLE `hrip_org` (
+  `ORG_ID` varchar(32) NOT NULL COMMENT '结构编号',
+  `ORG_NAME` varchar(30) DEFAULT NULL COMMENT '结构名称',
+  `ADMIN_CODE` varchar(30) DEFAULT NULL COMMENT '结构登陆名',
+  `ORG_PWD` varchar(30) DEFAULT NULL COMMENT '登陆密码',
+  `PARENT_ID` varchar(32) DEFAULT NULL COMMENT '父菜单',
+  `ORG_QUERY_ID` varchar(255) DEFAULT NULL COMMENT '主机构查询ID',
+  `TEL` varchar(15) DEFAULT NULL COMMENT 'tel',
+  `LINK_NAME` varchar(30) DEFAULT NULL COMMENT '结构联系人',
+  `LINK_PHONE` varchar(30) DEFAULT NULL COMMENT '联系人电话',
+  `ADDRESS` varchar(300) DEFAULT NULL COMMENT '地址',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `UPDATE_TIME` datetime DEFAULT NULL,
+  `VERSION` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`ORG_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_org
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_org` VALUES ('1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '1中心', 'aaaaaa', '111111A', 'superAdmin', 'superkru', '89875521', '张秋慧', '13022252125', '西三环', '2015-12-10 14:58:21', '2018-06-23 23:56:41', '1');
 INSERT INTO `hrip_org` VALUES ('5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '2中心', '11111', 'a1111', 'superAdmin', 'superlSI', '89874521', '张玉龙', '13011117406', '西三环', '2015-12-09 15:16:00', '2018-06-23 23:56:53', '1');
 INSERT INTO `hrip_org` VALUES ('p6jGuATDJKsvZCgjH08CephmdTxB2PMs', '1部门', 'aaaaaa', '111111lk', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'superkrukjp', '1022222222', '张宇', '13011112521', '2楼', '2018-06-23 23:57:56', '2018-06-23 23:57:56', '1');
 INSERT INTO `hrip_org` VALUES ('superAdmin', '超级管理机构', 'superAdmin', '123456', NULL, 'super', '89872221', '张玉龙', '13011117406', '北京市海淀区西二旗赢创动力B座5-03', '2015-10-12 12:57:35', '2015-10-12 12:57:39', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_org_doc
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_org_doc`;
-CREATE TABLE `hrip_org_doc`  (
-  `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '医生编号',
-  `ORG_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结构编号',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_org_doc` (
+  `ID` varchar(32) NOT NULL COMMENT '编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `ORG_ID` varchar(32) DEFAULT NULL COMMENT '结构编号',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`ID`) USING BTREE,
-  INDEX `DOC_ID`(`DOC_ID`) USING BTREE,
-  INDEX `ORG_ID`(`ORG_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `DOC_ID` (`DOC_ID`) USING BTREE,
+  KEY `ORG_ID` (`ORG_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_org_doc
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_org_doc` VALUES ('7DlNnLWJRdhYREoHohxGsmmbvfmAE5Ur', 'rsAOQAUeIbD6HFEFAXp864NssT823SLA', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '2015-12-09 15:18:18', '1');
 INSERT INTO `hrip_org_doc` VALUES ('jgXI3RxntnEa1yiwjpMs3YeukmQMWzeR', 'q8d44QVBGIicxZCiZRsb3XJePgmZvroy', 'superAdmin', '2015-11-26 16:06:17', '1');
 INSERT INTO `hrip_org_doc` VALUES ('superAdmin', 'superAdmin', 'superAdmin', '2015-10-12 13:00:42', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_org_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_org_permission`;
-CREATE TABLE `hrip_org_permission`  (
-  `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `ORG_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构编号',
-  `PERMISSION_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限编号',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_org_permission` (
+  `ID` varchar(32) NOT NULL COMMENT '编号',
+  `ORG_ID` varchar(32) DEFAULT NULL COMMENT '机构编号',
+  `PERMISSION_ID` varchar(32) DEFAULT NULL COMMENT '权限编号',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`ID`) USING BTREE,
-  INDEX `ORG_ID`(`ORG_ID`) USING BTREE,
-  INDEX `PERMISSION_ID`(`PERMISSION_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `ORG_ID` (`ORG_ID`) USING BTREE,
+  KEY `PERMISSION_ID` (`PERMISSION_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_org_permission
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_org_permission` VALUES ('00j8hTGZ0pJEAUaPkr8GFlUkJooBS753', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D003', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('0jjMaHXM6qCQfSevVqq0hQ5moVi62CA3', 'superAdmin', 'be4r4XMsnybBqGNJSB2icfGSJ8Rx8NMB', '2018-06-18 20:53:18', '1');
 INSERT INTO `hrip_org_permission` VALUES ('0xGET47BEKBBYYQqvNqvislbJb83OAp4', 'superAdmin', 'NzXxLGTjO8xGBWYLw0ywlMZneSr0oLOP', '2016-04-05 16:26:22', '1');
@@ -49023,32 +49308,34 @@ INSERT INTO `hrip_org_permission` VALUES ('yuTkiaIjarWwlXqoUto4mJDQSjWxvqsN', '1
 INSERT INTO `hrip_org_permission` VALUES ('zbq42X7WsS0HJ5JCjbgz6SqM41lCPY68', 'superAdmin', 'NVw1Q5r0d0YVNAwmTTlOAz3cnvPDW6Wk', '2018-06-18 21:06:23', '1');
 INSERT INTO `hrip_org_permission` VALUES ('zcJmGNRWV3zxDSdK8bNDJim5SmhNvUk4', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D017', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('Zo1ETKlnH0GfbJa5oubWMBcAMH6zWghq', 'superAdmin', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', '2018-06-18 12:23:17', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_permission`;
-CREATE TABLE `hrip_permission`  (
-  `PERMISSION_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CODE` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ICON` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `OPEN_METHOD` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ELEMENT_TYPE` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `URL` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PARENT_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SORT` decimal(8, 0) NULL DEFAULT NULL,
-  `STATUE` decimal(8, 0) NULL DEFAULT NULL,
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `REMARK` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+CREATE TABLE `hrip_permission` (
+  `PERMISSION_ID` varchar(32) NOT NULL,
+  `NAME` varchar(30) DEFAULT NULL,
+  `CODE` varchar(30) DEFAULT NULL,
+  `ICON` varchar(30) DEFAULT NULL,
+  `OPEN_METHOD` varchar(30) DEFAULT NULL,
+  `ELEMENT_TYPE` varchar(4) DEFAULT NULL,
+  `URL` varchar(100) DEFAULT NULL,
+  `PARENT_ID` varchar(32) DEFAULT NULL,
+  `SORT` decimal(8,0) DEFAULT NULL,
+  `STATUE` decimal(8,0) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `VERSION` varchar(30) DEFAULT NULL,
+  `REMARK` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`PERMISSION_ID`) USING BTREE,
-  INDEX `PARENT_ID`(`PARENT_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `PARENT_ID` (`PARENT_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_permission
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_permission` VALUES ('07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', '今日邀约', '4UzDMzTpqaQcsiFQGmalKHegCKkmGk', 'icon-status_online', '1', '2', 'listener/allnow.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30101, 1, '2018-06-18 12:31:53', '1', '');
 INSERT INTO `hrip_permission` VALUES ('0S2PpoTliTgtsXGxcYYaTdArEtQQH7eo', '导出表格', 'LO6NXDUixabcFkFbAAKjTcffoX6vdi', 'icon-arrow_redo', '1', '3', NULL, '07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', 30103, 1, '2018-06-18 21:07:12', '1', '');
 INSERT INTO `hrip_permission` VALUES ('0Us1kOzN4uDGIzuXq5F7nxAG6hjhawub', '导出表格', 'fkL5SsC6zeinjTilggKibfD4q0WVEl', 'icon-arrow_redo', '1', '3', NULL, 'XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', 40004, 1, '2018-07-14 20:40:52', '1', '');
@@ -49164,71 +49451,77 @@ INSERT INTO `hrip_permission` VALUES ('xqEAeu2wA6nZ7ctS2UNBezlLel8xoEqT', '导�
 INSERT INTO `hrip_permission` VALUES ('yyr4dvnlFkispmTpZsbNA6FjdjdO4nzM', '查询', 'H7UZoCxXHHQMRPJslAGeDgyiyuCLhe', 'icon-zoom', '1', '3', NULL, 'nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', 30152, 1, '2018-06-18 21:07:49', '1', '');
 INSERT INTO `hrip_permission` VALUES ('zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', '今日成单', 'JajayAP2guEdZfvb7xZjGUDp8Izz6E', 'icon-emoticon_smile', '1', '2', 'success/now.do', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', 40051, 1, '2018-06-18 12:39:53', '1', '');
 INSERT INTO `hrip_permission` VALUES ('ZyEDEqyYF50ppc8bE3F30V8sXzg0hylj', '查询', 'sGZfkPDdtm37absEv1xtFZrbXHWT3u', 'icon-zoom', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30052, 1, '2018-06-18 20:59:36', '1', '');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_role
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_role`;
-CREATE TABLE `hrip_role`  (
-  `ROLE_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色编号',
-  `ROLE_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
-  `REMARK` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `ORG_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属机构',
-  `STATUS` decimal(8, 0) NULL DEFAULT NULL COMMENT '状态',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_role` (
+  `ROLE_ID` varchar(32) NOT NULL COMMENT '角色编号',
+  `ROLE_NAME` varchar(30) DEFAULT NULL COMMENT '角色名称',
+  `REMARK` varchar(300) DEFAULT NULL COMMENT '备注',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `UPDATE_TIME` datetime DEFAULT NULL COMMENT '修改时间',
+  `ORG_ID` varchar(32) DEFAULT NULL COMMENT '所属机构',
+  `STATUS` decimal(8,0) DEFAULT NULL COMMENT '状态',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`ROLE_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_role
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_role` VALUES ('hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'admin', '花园村', '2015-12-09 15:17:15', '2015-12-11 18:17:15', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 1, '1');
 INSERT INTO `hrip_role` VALUES ('iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'roleName', '角色', '2015-12-07 15:05:02', '2015-12-11 18:16:07', 'superAdmin', 1, '1');
 INSERT INTO `hrip_role` VALUES ('superAdmin', '超级角色', '超级角色', '2015-10-12 12:58:22', '2015-10-12 12:58:25', 'superAdmin', 1, '1');
 INSERT INTO `hrip_role` VALUES ('zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'fsdf34', '角色', '2016-04-02 22:31:06', '2016-04-02 22:31:06', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 1, '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_role_doc
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_role_doc`;
-CREATE TABLE `hrip_role_doc`  (
-  `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '医生编号',
-  `ROLE_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色编号',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_role_doc` (
+  `ID` varchar(32) NOT NULL COMMENT '编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `ROLE_ID` varchar(32) DEFAULT NULL COMMENT '角色编号',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`ID`) USING BTREE,
-  INDEX `DOC_ID`(`DOC_ID`) USING BTREE,
-  INDEX `ROLE_ID`(`ROLE_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `DOC_ID` (`DOC_ID`) USING BTREE,
+  KEY `ROLE_ID` (`ROLE_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_role_doc
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_role_doc` VALUES ('4zmvzyEmCGQ0rfRarIVhvFUDeeY2bxnO', 'rsAOQAUeIbD6HFEFAXp864NssT823SLA', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', '2018-06-19 23:26:28', '1');
 INSERT INTO `hrip_role_doc` VALUES ('S4yi7HtSkidsm4RabE0X2D4m8q5qynBN', 'q8d44QVBGIicxZCiZRsb3XJePgmZvroy', 'superAdmin', '2018-06-19 23:27:07', '1');
 INSERT INTO `hrip_role_doc` VALUES ('superAdmin', 'superAdmin', 'superAdmin', '2015-10-12 13:01:03', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_role_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_role_permission`;
-CREATE TABLE `hrip_role_permission`  (
-  `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `ROLE_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色编号',
-  `PERMISSION_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限编号',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_role_permission` (
+  `ID` varchar(32) NOT NULL COMMENT '编号',
+  `ROLE_ID` varchar(32) DEFAULT NULL COMMENT '角色编号',
+  `PERMISSION_ID` varchar(32) DEFAULT NULL COMMENT '权限编号',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`ID`) USING BTREE,
-  INDEX `ROLE_ID`(`ROLE_ID`) USING BTREE,
-  INDEX `PERMISSION_ID`(`PERMISSION_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `ROLE_ID` (`ROLE_ID`) USING BTREE,
+  KEY `PERMISSION_ID` (`PERMISSION_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_role_permission
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_role_permission` VALUES ('0FZfhzZnFWeiafclI2l2Q4tpzjltXSM8', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('0XFOjkyXC7I5jcsdQSdruwstEVRNgTHo', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D013', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('0yQZE7Vv6WzQhImkNhSGy6BkJCYc6j67', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'C001', '2016-04-07 17:35:15', '1');
@@ -49411,228 +49704,31 @@ INSERT INTO `hrip_role_permission` VALUES ('ZC4LsyipbaBWY5sFC8z8cYThKEcRsanz', '
 INSERT INTO `hrip_role_permission` VALUES ('zq1NkWOk7Nr7onUwRCviEB6NNVTaf7z5', 'superAdmin', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', '2018-06-18 12:38:32', '1');
 INSERT INTO `hrip_role_permission` VALUES ('zubsMfLK5nodryjJiOKW8ow7EPelmetk', 'superAdmin', 'hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '2016-04-05 16:23:39', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ZuM65YFhUYYceJEdJ4laawH8aXGaysye', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'B001', '2016-04-02 22:31:23', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for hrip_user_group
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_user_group`;
-CREATE TABLE `hrip_user_group`  (
-  `GROUP_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '团队',
-  `ORG_ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构',
-  `GROUP_NAME` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '团队名称',
-  `REMARKS` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `STATUS` decimal(8, 0) NULL DEFAULT NULL COMMENT '状态',
-  `VERSION` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版本',
+CREATE TABLE `hrip_user_group` (
+  `GROUP_ID` varchar(32) NOT NULL COMMENT '团队',
+  `ORG_ID` varchar(32) DEFAULT NULL COMMENT '机构',
+  `GROUP_NAME` varchar(30) DEFAULT NULL COMMENT '团队名称',
+  `REMARKS` varchar(300) DEFAULT NULL COMMENT '说明',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `STATUS` decimal(8,0) DEFAULT NULL COMMENT '状态',
+  `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`GROUP_ID`) USING BTREE,
-  INDEX `ORG_ID`(`ORG_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  KEY `ORG_ID` (`ORG_ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of hrip_user_group
 -- ----------------------------
+BEGIN;
 INSERT INTO `hrip_user_group` VALUES ('cExYhuCIFSoqRzblQPxtg04dDeE4xyDK', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '3队', '3队', '2018-06-19 22:26:28', 1, '1');
 INSERT INTO `hrip_user_group` VALUES ('lZapoL7iLRDOG0wWIGPzv2s55Tt6zwTg', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '1队', '1队', '2018-06-19 22:25:11', 1, '1');
 INSERT INTO `hrip_user_group` VALUES ('TrJSYmXTty7VdUnf06pPKmWKJJyyDFcv', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '2队', '2队', '2018-06-19 22:26:18', 1, '1');
-
--- ----------------------------
--- Table structure for qrtz_blob_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_blob_triggers`;
-CREATE TABLE `qrtz_blob_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `BLOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_calendars
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_calendars`;
-CREATE TABLE `qrtz_calendars`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CALENDAR_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CALENDAR` blob NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `CALENDAR_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_cron_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_cron_triggers`;
-CREATE TABLE `qrtz_cron_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CRON_EXPRESSION` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TIME_ZONE_ID` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_fired_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_fired_triggers`;
-CREATE TABLE `qrtz_fired_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ENTRY_ID` varchar(95) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `INSTANCE_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `FIRED_TIME` bigint(13) NOT NULL,
-  `SCHED_TIME` bigint(13) NOT NULL,
-  `PRIORITY` int(11) NOT NULL,
-  `STATE` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `IS_NONCONCURRENT` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `REQUESTS_RECOVERY` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `ENTRY_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_job_details
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_job_details`;
-CREATE TABLE `qrtz_job_details`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `DESCRIPTION` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `JOB_CLASS_NAME` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_DURABLE` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_NONCONCURRENT` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_UPDATE_DATA` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `REQUESTS_RECOVERY` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_locks
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_locks`;
-CREATE TABLE `qrtz_locks`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `LOCK_NAME` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `LOCK_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qrtz_locks
--- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'TRIGGER_ACCESS');
-
--- ----------------------------
--- Table structure for qrtz_log
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_log`;
-CREATE TABLE `qrtz_log`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `task_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `task_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `task_begin_time` datetime(0) NULL DEFAULT NULL,
-  `task_end_time` datetime(0) NULL DEFAULT NULL,
-  `task_result` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `task_running_message` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `task_id`(`task_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_paused_trigger_grps
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
-CREATE TABLE `qrtz_paused_trigger_grps`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_scheduler_state
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_scheduler_state`;
-CREATE TABLE `qrtz_scheduler_state`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `INSTANCE_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
-  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `INSTANCE_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qrtz_scheduler_state
--- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'SC-2018071301431531758997626', 1531759089764, 15000);
-
--- ----------------------------
--- Table structure for qrtz_simple_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simple_triggers`;
-CREATE TABLE `qrtz_simple_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `REPEAT_COUNT` bigint(7) NOT NULL,
-  `REPEAT_INTERVAL` bigint(12) NOT NULL,
-  `TIMES_TRIGGERED` bigint(10) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_simprop_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
-CREATE TABLE `qrtz_simprop_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `STR_PROP_1` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STR_PROP_2` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STR_PROP_3` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `INT_PROP_1` int(11) NULL DEFAULT NULL,
-  `INT_PROP_2` int(11) NULL DEFAULT NULL,
-  `LONG_PROP_1` bigint(20) NULL DEFAULT NULL,
-  `LONG_PROP_2` bigint(20) NULL DEFAULT NULL,
-  `DEC_PROP_1` decimal(13, 4) NULL DEFAULT NULL,
-  `DEC_PROP_2` decimal(13, 4) NULL DEFAULT NULL,
-  `BOOL_PROP_1` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BOOL_PROP_2` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_triggers`;
-CREATE TABLE `qrtz_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `DESCRIPTION` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `NEXT_FIRE_TIME` bigint(13) NULL DEFAULT NULL,
-  `PREV_FIRE_TIME` bigint(13) NULL DEFAULT NULL,
-  `PRIORITY` int(11) NULL DEFAULT NULL,
-  `TRIGGER_STATE` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_TYPE` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `START_TIME` bigint(13) NOT NULL,
-  `END_TIME` bigint(13) NULL DEFAULT NULL,
-  `CALENDAR_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `MISFIRE_INSTR` smallint(2) NULL DEFAULT NULL,
-  `JOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  INDEX `SCHED_NAME`(`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
