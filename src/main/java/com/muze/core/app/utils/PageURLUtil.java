@@ -115,69 +115,8 @@ public class PageURLUtil {
 
 	}
 
-	// 海风新增任务相关
-	public static class Hf {
-
-		//新增订单主页面
-		public static final String PAGE = "hf/hfOrder";
-
-		//新增订单主页面日
-		public static final String PAGE_DAY = "hf/hfOrderDay";
-
-		//新增订单主页面周
-		public static final String PAGE_WEEK = "hf/hfOrderWeek";
-
-		//新增订单主页面月
-		public static final String PAGE_MONTH = "hf/hfOrderMonth";
-
-		//新增订单主页面年
-		public static final String PAGE_YEAR= "hf/hfOrderYear";
-
-		//新增修改页面
-		public static final String ORDER_ADD_SAVE = "hf/hfOrderAddOrSave";
-
-		//试听页面
-		public static final String ORDER_LISTEN = "hf/hfOrderListen";
-
-		//成单页面
-		public static final String ORDER_SUCCESS = "hf/hfOrderSuccess";
-
-		//转介绍
-		public static final String ORDER_INTRODUCTION = "hf/introduction";
-
-		//转介绍
-		public static final String ORDER_ERROR = "hf/hfOrderError";
-	}
-
-	// 海风试听相关
-	public static class HfListen {
-		public static final String PAGE = "hflisten/hflisten";
-		public static final String PAGE_CREAT_BYDAY = "hflisten/hflistenCreatByDay";
-		public static final String PAGE_DAY = "hflisten/hflistenDay";
-		public static final String PAGE_NEXT_DAY = "hflisten/hflistenNextDay";
-		public static final String PAGE_WEEK_DAY = "hflisten/hflistenWeekDay";
-		public static final String PAGE_MONTH_DAY = "hflisten/hflistenMonthDay";
-		public static final String PAGE_JUMP = "hflisten/hflistenJump";
-	}
-
-	// 海风成单相关
-	public static class HfSuccessListen {
-		public static final String PAGE = "hfsuccess/hfsuccessAll";
-		public static final String PAGE_DAY = "hfsuccess/hfsuccessDay";
-		public static final String PAGE_WEEK = "hfsuccess/hfsuccessWeek";
-		public static final String PAGE_MONTH = "hfsuccess/hfsuccessMonth";
-	}
-
-	// 海风成单相关
-	public static class HfErrorListen {
-		public static final String PAGE = "hferror/hferrorPhone";
-		public static final String PAGE_LISTEN = "hferror/hferrorListen";
-		public static final String PAGE_NO_LISTEN = "hferror/hferrorNoListen";
-
-	}
-
-	// 海风主页相关
-	public static class HfHome {
-		public static final String PAGE = "hfhome/hfhome";
+	// 主页相关
+	public static class Index {
+		public static final String PAGE = "index/home";
 	}
 }

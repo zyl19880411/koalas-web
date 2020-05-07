@@ -4,7 +4,7 @@ table.dataintable {
 	border:1px solid #aaa;
 	width:90%;
 	height:90%;
-	position: absolute;
+	margin-top: 15px;
 	top: 0;
 	left: 0;
 	right: 0;

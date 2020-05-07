@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/common/login/newlogin.css">
 <script type="text/javascript" src="<%=basePath%>js/common/login/login.js"></script>
 <!--[if IE]>
-<script src="js/html5.js"></script>
+<script src="js/common/login/html5.js"></script>
 <![endif]-->
 
 <script type="text/javascript">

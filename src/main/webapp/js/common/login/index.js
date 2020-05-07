@@ -92,7 +92,7 @@ $(document).ready(
             $('#tt').tabs('add', {
                 title : "主页",
                 selected : true,
-                content:'<iframe scrolling="yes"  frameborder="0" src="'+ $("#basePath").val() + "hfhome/page.do" + '"  style="width:100%;height:100%;position: absolute;"></iframe>',
+                content:'<iframe scrolling="yes"  frameborder="0" src="'+ $("#basePath").val() + "index/page.do" + '"  style="width:100%;height:100%;position: absolute;"></iframe>',
                 closable : false,
                 iconCls : "icon-house",
                 id:"hfhome",

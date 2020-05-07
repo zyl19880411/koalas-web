@@ -13,5 +13,4 @@
 	<import resource="spring-services.xml" />
 	<import resource="spring-ds.xml" />
 	<import resource="spring-shiro.xml" />
-	<import resource="spring-aop.xml" />
 </beans>

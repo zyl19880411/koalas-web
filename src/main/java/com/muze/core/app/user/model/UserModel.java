@@ -3,9 +3,9 @@ package com.muze.core.app.user.model;
 //用户实体类
 public class UserModel {
 
-	// 医生编号
+	// 用户编号
 	private String doc_id;
-	// 医生名称
+	// 用户名称
 	private String doc_name;
 	//登录名称
 	private String login_name;

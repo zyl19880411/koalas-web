@@ -15,9 +15,9 @@ $(document).ready(function() {
         method:'post',
         columns:[[
                 {field:'check',align:'center',checkbox:true,width:15},  
-          		{field:'doc_id',title:'医生编号',align:'center',width:100,hidden:true},
-          		{field:'login_name',title:'医生登录名',align:'center',width:100,hidden:true},
-          		{field:'doc_name',title:'医生名称',align:'center',width:100},
+          		{field:'doc_id',title:'用户编号',align:'center',width:100,hidden:true},
+          		{field:'login_name',title:'用户登录名',align:'center',width:100,hidden:true},
+          		{field:'doc_name',title:'用户名称',align:'center',width:100},
           		{field:'gender',title:'性别',align:'center',width:40,
         			formatter: function(value,row,index){
         				if (value=='1'){
@@ -109,7 +109,7 @@ $(document).ready(function() {
 			   return false;
 		   }
 		   
-		    $.messager.confirm('确认删除', '确认删除这个医生吗?', function(r){
+		    $.messager.confirm('确认删除', '确认删除这个用户吗?', function(r){
 		    	if (r){
 		    		 $.ajax({    
 		 		        type:'post',        
@@ -126,7 +126,7 @@ $(document).ready(function() {
 		 		        	}
 		 		        },
 		 		        error:function(XMLHttpRequest, textStatus, errorThrown){
-		 		        	$.messager.alert('删除失败','医生删除错误!','error')
+		 		        	$.messager.alert('删除失败','用户删除错误!','error')
 		 		        }
 		 		    });
 		    	}
@@ -401,13 +401,13 @@ $(document).ready(function() {
 			        		$.messager.alert('添加确认','登录名重复，请换个试试!','info');
 			        	};
 			        	if(data=='addSuccess'){
-			        		$.messager.alert('添加成功','医生添加成功!','info',function(){
+			        		$.messager.alert('添加成功','用户添加成功!','info',function(){
 				        		$('#userdialog').dialog('close');
 				        		$("#D001").click();
 				        	});
 			        	};
 			        	if(data=='updateSuccess'){
-			        		$.messager.alert('修改成功','医生修改成功!','info',function(){
+			        		$.messager.alert('修改成功','用户修改成功!','info',function(){
 				        		$('#userdialog').dialog('close');
 				        		$("#D001").click();
 				        	});
@@ -415,7 +415,7 @@ $(document).ready(function() {
 			        	
 			        },
 			        error:function(XMLHttpRequest, textStatus, errorThrown){
-			        	$.messager.alert('添加失败','医生添加错误!','error')
+			        	$.messager.alert('添加失败','用户添加错误!','error')
 			        }
 			    });
 		   }

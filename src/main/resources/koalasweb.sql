@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 07/05/2020 14:20:52
+ Date: 07/05/2020 16:17:02
 */
 
 SET NAMES utf8mb4;
@@ -196,7 +196,7 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 -- Records of QRTZ_SCHEDULER_STATE
 -- ----------------------------
 BEGIN;
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('scheduler', 'zhangyulongdeMacBook-Pro.local1588832396557', 1588832397059, 15000);
+INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('scheduler', 'zhangyulongdeMacBook-Pro.local1588839419741', 1588839420097, 15000);
 COMMIT;
 
 -- ----------------------------
@@ -312,7 +312,7 @@ BEGIN;
 INSERT INTO `hf_listen` VALUES (5, 21, '北京海淀区30号', '1', '1', '2018-07-10 00:39:27', '张老师', '13011114521', '部分突然想到官方通过', 1, '2018-07-10 00:54:22', '2018-07-13 12:31:50', NULL, 0);
 INSERT INTO `hf_listen` VALUES (6, 23, '北京海淀区1', '0', '0', '2018-07-15 21:44:42', '张老师', '13011114521', '111', 1, '2018-07-14 20:00:15', '2018-07-14 20:00:15', '2018-07-14 18:52:54', 1);
 INSERT INTO `hf_listen` VALUES (7, 22, '北京海淀区', '11', '8', '2018-07-11 00:55:33', '张老师', '13011114521', '111', 1, '2018-07-11 23:46:45', '2018-07-11 23:47:04', NULL, 1);
-INSERT INTO `hf_listen` VALUES (8, 24, NULL, '3', '4', '2018-07-10 00:08:15', '张老师1', '13011114521', NULL, 1, NULL, '2018-07-13 13:24:03', '2018-07-13 13:24:03', 1);
+INSERT INTO `hf_listen` VALUES (8, 24, NULL, '3', '4', '2018-07-10 00:08:15', '张老师1', '13011114521', NULL, 0, '2020-05-07 14:27:56', '2020-05-07 14:27:56', '2018-07-13 13:24:03', 1);
 INSERT INTO `hf_listen` VALUES (9, 24, '北京海淀区', '2', '2', '2018-07-11 22:26:15', '张老师', '13522221112', '3', 1, '2018-07-11 23:36:38', '2018-07-11 23:47:04', NULL, 1);
 INSERT INTO `hf_listen` VALUES (10, 21, '111111111111', '2', '3', '2018-07-05 12:32:06', 'aaaa', '11111111111', '111', 1, NULL, '2018-07-13 12:32:16', NULL, 1);
 INSERT INTO `hf_listen` VALUES (11, 20, '111111111111', '1', '1', '2018-06-13 12:35:32', 'aaaa', '11111111111', '1\r\n1\r\n1', 1, NULL, '2018-07-13 12:35:41', NULL, 1);
@@ -47945,8 +47945,8 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_doc`;
 CREATE TABLE `hrip_doc` (
-  `DOC_ID` varchar(32) NOT NULL COMMENT '医生编号',
-  `DOC_NAME` varchar(30) DEFAULT NULL COMMENT '医生名称',
+  `DOC_ID` varchar(32) NOT NULL COMMENT '用户编号',
+  `DOC_NAME` varchar(30) DEFAULT NULL COMMENT '用户名称',
   `LOGIN_NAME` varchar(30) DEFAULT NULL COMMENT '登陆名',
   `LOGIN_PWD` varchar(30) DEFAULT NULL COMMENT '登陆密码',
   `GENDER` decimal(1,0) DEFAULT NULL COMMENT '性别',
@@ -47978,7 +47978,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_group_doc`;
 CREATE TABLE `hrip_group_doc` (
   `ID` varchar(32) DEFAULT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
   `GROUP_ID` varchar(32) DEFAULT NULL COMMENT '团队编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
@@ -49078,7 +49078,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_org_doc`;
 CREATE TABLE `hrip_org_doc` (
   `ID` varchar(32) NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
   `ORG_ID` varchar(32) DEFAULT NULL COMMENT '结构编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
@@ -49116,138 +49116,71 @@ CREATE TABLE `hrip_org_permission` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `hrip_org_permission` VALUES ('00j8hTGZ0pJEAUaPkr8GFlUkJooBS753', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D003', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('0jjMaHXM6qCQfSevVqq0hQ5moVi62CA3', 'superAdmin', 'be4r4XMsnybBqGNJSB2icfGSJ8Rx8NMB', '2018-06-18 20:53:18', '1');
 INSERT INTO `hrip_org_permission` VALUES ('0xGET47BEKBBYYQqvNqvislbJb83OAp4', 'superAdmin', 'NzXxLGTjO8xGBWYLw0ywlMZneSr0oLOP', '2016-04-05 16:26:22', '1');
-INSERT INTO `hrip_org_permission` VALUES ('0xGP4MAr1GYWUTyLT8PVsJfyItiIrnt1', 'superAdmin', 'wmokpuP2TcaaaQkx3KmlhsoPzy6ZBNOC', '2018-06-18 21:03:17', '1');
-INSERT INTO `hrip_org_permission` VALUES ('0ZmaTDHjtdBGGNGulC6m31nh7OKqb3pa', 'superAdmin', 'u3s1NflXXK8z3UDBA8Ii7gsQXJ24ovaJ', '2018-06-18 12:43:37', '1');
-INSERT INTO `hrip_org_permission` VALUES ('18gbBoWFMYzqKvWccBwtMCDDiBvC4uNq', 'superAdmin', 'JApmWcO2SnwRi2ycxIDDfF4uTyQasHWS', '2018-06-18 12:29:06', '1');
 INSERT INTO `hrip_org_permission` VALUES ('1RC2F3ZWmFh8piWOQk6KXPBEv4THAO11', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '37pyRui4B2WAP6E2mzDdFG2MnjYGYD1Z', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('1u0KHnvJpsMiptS8zcM21MEiJMWSy2D6', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D002', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('21rbFPoj3vXCL0ZckSaJsleXdK1t2It3', 'superAdmin', 'LQiNr3f58FUp3i8lfDFQV5CGfElxsaQ4', '2018-06-18 12:33:45', '1');
-INSERT INTO `hrip_org_permission` VALUES ('28eY1QRcrKXiTffpai0SUvk4ikX34lTo', 'superAdmin', 'GpJF6MurZsAxyxdviXvQSVtBlZ8SNHee', '2018-06-18 21:04:53', '1');
-INSERT INTO `hrip_org_permission` VALUES ('2KiqVNysv7IIUbNSVr3cRjl7V26cPKJ3', 'superAdmin', 'cNzEdIPYRxyeU8W20vNqKAYkFmAwy84M', '2018-07-14 00:07:10', '1');
 INSERT INTO `hrip_org_permission` VALUES ('2VbDmnIRl7J8QvZWzFxEWPOgLa6k4Ydw', 'superAdmin', 'Mt5A1KRKTgty31DtJ3ik8boG5tFbJvHQ', '2016-04-05 16:24:13', '1');
 INSERT INTO `hrip_org_permission` VALUES ('2vbFFnsePhuk2RNyvvxDEcIitty2ZMSa', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('2XE2PleMEjT15ZAtf4BNNWpbyjVwP0oa', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D006', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('38Aj730gO0AtO7agNPZSPAla1wafIsJg', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'AKvC3hCyEHAIGw1odhpVNoNXJ0kETxUA', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('3aCAkkBJR70GQkBOkJQrPOe43pCAzaYv', 'superAdmin', 'gKGSIkAJNt0v568ha8G6msCpZIh32OB2', '2018-07-14 00:06:31', '1');
-INSERT INTO `hrip_org_permission` VALUES ('3c5oImh2ZqpiFS7IHylPmbxlvqafDmzA', 'superAdmin', 'mo20ieCloWUJV7kbfICGnh3dOFhXgGPO', '2018-06-18 20:53:35', '1');
-INSERT INTO `hrip_org_permission` VALUES ('3PhVtHnzTGbgCVCUQ5JiZFthjUWqAoVJ', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'DhmR0OdVOiJ8BtWbSNasWRO7OG6TuITm', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('3ZVz57rNUdQfBulMB5UQhZmKZDhViXkM', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D016', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('44yeIwXbkwjvyEINgkm761STCTbidOvv', 'superAdmin', 'AKvC3hCyEHAIGw1odhpVNoNXJ0kETxUA', '2018-06-18 17:44:02', '1');
-INSERT INTO `hrip_org_permission` VALUES ('4EKG2FHLCmdbYZOhtHAHtjE14rHQy7cg', 'superAdmin', 'ORnIfXHz8afqX4FkygFQOc5DDe301YY4', '2018-06-18 17:42:24', '1');
-INSERT INTO `hrip_org_permission` VALUES ('5VtpFasGj4VWhMrqN7qdfdshyIFNgG3x', 'superAdmin', 'MLh5StqnavfSM7sWHrQZw8Y8Gprx6WfZ', '2018-07-14 00:06:47', '1');
 INSERT INTO `hrip_org_permission` VALUES ('6QUA55ku8YzHzzRBo2t4OuWtouSkESIj', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'JzDypWYwaXUBL2A0HZpTqjl2sOkqd6lX', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('6xppFpvcsZUZtzcEp8UOr1s0v1o2BR2e', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('73MmTRN6RlfQoyZbnFSg3BgVhOiD0CZm', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'kK21HSCDQUpPYSZj3vDj71qlMtIwEO3P', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('7gTFcgazFexMl6HHGVtMmuogWKYTroVr', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'ORnIfXHz8afqX4FkygFQOc5DDe301YY4', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('7mNlttkrBuXUi8xoDkXZ3F5nYg3wWzib', 'superAdmin', 'rFEajOh6HnQoBBRV5rxJGJCOSSHpkknk', '2018-07-14 00:06:16', '1');
-INSERT INTO `hrip_org_permission` VALUES ('8uFoPphMZRhLbH6AGKg2TiSGmGEJRTs2', 'superAdmin', 'kfnoQC2eKETjNbB6Eq177j6EdRxrliaU', '2018-06-18 17:42:55', '1');
 INSERT INTO `hrip_org_permission` VALUES ('a1kTsuQeXDe0UfEFubviOp8SlCT0FPmy', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('a73SvvhHrMrDSGAVMK3SWB7rlW4biFun', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'BBwm4jY8hZGzhsrEgzW2oUVNCUIquyT7', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('aCeQOyVFYYxQmVsqzBID5As7cC7t6aDY', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('AD38P1zB4giVg74d6c8ARsPyNRi5GDih', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'C002', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('AgkdYa8Ezy58ALgRjpWwYDIvaZAnpTz1', 'superAdmin', 'yyr4dvnlFkispmTpZsbNA6FjdjdO4nzM', '2018-06-18 21:07:49', '1');
-INSERT INTO `hrip_org_permission` VALUES ('akkiRg5d7LaZnaw5Vt4d0tPhOFiv5ngu', 'superAdmin', 'gHeVE8y6VT7hDjrrWq7FifeYuKpZyVN6', '2018-06-18 12:47:30', '1');
 INSERT INTO `hrip_org_permission` VALUES ('aQ1mXZPGk3Ehl8lH5GxniFYBZtreCMSG', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D005', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('ARLLSI2wN14BEdCQBQIRRfywbWHL43E8', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'XMHiJy4XnXj0o6NpYcAE5iFDwfC0DyFz', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('aUMue3mPqwpH6uNxwgY4j8KeBgvAMINt', 'superAdmin', '7J4UcHNuBPxqodqhjioJHihKsb3xGgOu', '2018-07-14 00:08:51', '1');
 INSERT INTO `hrip_org_permission` VALUES ('aypO7bbp7XJATDOFgClLvtQWorsvYErj', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '37pyRui4B2WAP6E2mzDdFG2MnjYGYD1Z', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('c0qeiuRp7ph0NyY8nEoMWAuiChcQ5Puq', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'be4r4XMsnybBqGNJSB2icfGSJ8Rx8NMB', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('C3bJSbL6MthkpoTtcAF01vFI7lYjW7yi', 'superAdmin', 'TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', '2018-06-18 12:37:56', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Cgjfp5U4DgvgwNfkPHlYzx5M14VVvzzu', 'superAdmin', 'XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', '2018-07-14 20:39:51', '1');
-INSERT INTO `hrip_org_permission` VALUES ('CIc45XjUHhkUaJeUwoeP5nhMb4uxKbvO', 'superAdmin', 'oUHfs18Wg4MfvLseh6fFiE5yFID5ceaA', '2018-06-18 17:45:06', '1');
-INSERT INTO `hrip_org_permission` VALUES ('CiYn2RHqGneWrDuLGolEKBiMjwwuJ3cJ', 'superAdmin', 'lauelJCP1gWo0i0NjIFjBiS70e4C12ca', '2018-06-18 12:28:06', '1');
 INSERT INTO `hrip_org_permission` VALUES ('cK5mQiViylXn5WNKr7APB0hUNrpQXqMB', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'B001', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('cMfH1UmR4Tk472fwSzrSlN6fEpR0Mghq', 'superAdmin', 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', '2016-04-05 16:22:36', '1');
 INSERT INTO `hrip_org_permission` VALUES ('cVu4DPPtk2AaIQgAPYuZuTeaoW2aaXIT', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D001', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Dd2kC12iyYC1FcwUAR2QNWT6QAHUaaAd', 'superAdmin', 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', '2018-06-18 12:25:12', '1');
-INSERT INTO `hrip_org_permission` VALUES ('DlPMmNddf2topk5KekXZ28moB3k8flPH', 'superAdmin', 'nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', '2018-06-18 12:32:52', '1');
-INSERT INTO `hrip_org_permission` VALUES ('DtRIDpvopPQfkxaWxGXNOExZ6PFrqgB7', 'superAdmin', '4w3fHyS1IG6gI1zbrz6m8ma57LokazJY', '2018-06-18 21:02:14', '1');
 INSERT INTO `hrip_org_permission` VALUES ('DUw2x2o7Tl5r15cJeazcs4y6LLl5fOl1', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D011', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('DYCHID7DmrHbJLT0dnDNYZHpwhYEYpcY', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D010', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('DyJ5LQvKLqvpGupNk7ksRiu4ObRxu83B', 'superAdmin', 'a2SHwiabhbcbAs28LlFzpHtz0dlwFQwg', '2018-06-18 21:06:54', '1');
-INSERT INTO `hrip_org_permission` VALUES ('E5eEZFrM1rrlrCGtRBIiZfffGagjsDFk', 'superAdmin', '0YeObhmjTNNGCuWEWUN5vBcsmjOTtylH', '2018-07-14 00:04:45', '1');
-INSERT INTO `hrip_org_permission` VALUES ('edpGIeL3UsopWVoSySaMA3Tnzn3jZmEL', 'superAdmin', 'zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', '2018-06-18 12:39:53', '1');
-INSERT INTO `hrip_org_permission` VALUES ('EGGGIdYrzscMdQOhFeZpJxagehXRjl1F', 'superAdmin', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', '2018-06-18 12:30:09', '1');
 INSERT INTO `hrip_org_permission` VALUES ('EPk0kz3dtMFUIus8OF81yVK6tkzJc6y6', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'C003', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('EW0qKXxl1izp4qJsGAXfEpwBQcvrv4y4', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('FSvFqfrDYHH3cneK18omoe2uNsqcB30Y', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'JzDypWYwaXUBL2A0HZpTqjl2sOkqd6lX', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('fvlW7fDfLf7B6vSCZXP6GDcvcPkPg6bz', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'Mt5A1KRKTgty31DtJ3ik8boG5tFbJvHQ', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('fzZJHzKa1RE4zkfsJdkoD2JucH6iPaNa', 'superAdmin', 'wpCmNMc4FsAYWsJD6X70yNOi8kYOS7pb', '2016-04-07 11:18:01', '1');
 INSERT INTO `hrip_org_permission` VALUES ('GgMagYEDF3505aAuilpqnNy4Ufi6kvJl', 'superAdmin', 'JzDypWYwaXUBL2A0HZpTqjl2sOkqd6lX', '2016-04-05 17:28:06', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Gi1DDGMzOwPcoQbrK8qEeiIDK1ROAMrr', 'superAdmin', 'R00gZGjvetIo1CiCHdLkg0VZln0WtZcJ', '2018-06-18 21:08:27', '1');
 INSERT INTO `hrip_org_permission` VALUES ('GqCXUdudS5hwTterPh43xxAvGXRFXmD4', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'wpCmNMc4FsAYWsJD6X70yNOi8kYOS7pb', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('GtpBRWoyxBtVaZY4qYZtCdv1krztaBhK', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'UjEm2w4sYVx1XVNxQ0DCbmf1ANbjB5fe', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('gzhL3dZ3uuOR3pvCpJB2VCdxpVcXRiPt', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'wmokpuP2TcaaaQkx3KmlhsoPzy6ZBNOC', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('h2MIVED8tjTrNyEAXyRbekFkqgrZtCye', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'kfnoQC2eKETjNbB6Eq177j6EdRxrliaU', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('h8rGAlHHWnxzFeKXuCuAINLrwh6PTlSN', 'superAdmin', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', '2016-04-05 16:20:48', '1');
-INSERT INTO `hrip_org_permission` VALUES ('HawVHjyyALE2b8wPWqScAIn6rhzSDvD2', 'superAdmin', 'T2wWKE3uoqnRKdd2Eyk4JdVl8peCHqqa', '2018-06-18 21:11:06', '1');
 INSERT INTO `hrip_org_permission` VALUES ('HHllmoP3BGs8MY7iJ6BxKcrwfJpGsOaS', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'UjEm2w4sYVx1XVNxQ0DCbmf1ANbjB5fe', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('hTkQY3rHZLOpJGWtKzjzQQye1FurostV', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'oUHfs18Wg4MfvLseh6fFiE5yFID5ceaA', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('hTXwxTvAJ1vBLYSu8VyV38JlAaTKJImr', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D020', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Hx0NaVjX0tj1li6mNcAylyWU3yLGs0Oa', 'superAdmin', 'nBzAEwwZjZR8CaKeB08eKqVLM7zx560n', '2018-06-18 12:45:43', '1');
 INSERT INTO `hrip_org_permission` VALUES ('HyUT0xWQ63rxOxKgvcfR5Nne7HQYLgP1', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D015', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('i7rqN0jRo3Uqb37Pty40y16hM8agloUR', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'B001', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('IFuK4PlyfnIMnwV2ONL1BHsoggHn8xf0', 'superAdmin', 'LIMaBAx5dofdOvWBzOaWALJZtdmqxQRq', '2018-06-18 20:54:07', '1');
-INSERT INTO `hrip_org_permission` VALUES ('IQwYjDd5oPq5l87l7J3QC6PmJrvvHmNW', 'superAdmin', 'uLZ61Y8KIDfixruZIWcmMab4cmPGx5MP', '2018-06-18 21:10:39', '1');
 INSERT INTO `hrip_org_permission` VALUES ('j6hf4Ieoj4GIAA5HNP2ul5fuYBlaByoP', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D014', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('JIkqP2pkoCBMyBHZUBMNge7Z4Yuvqafq', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'Mt5A1KRKTgty31DtJ3ik8boG5tFbJvHQ', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('JjgPjtVqZc1x1zJ5snSgTX5mpGf5D8wS', 'superAdmin', 'lwC4DgaeZTugCFVe0WKmLWQ5W3R0YcFw', '2018-06-18 21:10:06', '1');
 INSERT INTO `hrip_org_permission` VALUES ('JmTPJO4xClrVAzqcfPcZO03Rg6cqrEZC', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D009', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('jX73j1jwa3ryWIzq36lv8IBxZwu7Rh2a', 'superAdmin', 'IvMFCPEwoALX5efs1JMTuEHfbEiecVta', '2018-07-14 20:40:40', '1');
 INSERT INTO `hrip_org_permission` VALUES ('JxydfJyrvLr0VMdjzySXb4FAVJrC7STW', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D012', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('JY1MN3QoAouDmeaKSnuSQFdqoDhcWUFD', 'superAdmin', 'XMHiJy4XnXj0o6NpYcAE5iFDwfC0DyFz', '2016-04-05 16:25:05', '1');
 INSERT INTO `hrip_org_permission` VALUES ('kBIFztLr23BZPIkL6pWcEPVYoibYG3vt', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('KIIUrWrmI7g0wNTI1n56DKfiIHkAOFQV', 'superAdmin', 'SJ2nY5HEoNvsy0iayBhFZcptP5wuFP8v', '2018-07-14 00:08:00', '1');
-INSERT INTO `hrip_org_permission` VALUES ('l5HPVUY2oWOI28BABPivHelh8RokthPr', 'superAdmin', '3pKQU5KavHA0r4STD3MScFPentPwyvyL', '2018-06-18 21:11:35', '1');
 INSERT INTO `hrip_org_permission` VALUES ('lh8g4tNfGeKDbflu1wHRcZzt2iYJzjsa', 'superAdmin', 'KFGL0lWTbrctpHkO8ZjIjSjJI8nHQ8xE', '2016-04-07 11:18:29', '1');
 INSERT INTO `hrip_org_permission` VALUES ('LUtwLyhL8fIXhCcC34BmJCOP5zJHpouE', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D011', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('lVUQejIycA7yE6LWwHPo6rVpSxnAuaXq', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '4BxadSTePjrsIrdt8s3KSPfu3ihVsVfC', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('lYb5H6ZByOWtROo1dTwd63jmp1tXuYu6', 'superAdmin', 'XiGaQbE72OzlZ1seRbayVGP0hXNKWg3H', '2018-07-14 00:04:25', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Md7BuxF7WVxj2K5VvTqvHSEieGo6T7ZG', 'superAdmin', 'vyXnmQaLnjjQSNdQ3nWC4WNtBRuirsyV', '2018-06-18 21:09:03', '1');
 INSERT INTO `hrip_org_permission` VALUES ('MEnWED0bk3wpcQK3YgcYtZ5Lg6hMlYyl', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D005', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('mgamKvaI1mRU4HHuVd57W4zk8veooEMK', 'superAdmin', 'iojw7o5RtZjXItHceh6WhoKT6B4CCW6Y', '2018-07-14 00:05:02', '1');
 INSERT INTO `hrip_org_permission` VALUES ('mLt3Mhp0qjsgZ4mmf838KRhkbwRPBt1M', 'superAdmin', 'kK21HSCDQUpPYSZj3vDj71qlMtIwEO3P', '2016-04-06 15:49:21', '1');
-INSERT INTO `hrip_org_permission` VALUES ('mMeJYzGQyCcIwNvQZTPuO25XiWlHirw2', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('mOlDx6efei76dy4ofqSz3yCfS6BuHuQx', 'superAdmin', 'vLrStHizvlA3QJ8AvcmMHRgzVTFJQtnO', '2018-06-18 21:04:16', '1');
 INSERT INTO `hrip_org_permission` VALUES ('mvIieQrrAvi48LZHF8NlniLyT5SVGw4t', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'C001', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('MW0jESVq5RPg6EzByseuR0dqTzVt6M7k', 'superAdmin', 'OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '2016-04-02 20:43:56', '1');
-INSERT INTO `hrip_org_permission` VALUES ('MWVPeqBDzWObFeCsev3C4GlB2dApWdLJ', 'superAdmin', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', '2018-06-18 12:38:32', '1');
-INSERT INTO `hrip_org_permission` VALUES ('mXvxMsxZf3Ft7zz2JE5UJzA1CieZiVFY', 'superAdmin', '0Us1kOzN4uDGIzuXq5F7nxAG6hjhawub', '2018-07-14 20:40:52', '1');
-INSERT INTO `hrip_org_permission` VALUES ('n68j4TAhWtWBau5C68Z1cDGXmrCkVOIs', 'superAdmin', 'BCQOiPEC3QcuFhjIQKrCyr5FelYrQmIE', '2018-06-18 21:09:27', '1');
 INSERT INTO `hrip_org_permission` VALUES ('n6XDbJXo4F5LtvSqvEFedxy00alttSw6', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D004', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('nYakOCk3QKqOmmRWq4MgZAen5wMzKEo0', 'superAdmin', 'sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '2015-11-23 10:35:34', '1');
 INSERT INTO `hrip_org_permission` VALUES ('NyvrdYFKX7TYyMohl2U8cHidkiGaldb7', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D008', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('NzgRiZEfyP4U1nmA7WcomozpRTh4THCD', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '3KYFxo0cTAk6I8iBUseorwKID8luvvMr', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('O02K02bveTRBslK3NGbhkLHTkqVsQvuF', 'superAdmin', '4ZXrhSFmVVeumURrEtuJH7wW7y4WEWw8', '2018-07-14 00:08:08', '1');
 INSERT INTO `hrip_org_permission` VALUES ('OFuTgqF4QFwAyaqGoptqIRMEduuW7CLH', 'superAdmin', '37pyRui4B2WAP6E2mzDdFG2MnjYGYD1Z', '2016-04-05 16:23:12', '1');
 INSERT INTO `hrip_org_permission` VALUES ('OuN31fWLGeH1jg8lKa4rCsE6H28fYI0i', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'C004', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('P8ZVSYRUPAKYoDE1FOnKvANU4ARcPqbW', 'superAdmin', '5unUbXTsZqqMVGEzzarSezAYhcrXGmun', '2018-07-14 00:07:46', '1');
-INSERT INTO `hrip_org_permission` VALUES ('pi8Lk0H61VelVTbAv82zjXVe17nWfNta', 'superAdmin', 'E0Hl7uzefZYdNa3nM0CpICFw2XPnpk77', '2018-06-18 17:44:36', '1');
 INSERT INTO `hrip_org_permission` VALUES ('PQwfLrikI78CsgQyobTrVz6hpWg0I7JY', 'superAdmin', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2015-11-23 10:34:38', '1');
 INSERT INTO `hrip_org_permission` VALUES ('pRRixbBPlwkIzgO5t6vUlqpRYE8qGFOc', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'NzXxLGTjO8xGBWYLw0ywlMZneSr0oLOP', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('pvywiCDGfQVmkQwwcoXAGdZPdiyoBj6L', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('pypir8fzOftu0SsQoLn54qRs2vUBcKTG', 'superAdmin', '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '2015-11-23 10:27:22', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Q4dsCXimT7J0bpdHTsFToU2ciM78D3Jr', 'superAdmin', '0S2PpoTliTgtsXGxcYYaTdArEtQQH7eo', '2018-06-18 21:07:12', '1');
 INSERT INTO `hrip_org_permission` VALUES ('qgl2XPSZuMDNWSe3r55UlxxRdlt6RNFF', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'XMHiJy4XnXj0o6NpYcAE5iFDwfC0DyFz', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('qrUICa5wvetLi0ReR0BEqLL6oXPDgKCW', 'superAdmin', '4BxadSTePjrsIrdt8s3KSPfu3ihVsVfC', '2018-06-18 17:46:19', '1');
 INSERT INTO `hrip_org_permission` VALUES ('QrxGxhXvSTPSzYA4aNxLLFohluiboKZG', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D007', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('QvZULHzC1NRliajXMPMdsZhYQ8yFllxp', 'superAdmin', '3KYFxo0cTAk6I8iBUseorwKID8luvvMr', '2018-06-18 22:55:53', '1');
 INSERT INTO `hrip_org_permission` VALUES ('QXfNCPwMkcSnuP3xFCxNrtr56GeFtfoL', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'NzXxLGTjO8xGBWYLw0ywlMZneSr0oLOP', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('RDNu4j6AMpsg4XpyG4qoVMPH0yNEzhBW', 'superAdmin', 'JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', '2018-06-18 12:26:28', '1');
 INSERT INTO `hrip_org_permission` VALUES ('RGzWDcViRrvnTbkPKR6LrBbjVDrnksAj', 'superAdmin', 'BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '2015-11-23 10:37:24', '1');
 INSERT INTO `hrip_org_permission` VALUES ('RL5tcjspkO2PqpTu86TRU0lTMYGBNv8F', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'D002', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('RM5H74BXaqUQIIWFgvsoa2Od3l6NWmCe', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D018', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Rp6kqWYZuXd6u8NIOpEzyIub6uoZaB8k', 'superAdmin', 'xqEAeu2wA6nZ7ctS2UNBezlLel8xoEqT', '2018-07-14 00:08:29', '1');
 INSERT INTO `hrip_org_permission` VALUES ('RuArQKfqwpqaned1BPiNG3M27uovIp56', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D008', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('sAGnoRCQoFO1dnSNNGzd5Q2rHBRdumKD', 'superAdmin', '07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', '2018-06-18 12:31:53', '1');
-INSERT INTO `hrip_org_permission` VALUES ('se5DHAbTtxy8ryRIppJBk5cgYNgvmTMI', 'superAdmin', 'Ga6cspiuBovzfabHgk17x8gAQdA0ZnEm', '2018-07-10 23:58:30', '1');
-INSERT INTO `hrip_org_permission` VALUES ('sEEWDz1ywmol1mXTqR3RSeem7fHiz0xM', 'superAdmin', 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', '2018-06-18 12:31:06', '1');
 INSERT INTO `hrip_org_permission` VALUES ('SJBHMwsQzPDfeFexZgQdO3cpGMWWrUGd', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D019', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('sjQBfKXtlI6DhGAcwmnIkpWK1IYYrW6E', 'superAdmin', 'WyG30SMv3p8FnnC6RHoHQkAh45EZXAnS', '2018-06-18 21:01:20', '1');
 INSERT INTO `hrip_org_permission` VALUES ('sm1F0umNjIb2WoltZwIY62HrmSNNV2GA', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Sr5wiz68APYarChr67QW6ICneQvsc6Bb', 'superAdmin', 'RrocphqRDZZpOgbaXvKJQBrk7Waw8gVZ', '2018-07-14 00:08:17', '1');
 INSERT INTO `hrip_org_permission` VALUES ('superAdmin1', 'superAdmin', 'B001', '2015-10-12 13:07:55', '1');
 INSERT INTO `hrip_org_permission` VALUES ('superAdmin10', 'superAdmin', 'D005', '2015-10-12 13:07:55', '1');
 INSERT INTO `hrip_org_permission` VALUES ('superAdmin11', 'superAdmin', 'D006', '2015-10-12 13:07:55', '1');
@@ -49275,39 +49208,20 @@ INSERT INTO `hrip_org_permission` VALUES ('superAdmin8', 'superAdmin', 'D003', '
 INSERT INTO `hrip_org_permission` VALUES ('superAdmin9', 'superAdmin', 'D004', '2015-10-12 13:07:55', '1');
 INSERT INTO `hrip_org_permission` VALUES ('sXBs7yGp0ICuzJ4EmCBpHZY8hvh6RH4o', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D006', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('TcyNkNcHEWvBkYkXwWKV6GLyrh7KoCNa', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('TEseAB5b53kxFG7HkgISX40uvgW5jjhV', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('TExqKZeSx2o8TQzwq3kMtk1LtWKD13Q6', 'superAdmin', 'symCqKE4cnDI1OpcPMHWZZGZpQv8SfC8', '2018-07-14 00:06:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('tiFw5dYTerwCUhWvE8NrRzoTOBaJPvga', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'C001', '2018-06-24 00:08:41', '1');
-INSERT INTO `hrip_org_permission` VALUES ('TMbhwLxLhNhMN2uMWupPxGMNutlgIBhc', 'superAdmin', 'DhmR0OdVOiJ8BtWbSNasWRO7OG6TuITm', '2018-06-18 17:43:27', '1');
-INSERT INTO `hrip_org_permission` VALUES ('TnwnuiLeyBwXuKdNiHn4oNnQvkA7fXN3', 'superAdmin', '1RK0xXnvogxW6cWh173psC05IUTLb4tM', '2018-07-14 00:08:40', '1');
-INSERT INTO `hrip_org_permission` VALUES ('ueCGvrJ3l0busPpCdoYvK6bDlrnsyTDy', 'superAdmin', 'WHMPjQxwPWlSoprWaotzszPkjScqLult', '2018-06-18 21:00:51', '1');
-INSERT INTO `hrip_org_permission` VALUES ('UtleLw00eYN2ztPwy88dSAB0qW8WM8qT', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'E0Hl7uzefZYdNa3nM0CpICFw2XPnpk77', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('V0wARAOV5Eq6UJ7SCHd8PkPimu3ZCLWO', 'superAdmin', 'sYFzsHQRcLcVjMYhbRreFDzKU3FkoDHa', '2018-06-18 12:27:03', '1');
-INSERT INTO `hrip_org_permission` VALUES ('V5MsHfmupvUFPB0sq6aMHk67hlhCv2Y1', 'superAdmin', 'SLJK0LfkUZIl7ZubFbvw4f7XruKJiAxA', '2018-06-18 21:03:54', '1');
 INSERT INTO `hrip_org_permission` VALUES ('vFa5cjJwrjBFVIsBf6DP3WvdotOff5w0', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D003', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('vFI6mR7sf66BMX50WMXMnzfLl0UXjt1d', 'superAdmin', 'B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', '2018-06-18 12:44:38', '1');
 INSERT INTO `hrip_org_permission` VALUES ('W3xNL6PehfCgEEEbbgzvAV5Q8wS5sujd', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', 'KFGL0lWTbrctpHkO8ZjIjSjJI8nHQ8xE', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('Wdy2WoYbP3zShkic85lDvIdTgVUAUwNE', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D009', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('WgdVsLjErFnqKHU1dgyN72peTTBrBQCF', 'superAdmin', 'qYApVUu60zzuXnbm3VaJpCdtpy6y1xit', '2018-06-18 12:34:56', '1');
 INSERT INTO `hrip_org_permission` VALUES ('WgJ4BiVTgkIpCxJs5hzF5CoBhSGjowkw', 'superAdmin', 'UjEm2w4sYVx1XVNxQ0DCbmf1ANbjB5fe', '2016-04-05 16:25:42', '1');
-INSERT INTO `hrip_org_permission` VALUES ('wIlygQSGCVjHNNrz1tTe85Sawc6i4wh5', 'superAdmin', 'pVh4CZytgYFqRSsLTFveOC4emvI1OX63', '2018-06-18 12:44:19', '1');
 INSERT INTO `hrip_org_permission` VALUES ('wRFuyxC3PL1MQaeIbiUUhuCF4kZG6SzJ', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('WTjQHgEtQunQMTwqqALU3ovfGr5x8MYv', 'superAdmin', 'PXaDRsV7rhjJdC4WbyCiUrVJQWXRjZfp', '2018-06-18 12:46:53', '1');
 INSERT INTO `hrip_org_permission` VALUES ('WXP2n8ZBuc06dd2CSqmaL3yFDfJPTxpB', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'C002', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('x3piXmjS52nIyKl0gxv86PQoceQTqJh0', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', '4w3fHyS1IG6gI1zbrz6m8ma57LokazJY', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('XbqtO2lsgrZ1dF06KvsUW2MiAL6Q5CP1', 'superAdmin', 'ZyEDEqyYF50ppc8bE3F30V8sXzg0hylj', '2018-06-18 20:59:36', '1');
-INSERT INTO `hrip_org_permission` VALUES ('XHmBcDl4lynaOtoXsSbw6z0Lxe23khJw', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('xMoBLBHc2bEbGmg30qGvkOmADJi74i7R', 'superAdmin', 'NyJja7vmmWsdBHst5rr2Zau7PjucqY4T', '2018-06-18 20:54:21', '1');
 INSERT INTO `hrip_org_permission` VALUES ('xoUOnSxWTvWkHaXnXAZpBC8Ym0DEcuvW', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D001', '2018-06-24 00:00:57', '1');
 INSERT INTO `hrip_org_permission` VALUES ('xSR2GvsKgrT6jBebvDBvMeBo41VOZq6X', 'superAdmin', 'hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '2016-04-05 16:23:39', '1');
 INSERT INTO `hrip_org_permission` VALUES ('xwPnvjWRIBn1otgWcfyeXH6GgYMNfAy0', 'superAdmin', 'BBwm4jY8hZGzhsrEgzW2oUVNCUIquyT7', '2015-11-23 10:38:32', '1');
 INSERT INTO `hrip_org_permission` VALUES ('y7xzMsXArhSagoS1SXEesPcVDDhzjn2W', '5unym5HvJUCwATpbvDqty3HsDR1q0cPw', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', '2018-06-24 00:08:41', '1');
 INSERT INTO `hrip_org_permission` VALUES ('YfvnI8cBGRV1iMEsBkT1SQpozMrmy3pi', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D013', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('YPcKtx1EwsNC1wBRP7H1ZqEI1zZ8kBDF', 'superAdmin', '277dqzgscaHyQQ0TSS3dBDskJtS1FIbD', '2018-06-18 12:36:17', '1');
 INSERT INTO `hrip_org_permission` VALUES ('yuTkiaIjarWwlXqoUto4mJDQSjWxvqsN', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D007', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('zbq42X7WsS0HJ5JCjbgz6SqM41lCPY68', 'superAdmin', 'NVw1Q5r0d0YVNAwmTTlOAz3cnvPDW6Wk', '2018-06-18 21:06:23', '1');
 INSERT INTO `hrip_org_permission` VALUES ('zcJmGNRWV3zxDSdK8bNDJim5SmhNvUk4', '1nv6cikZ7IyzYmz1KooAQyZJ20mZ22lX', 'D017', '2018-06-24 00:00:57', '1');
-INSERT INTO `hrip_org_permission` VALUES ('Zo1ETKlnH0GfbJa5oubWMBcAMH6zWghq', 'superAdmin', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', '2018-06-18 12:23:17', '1');
 COMMIT;
 
 -- ----------------------------
@@ -49336,35 +49250,16 @@ CREATE TABLE `hrip_permission` (
 -- Records of hrip_permission
 -- ----------------------------
 BEGIN;
-INSERT INTO `hrip_permission` VALUES ('07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', '今日邀约', '4UzDMzTpqaQcsiFQGmalKHegCKkmGk', 'icon-status_online', '1', '2', 'listener/allnow.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30101, 1, '2018-06-18 12:31:53', '1', '');
-INSERT INTO `hrip_permission` VALUES ('0S2PpoTliTgtsXGxcYYaTdArEtQQH7eo', '导出表格', 'LO6NXDUixabcFkFbAAKjTcffoX6vdi', 'icon-arrow_redo', '1', '3', NULL, '07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', 30103, 1, '2018-06-18 21:07:12', '1', '');
-INSERT INTO `hrip_permission` VALUES ('0Us1kOzN4uDGIzuXq5F7nxAG6hjhawub', '导出表格', 'fkL5SsC6zeinjTilggKibfD4q0WVEl', 'icon-arrow_redo', '1', '3', NULL, 'XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', 40004, 1, '2018-07-14 20:40:52', '1', '');
-INSERT INTO `hrip_permission` VALUES ('0YeObhmjTNNGCuWEWUN5vBcsmjOTtylH', '导出表格', '78FaAmmPDf2HcTFS2l73VGuNG8MQcD', 'icon-arrow_redo', '1', '3', NULL, 'LQiNr3f58FUp3i8lfDFQV5CGfElxsaQ4', 30203, 1, '2018-07-14 00:04:45', '1', '');
-INSERT INTO `hrip_permission` VALUES ('1RK0xXnvogxW6cWh173psC05IUTLb4tM', '查询', 'edOIpypZBzDFT1SXAuPSblczVVrt7l', 'icon-zoom', '1', '3', NULL, 'gHeVE8y6VT7hDjrrWq7FifeYuKpZyVN6', 50152, 1, '2018-07-14 00:08:40', '1', '');
-INSERT INTO `hrip_permission` VALUES ('277dqzgscaHyQQ0TSS3dBDskJtS1FIbD', '本月出席', 'r3k7klVOfygxxAarHZyd1VTBuw4lSx', 'icon-user', '1', '2', 'listener/currMonth.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30301, 1, '2018-06-18 12:36:17', '1', '');
 INSERT INTO `hrip_permission` VALUES ('37pyRui4B2WAP6E2mzDdFG2MnjYGYD1Z', '查询', 'pSEjPU8BDmNUcxQ2eO7BmyQiqEwGW5', 'icon-search', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10052, 1, '2016-04-05 16:23:12', '1', '定时任务查询');
-INSERT INTO `hrip_permission` VALUES ('3KYFxo0cTAk6I8iBUseorwKID8luvvMr', '查询', '0MEbdBdaoz6QG8AD14bDx4Zd5pOPv0', 'icon-zoom', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20060, 1, '2018-06-18 22:55:53', '1', '');
-INSERT INTO `hrip_permission` VALUES ('3pKQU5KavHA0r4STD3MScFPentPwyvyL', '导出表格', 'wVaIaudvcZN2G0mrCREAdqJjp4alZc', 'icon-arrow_redo', '1', '3', NULL, 'TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', 30354, 1, '2018-06-18 21:11:35', '1', '');
-INSERT INTO `hrip_permission` VALUES ('4BxadSTePjrsIrdt8s3KSPfu3ihVsVfC', '无效名单', '8YoINwfmGuashBUjOd0HgB3kfxv1av', 'icon-cancel', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20058, 1, '2018-06-18 17:46:19', '1', '');
-INSERT INTO `hrip_permission` VALUES ('4w3fHyS1IG6gI1zbrz6m8ma57LokazJY', '导出表格', 'omfWdOfgtmOFGbuHNBL8NrOim50ZOc', 'icon-tick', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20059, 1, '2018-06-18 21:02:14', '1', '');
-INSERT INTO `hrip_permission` VALUES ('4ZXrhSFmVVeumURrEtuJH7wW7y4WEWw8', '导出表格', '2H3ziaVNHdeLgqhvw5AlICGWfRmQel', 'icon-arrow_redo', '1', '3', NULL, 'nBzAEwwZjZR8CaKeB08eKqVLM7zx560n', 50053, 1, '2018-07-14 00:08:08', '1', '');
 INSERT INTO `hrip_permission` VALUES ('5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '团队管理', '6BplAE8uWWQA7ETSXFtLGf70J65bmh', 'icon-group_add', '1', '2', 'GroupController/getPage.do', 'B001', 450, 1, '2015-11-23 10:27:22', '1', '团队管理');
-INSERT INTO `hrip_permission` VALUES ('5unUbXTsZqqMVGEzzarSezAYhcrXGmun', '导出表格', '0TvGuHIEGE23SUVPjTqD1qLTHDKRXq', 'icon-arrow_redo', '1', '3', NULL, 'pVh4CZytgYFqRSsLTFveOC4emvI1OX63', 40153, 1, '2018-07-14 00:07:46', '1', '');
 INSERT INTO `hrip_permission` VALUES ('6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', '定时任务', 'mWzDZSoFdbvLoleeWTrmDRmQKc5aNt', 'icon-clock', '1', '1', NULL, '', 10001, 1, '2016-04-05 16:20:48', '1', '定时任务');
-INSERT INTO `hrip_permission` VALUES ('7J4UcHNuBPxqodqhjioJHihKsb3xGgOu', '导出表格', 'h1BLBnlKZnC4xDiWwiuBVOOFrcVkvu', 'icon-arrow_redo', '1', '3', NULL, 'gHeVE8y6VT7hDjrrWq7FifeYuKpZyVN6', 50153, 1, '2018-07-14 00:08:51', '1', '');
-INSERT INTO `hrip_permission` VALUES ('a2SHwiabhbcbAs28LlFzpHtz0dlwFQwg', '查询', 'MMft2HtpfPhvK4KyCa0tarycjHWfSo', 'icon-zoom', '1', '3', NULL, '07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', 30102, 1, '2018-06-18 21:06:54', '1', '');
-INSERT INTO `hrip_permission` VALUES ('AKvC3hCyEHAIGw1odhpVNoNXJ0kETxUA', '试听', 'zbYoJ17XW4EmdwQEMJdFJKENdKxV8g', 'icon-dvd', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20055, 1, '2018-06-18 17:44:02', '1', '');
 INSERT INTO `hrip_permission` VALUES ('B001', '权限管理', 'sys:manage', 'icon-feed', '1', '1', NULL, NULL, 1, 1, '2015-08-14 11:52:48', '1', '系统管理权限');
-INSERT INTO `hrip_permission` VALUES ('B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', '无效数据', 'oyIOsLroDM2JE5kCt2MMASGDAZSsHQ', 'icon-cancel', '1', '1', NULL, '', 50001, 1, '2018-06-18 12:44:38', '1', '');
 INSERT INTO `hrip_permission` VALUES ('BBwm4jY8hZGzhsrEgzW2oUVNCUIquyT7', '删除团队', '18VDNThUQw32qhdPuPkC5ClxdJrM4F', 'icon-remove', '1', '3', NULL, '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', 454, 1, '2015-11-23 10:38:32', '1', '删除团队');
-INSERT INTO `hrip_permission` VALUES ('BCQOiPEC3QcuFhjIQKrCyr5FelYrQmIE', '查询', 'ZhqN5xqZz07Cl2e0ZpswZ6PbUppv2F', 'icon-zoom', '1', '3', NULL, '277dqzgscaHyQQ0TSS3dBDskJtS1FIbD', 30302, 1, '2018-06-18 21:09:27', '1', '');
-INSERT INTO `hrip_permission` VALUES ('be4r4XMsnybBqGNJSB2icfGSJ8Rx8NMB', '查询', 'WQI7qSbdCFJpGe0IYQR5gwMUE65LxK', 'icon-zoom', '1', '3', NULL, 'JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', 20102, 1, '2018-06-18 20:53:18', '1', '');
 INSERT INTO `hrip_permission` VALUES ('BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '修改团队', '3Jw2ySpkDQycZCqk7tT0ckkZIiUmHP', 'icon-add', '1', '3', NULL, '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', 453, 1, '2015-11-23 10:37:24', '1', '修改团队');
 INSERT INTO `hrip_permission` VALUES ('C001', '用户管理', 'user:manage', 'icon-add', '1', '2', 'UserController/getPage.do', 'B001', 100, 1, '2015-08-14 11:52:48', '1', '用户管理权限');
 INSERT INTO `hrip_permission` VALUES ('C002', '角色管理', 'role:manage', 'icon-save', '1', '2', 'RoleController/getPage.do', 'B001', 200, 1, '2015-08-14 11:52:48', '1', '角色管理权限');
 INSERT INTO `hrip_permission` VALUES ('C003', '菜单管理', 'permission:manage', 'icon-lock', '1', '2', 'PermissionController/getPage.do', 'B001', 300, 1, '2015-08-14 11:52:48', '1', '菜单管理权限');
 INSERT INTO `hrip_permission` VALUES ('C004', '机构管理', 'org:manage', 'icon-group', '1', '2', 'OrgController/getPage.do', 'B001', 400, 1, '2015-08-14 11:52:48', '1', '机构管理');
-INSERT INTO `hrip_permission` VALUES ('cNzEdIPYRxyeU8W20vNqKAYkFmAwy84M', '查询', '3B5me5VQZM2YmTaWlZvMf8DMD3kqqp', 'icon-zoom', '1', '3', NULL, 'pVh4CZytgYFqRSsLTFveOC4emvI1OX63', 40152, 1, '2018-07-14 00:07:10', '1', '');
 INSERT INTO `hrip_permission` VALUES ('D001', '查询', 'user:manage:select', 'icon-zoom', '1', '3', NULL, 'C001', 101, 1, '2015-08-14 11:52:48', '1', '用户管理权限查询');
 INSERT INTO `hrip_permission` VALUES ('D002', '添加用户', 'user:manage:insert', 'icon-add', '1', '3', NULL, 'C001', 102, 1, '2015-08-14 11:52:48', '1', '用户管理权限新增');
 INSERT INTO `hrip_permission` VALUES ('D003', '修改用户', 'user:manage:update', 'icon-edit', '1', '3', '', 'C001', 103, 1, '2015-08-14 11:52:48', '1', '用户管理权限修改');
@@ -49385,72 +49280,19 @@ INSERT INTO `hrip_permission` VALUES ('D017', '添加机构', 'org:manage:insert
 INSERT INTO `hrip_permission` VALUES ('D018', '修改机构', 'org:manage:update', 'icon-edit', '1', '3', '', 'C004', 403, 1, '2015-08-14 11:52:48', '1', '机构管理修改');
 INSERT INTO `hrip_permission` VALUES ('D019', '删除机构', 'org:manage:delete', 'icon-remove', '1', '3', '', 'C004', 404, 1, '2015-08-14 11:52:48', '1', '机构管理删除');
 INSERT INTO `hrip_permission` VALUES ('D020', '机构权限', 'org:manage:author', 'icon-group', '1', '3', '', 'C004', 405, 1, '2015-08-14 11:52:48', '1', '机构管理权限');
-INSERT INTO `hrip_permission` VALUES ('DhmR0OdVOiJ8BtWbSNasWRO7OG6TuITm', '名单删除', 'a214r7YFuMo8eDgwHKbDSJI8NqVWff', 'icon-remove', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20054, 1, '2018-06-18 17:43:27', '1', '');
-INSERT INTO `hrip_permission` VALUES ('E0Hl7uzefZYdNa3nM0CpICFw2XPnpk77', '成单', '72fVBPr4KBHLIUn07b5gykDUW0ftxw', 'icon-tick', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20056, 1, '2018-06-18 17:44:36', '1', '');
-INSERT INTO `hrip_permission` VALUES ('Ga6cspiuBovzfabHgk17x8gAQdA0ZnEm', '修改', 'tqMieW0WjXALhBAsmmQbYSs2GwPigv', 'icon-pencil', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30052, 1, '2018-07-10 23:58:30', '1', '修改');
-INSERT INTO `hrip_permission` VALUES ('gHeVE8y6VT7hDjrrWq7FifeYuKpZyVN6', '试听后失单', '2Sh0t7TBqMEkWk16nDKTkQyFlkVjbo', 'icon-cross', '1', '2', 'error/listenError.do', 'B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', 50151, 1, '2018-06-18 12:47:30', '1', '');
-INSERT INTO `hrip_permission` VALUES ('gKGSIkAJNt0v568ha8G6msCpZIh32OB2', '导出表格', 'EbhaN2o0ErW5XqIPkqioCAKAltVAb4', 'icon-arrow_redo', '1', '3', NULL, 'zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', 40053, 1, '2018-07-14 00:06:31', '1', '');
-INSERT INTO `hrip_permission` VALUES ('GpJF6MurZsAxyxdviXvQSVtBlZ8SNHee', '导出表格', '5MA55Sxg0XIWBNOF1XUfZhBRw6rnWv', 'icon-arrow_redo', '1', '3', NULL, 'JApmWcO2SnwRi2ycxIDDfF4uTyQasHWS', 20253, 1, '2018-06-18 21:04:53', '1', '');
 INSERT INTO `hrip_permission` VALUES ('hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '修改', 'UG200PZbtzbyR1rnvKYpTCwfNuNSyA', 'icon-edit', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10054, 1, '2016-04-05 16:23:39', '1', '修改');
-INSERT INTO `hrip_permission` VALUES ('iojw7o5RtZjXItHceh6WhoKT6B4CCW6Y', '导出表格', 'TycAPy4335eBxyj7J8wZBXj3p54eAn', 'icon-arrow_redo', '1', '3', NULL, 'qYApVUu60zzuXnbm3VaJpCdtpy6y1xit', 30253, 1, '2018-07-14 00:05:02', '1', '');
-INSERT INTO `hrip_permission` VALUES ('IvMFCPEwoALX5efs1JMTuEHfbEiecVta', '查询', 'ON4vtmTRSmLavrux1CxcIAlEIN3Lg8', 'icon-zoom', '1', '3', NULL, 'XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', 40003, 1, '2018-07-14 20:40:40', '1', '');
-INSERT INTO `hrip_permission` VALUES ('JApmWcO2SnwRi2ycxIDDfF4uTyQasHWS', '当年新名单', 'XRHiDUhTSPmHkeWNlIT1rN8nPC7WQ4', 'icon-user', '1', '2', 'order/allyear.do', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', 20251, 1, '2018-06-18 12:29:06', '1', '');
-INSERT INTO `hrip_permission` VALUES ('JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', '今日新名单', 'gt1dsgTdtIRrRHCp7ucJdZVMsUfwCW', 'icon-user_add', '1', '2', 'order/allnew.do', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', 20101, 1, '2018-06-18 12:26:28', '1', '');
 INSERT INTO `hrip_permission` VALUES ('JzDypWYwaXUBL2A0HZpTqjl2sOkqd6lX', '添加', 'v3nktKBz7VBOeeJkjOIsO3gy2XGDrw', 'icon-add', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10053, 1, '2016-04-05 17:28:06', '1', '添加任务');
 INSERT INTO `hrip_permission` VALUES ('KFGL0lWTbrctpHkO8ZjIjSjJI8nHQ8xE', '查询', 'YvnGzo6dzDpF7jVdhxqWQpt1dj0KMQ', 'icon-search', '1', '3', NULL, 'wpCmNMc4FsAYWsJD6X70yNOi8kYOS7pb', 10152, 1, '2016-04-07 11:18:29', '1', '查询');
-INSERT INTO `hrip_permission` VALUES ('kfnoQC2eKETjNbB6Eq177j6EdRxrliaU', '名单修改', 'jPMCYSP6ruFye3zxCkAgFxyxDSrRJ2', 'icon-pencil', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20053, 1, '2018-06-18 17:42:55', '1', '');
 INSERT INTO `hrip_permission` VALUES ('kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', '定时任务管理', 'ZJC6uZIVuDmc302fEOD52vTcKjrPFx', 'icon-clock', '1', '2', 'TaskController/getPage.do', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', 10051, 1, '2016-04-05 16:22:36', '1', '定时任务管理');
 INSERT INTO `hrip_permission` VALUES ('kK21HSCDQUpPYSZj3vDj71qlMtIwEO3P', '定时代码生成', 'erXB5KpUr8RqhYTowymorSqxMnZxzz', 'icon-clock_edit', '1', '2', 'TaskTimeController/getPage.do', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', 10101, 1, '2016-04-06 15:49:21', '1', '定时代码生成');
-INSERT INTO `hrip_permission` VALUES ('lauelJCP1gWo0i0NjIFjBiS70e4C12ca', '本月新名单', 'Ip3ATbAUyiYCwtmCmZWmVlPIV408E6', 'icon-user', '1', '2', 'order/allMonth.do', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', 20201, 1, '2018-06-18 12:28:06', '1', '');
-INSERT INTO `hrip_permission` VALUES ('LIMaBAx5dofdOvWBzOaWALJZtdmqxQRq', '查询', 'VVOl6onYPL4KmWLapUfTfcqIHRPSKa', 'icon-zoom', '1', '3', NULL, 'lauelJCP1gWo0i0NjIFjBiS70e4C12ca', 20202, 1, '2018-06-18 20:54:07', '1', '');
-INSERT INTO `hrip_permission` VALUES ('LQiNr3f58FUp3i8lfDFQV5CGfElxsaQ4', '明日出席', '7wcKn6xJXZUW00hmNJ5mrIpXhrHXMg', 'icon-cd_add', '1', '2', 'listener/nextDay.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30201, 1, '2018-06-18 12:33:45', '1', '');
-INSERT INTO `hrip_permission` VALUES ('lwC4DgaeZTugCFVe0WKmLWQ5W3R0YcFw', '查询', 'uGqSpUpGXjzUSS5c2P7a6khRS6IAM2', 'icon-zoom', '1', '3', NULL, 'TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', 30352, 1, '2018-06-18 21:10:06', '1', '查询');
-INSERT INTO `hrip_permission` VALUES ('MLh5StqnavfSM7sWHrQZw8Y8Gprx6WfZ', '查询', 'XmMByrXTH2au3InrRZeiFO6NJWCSki', 'icon-zoom', '1', '3', NULL, 'u3s1NflXXK8z3UDBA8Ii7gsQXJ24ovaJ', 40102, 1, '2018-07-14 00:06:47', '1', '');
-INSERT INTO `hrip_permission` VALUES ('mo20ieCloWUJV7kbfICGnh3dOFhXgGPO', '查询', 'Z4XzHgXv3r0yOxHaFO2uiYYCYH6SD3', 'icon-zoom', '1', '3', NULL, 'sYFzsHQRcLcVjMYhbRreFDzKU3FkoDHa', 20152, 1, '2018-06-18 20:53:35', '1', '');
 INSERT INTO `hrip_permission` VALUES ('Mt5A1KRKTgty31DtJ3ik8boG5tFbJvHQ', '暂停', 'nDDJ1ShBZXcZgELrwZmBPrV5xzKVi1', 'icon-clock_delete', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10055, 1, '2016-04-05 16:24:13', '1', '定时任务暂停');
-INSERT INTO `hrip_permission` VALUES ('nBzAEwwZjZR8CaKeB08eKqVLM7zx560n', '空错号', 'KVO1WDgHTvFZp67NgFvZjOoRvT6xkV', 'icon-no', '1', '2', 'error/phoneerror.do', 'B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', 50051, 1, '2018-06-18 12:45:43', '1', '');
-INSERT INTO `hrip_permission` VALUES ('nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', '今日出席', 'H62TQlIvht8lhZt3vZVmjtcUTAPghW', 'icon-tux', '1', '2', 'listener/daying.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30151, 1, '2018-06-18 12:32:52', '1', '');
-INSERT INTO `hrip_permission` VALUES ('NVw1Q5r0d0YVNAwmTTlOAz3cnvPDW6Wk', '导出表格', 'DSLYpYOuAcffdjjs7TFbLF65RENcDr', 'icon-arrow_redo', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30055, 1, '2018-06-18 21:06:23', '1', '');
-INSERT INTO `hrip_permission` VALUES ('NyJja7vmmWsdBHst5rr2Zau7PjucqY4T', '查询', 'TOR8e5EPMOhXYX6p4qjgJEqkuhXaHT', 'icon-zoom', '1', '3', NULL, 'JApmWcO2SnwRi2ycxIDDfF4uTyQasHWS', 20252, 1, '2018-06-18 20:54:21', '1', '');
 INSERT INTO `hrip_permission` VALUES ('NzXxLGTjO8xGBWYLw0ywlMZneSr0oLOP', '立即执行一次', 'RG8dznqVWmTagRqVdYhESy7sWphmbL', 'icon-flag_blue', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10058, 1, '2016-04-05 16:26:22', '1', '立即执行一次');
 INSERT INTO `hrip_permission` VALUES ('OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '系统监控', 'gX1xr3PXVW7uansXtZzBozjNGP5YVG', 'icon-magnifier', '1', '2', 'druid', 'B001', 500, 1, '2016-04-02 20:43:56', '1', '');
 INSERT INTO `hrip_permission` VALUES ('oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '查询', 'Hz7ZZOVovdP4Z68VTpOg5Kl1HHCTAU', 'icon-color_wheel', '1', '3', NULL, '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', 451, 1, '2015-11-23 10:34:38', '1', '团队查询');
-INSERT INTO `hrip_permission` VALUES ('ORnIfXHz8afqX4FkygFQOc5DDe301YY4', '名单录入', 'PuW5gvSpBTJ6603jBQjWhjoQMehqFh', 'icon-add', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20052, 1, '2018-06-18 17:42:24', '1', '名单录入');
-INSERT INTO `hrip_permission` VALUES ('oUHfs18Wg4MfvLseh6fFiE5yFID5ceaA', '转介绍', 'Ein8tfcksPuHvmOF8PKXm5z7TIYt1f', 'icon-arrow_undo', '1', '3', NULL, 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', 20057, 1, '2018-06-18 17:45:06', '1', '');
-INSERT INTO `hrip_permission` VALUES ('POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', '成单明细', 'EaeSVXR5RIs3kGGouRxSiCaSDGIp7q', 'icon-chart_bar', '1', '1', NULL, '', 40001, 1, '2018-06-18 12:38:32', '1', '');
-INSERT INTO `hrip_permission` VALUES ('pVh4CZytgYFqRSsLTFveOC4emvI1OX63', '本月成单', 'QqD5yzNEobuxvTs4TIG4snVM630WHq', 'icon-emoticon_smile', '1', '2', 'success/currmonth.do', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', 40151, 1, '2018-06-18 12:44:19', '1', '');
-INSERT INTO `hrip_permission` VALUES ('PXaDRsV7rhjJdC4WbyCiUrVJQWXRjZfp', '未试听失单', 'AigVBpEwHmlhrEAbT2TOvDp3c8fIcn', 'icon-delete', '1', '2', 'error/nolistenError.do', 'B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', 50101, 1, '2018-06-18 12:46:53', '1', '');
-INSERT INTO `hrip_permission` VALUES ('qYApVUu60zzuXnbm3VaJpCdtpy6y1xit', '本周出席', '5eRfr78aloCKg6bZtruEWvFISLulUU', 'icon-user', '1', '2', 'listener/currWeak.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30251, 1, '2018-06-18 12:34:56', '1', '');
-INSERT INTO `hrip_permission` VALUES ('R00gZGjvetIo1CiCHdLkg0VZln0WtZcJ', '查询', 'kkIVbDN7ABsTzEbakzRdWXfFLxT0hh', 'icon-zoom', '1', '3', NULL, 'LQiNr3f58FUp3i8lfDFQV5CGfElxsaQ4', 30202, 1, '2018-06-18 21:08:27', '1', '');
-INSERT INTO `hrip_permission` VALUES ('rFEajOh6HnQoBBRV5rxJGJCOSSHpkknk', '查询', 'ZST3iiSBiAZYbSif1AqafxSx7qhbPl', 'icon-zoom', '1', '3', NULL, 'zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', 40052, 1, '2018-07-14 00:06:16', '1', '');
-INSERT INTO `hrip_permission` VALUES ('RrocphqRDZZpOgbaXvKJQBrk7Waw8gVZ', '查询', 'AAP8CoQnKBkfmnfwm3jcoOCXcZbh8w', 'icon-zoom', '1', '3', NULL, 'PXaDRsV7rhjJdC4WbyCiUrVJQWXRjZfp', 50102, 1, '2018-07-14 00:08:17', '1', '');
-INSERT INTO `hrip_permission` VALUES ('SJ2nY5HEoNvsy0iayBhFZcptP5wuFP8v', '查询', 'OXOTjKnvxZcSkR0DNsaJKFZixKVU8o', 'icon-zoom', '1', '3', NULL, 'nBzAEwwZjZR8CaKeB08eKqVLM7zx560n', 50052, 1, '2018-07-14 00:08:00', '1', '');
-INSERT INTO `hrip_permission` VALUES ('SLJK0LfkUZIl7ZubFbvw4f7XruKJiAxA', '导出表格', 'GRCfijPFpMIbrmqCDN0NU1bcqj0xRr', 'icon-arrow_redo', '1', '3', NULL, 'sYFzsHQRcLcVjMYhbRreFDzKU3FkoDHa', 20153, 1, '2018-06-18 21:03:54', '1', '');
 INSERT INTO `hrip_permission` VALUES ('sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '添加团队', 'YnDXa8yI6Q0hR5G3npQsOSgwrTCRFY', 'icon-computer_go', '1', '3', NULL, '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', 452, 1, '2015-11-23 10:35:34', '1', '添加团队');
-INSERT INTO `hrip_permission` VALUES ('sYFzsHQRcLcVjMYhbRreFDzKU3FkoDHa', '本周新名单', 'NJXNQTliT01tIhpIqj2Qm2FZNj1lMF', 'icon-user', '1', '2', 'order/allweek.do', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', 20151, 1, '2018-06-18 12:27:03', '1', '');
-INSERT INTO `hrip_permission` VALUES ('symCqKE4cnDI1OpcPMHWZZGZpQv8SfC8', '导出表格', '1ZLRFtJOXluXbzh3PUgJdVIRK8eqnh', 'icon-arrow_redo', '1', '3', NULL, 'u3s1NflXXK8z3UDBA8Ii7gsQXJ24ovaJ', 40103, 1, '2018-07-14 00:06:57', '1', '');
-INSERT INTO `hrip_permission` VALUES ('T2wWKE3uoqnRKdd2Eyk4JdVl8peCHqqa', '导出表格', 'n8KHUQqFBw5z1os42QF5HsqSisr2a0', 'icon-arrow_redo', '1', '3', NULL, '277dqzgscaHyQQ0TSS3dBDskJtS1FIbD', 30303, 1, '2018-06-18 21:11:06', '1', '');
-INSERT INTO `hrip_permission` VALUES ('TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', '跳票', 'bc3gnERtASqfaFcKuHOxlBfbyx0DWR', 'icon-cancel', '1', '2', 'listener/destroy.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30351, 1, '2018-06-18 12:37:56', '1', '');
-INSERT INTO `hrip_permission` VALUES ('u3s1NflXXK8z3UDBA8Ii7gsQXJ24ovaJ', '本周成单', 'iHOcp7UkhNonuuWDLylF16eT8rdPur', 'icon-emoticon_grin', '1', '2', 'success/currweak.do', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', 40101, 1, '2018-06-18 12:43:37', '1', '');
-INSERT INTO `hrip_permission` VALUES ('UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', '全部试听', 'BBBjSB1Y0Y47iUnKXuyhhD1JyKatXO', 'icon-tux', '1', '2', 'listener/all.do', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', 30051, 1, '2018-06-18 12:31:06', '1', '');
-INSERT INTO `hrip_permission` VALUES ('ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', '全部名单', '0VKIhs4xjiGISsEh23tYTr66vbAuV5', 'icon-group', '1', '2', 'order/all.do', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', 20051, 1, '2018-06-18 12:25:12', '1', '全部名单');
 INSERT INTO `hrip_permission` VALUES ('UjEm2w4sYVx1XVNxQ0DCbmf1ANbjB5fe', '删除', 'C6vRbdgEqTEK7EEtUWVd8RL707QxJW', 'icon-delete', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10057, 1, '2016-04-05 16:25:42', '1', '删除');
-INSERT INTO `hrip_permission` VALUES ('UJVcyD4dCiozY44srHdVwBXw88zsnHBq', '数据明细', 'KAJZBcfJjDKPFxpqYHXRsJRtNCoAew', 'icon-user', '1', '1', NULL, '', 20001, 1, '2018-06-18 12:23:17', '1', '数据明细');
-INSERT INTO `hrip_permission` VALUES ('uLZ61Y8KIDfixruZIWcmMab4cmPGx5MP', '取消跳票', 'L8ynbVwFb76duN2TEJ5DYrQnKz4zRm', 'icon-cancel', '1', '3', NULL, 'TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', 30353, 1, '2018-06-18 21:10:39', '1', '');
-INSERT INTO `hrip_permission` VALUES ('vLrStHizvlA3QJ8AvcmMHRgzVTFJQtnO', '导出表格', 'P187PhPSGnJMr2BQ0BS5Spa4REPv7l', 'icon-arrow_redo', '1', '3', NULL, 'lauelJCP1gWo0i0NjIFjBiS70e4C12ca', 20203, 1, '2018-06-18 21:04:16', '1', '');
-INSERT INTO `hrip_permission` VALUES ('vyXnmQaLnjjQSNdQ3nWC4WNtBRuirsyV', '查询', 'lEFNgCS3hkgVSori5wYu0rgsiqxUlE', 'icon-zoom', '1', '3', NULL, 'qYApVUu60zzuXnbm3VaJpCdtpy6y1xit', 30252, 1, '2018-06-18 21:09:03', '1', '');
-INSERT INTO `hrip_permission` VALUES ('weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', '试听明细', 'AnUa3CyJ2OMfIPpy1y6lKkwTZzDvIT', 'icon-user_comment', '1', '1', NULL, '', 30001, 1, '2018-06-18 12:30:09', '1', '');
-INSERT INTO `hrip_permission` VALUES ('WHMPjQxwPWlSoprWaotzszPkjScqLult', '取消试听', '1fHg4P7RSqqCShy2DsKLfqK015oFWt', 'icon-remove', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30053, 1, '2018-06-18 21:00:51', '1', '');
-INSERT INTO `hrip_permission` VALUES ('wmokpuP2TcaaaQkx3KmlhsoPzy6ZBNOC', '导出表格', 'rxwdyUGhPSGKNSSEDG5eiJEEA81tSy', 'icon-arrow_redo', '1', '3', NULL, 'JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', 20103, 1, '2018-06-18 21:03:17', '1', '');
 INSERT INTO `hrip_permission` VALUES ('wpCmNMc4FsAYWsJD6X70yNOi8kYOS7pb', '任务日志管理', '6BaW3y0Rrhdzhgu3v0By5YNQFRJbGL', 'icon-clock_edit', '1', '2', 'TaskLogController/getPage.do', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', 10151, 1, '2016-04-07 11:18:01', '1', '任务日志管理');
-INSERT INTO `hrip_permission` VALUES ('WyG30SMv3p8FnnC6RHoHQkAh45EZXAnS', '跳票', '0G8THvXmsDViBhw2uSpOQ2MsY4bUNw', 'icon-cancel', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30054, 1, '2018-06-18 21:01:20', '1', '');
-INSERT INTO `hrip_permission` VALUES ('XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', '全部成单', '0Q7JgWoB0D1piMZNJzuDfAfheV2oOV', 'icon-emoticon_smile', '1', '2', 'success/all.do', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', 40002, 1, '2018-07-14 20:39:51', '1', '');
-INSERT INTO `hrip_permission` VALUES ('XiGaQbE72OzlZ1seRbayVGP0hXNKWg3H', '导出表格', 'sgfGdVqfJJzWNxYbfiA5CQt0vjmwIn', 'icon-arrow_redo', '1', '3', NULL, 'nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', 30153, 1, '2018-07-14 00:04:25', '1', '');
 INSERT INTO `hrip_permission` VALUES ('XMHiJy4XnXj0o6NpYcAE5iFDwfC0DyFz', '恢复', 'nhaFOnZOwgfZZB42SL003Z1q5MzAMQ', 'icon-clock_play', '1', '3', NULL, 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', 10056, 1, '2016-04-05 16:25:05', '1', '定时任务恢复');
-INSERT INTO `hrip_permission` VALUES ('xqEAeu2wA6nZ7ctS2UNBezlLel8xoEqT', '导出表格', 'ZTK3h84BhPOdPkr3KTPunyQpnAIsDy', 'icon-arrow_redo', '1', '3', NULL, 'PXaDRsV7rhjJdC4WbyCiUrVJQWXRjZfp', 50103, 1, '2018-07-14 00:08:29', '1', '');
-INSERT INTO `hrip_permission` VALUES ('yyr4dvnlFkispmTpZsbNA6FjdjdO4nzM', '查询', 'H7UZoCxXHHQMRPJslAGeDgyiyuCLhe', 'icon-zoom', '1', '3', NULL, 'nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', 30152, 1, '2018-06-18 21:07:49', '1', '');
-INSERT INTO `hrip_permission` VALUES ('zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', '今日成单', 'JajayAP2guEdZfvb7xZjGUDp8Izz6E', 'icon-emoticon_smile', '1', '2', 'success/now.do', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', 40051, 1, '2018-06-18 12:39:53', '1', '');
-INSERT INTO `hrip_permission` VALUES ('ZyEDEqyYF50ppc8bE3F30V8sXzg0hylj', '查询', 'sGZfkPDdtm37absEv1xtFZrbXHWT3u', 'icon-zoom', '1', '3', NULL, 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', 30052, 1, '2018-06-18 20:59:36', '1', '');
 COMMIT;
 
 -- ----------------------------
@@ -49485,7 +49327,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_role_doc`;
 CREATE TABLE `hrip_role_doc` (
   `ID` varchar(32) NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
   `ROLE_ID` varchar(32) DEFAULT NULL COMMENT '角色编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
@@ -49525,94 +49367,51 @@ BEGIN;
 INSERT INTO `hrip_role_permission` VALUES ('0FZfhzZnFWeiafclI2l2Q4tpzjltXSM8', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('0XFOjkyXC7I5jcsdQSdruwstEVRNgTHo', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D013', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('0yQZE7Vv6WzQhImkNhSGy6BkJCYc6j67', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'C001', '2016-04-07 17:35:15', '1');
-INSERT INTO `hrip_role_permission` VALUES ('16Cvyu6Lw4433NwuJxhqEbkowg4FvJbB', 'superAdmin', 'a2SHwiabhbcbAs28LlFzpHtz0dlwFQwg', '2018-06-18 21:06:54', '1');
-INSERT INTO `hrip_role_permission` VALUES ('1aBmIgciF8VkDvekf58sOHWPYHdyrzTt', 'superAdmin', '3pKQU5KavHA0r4STD3MScFPentPwyvyL', '2018-06-18 21:11:35', '1');
 INSERT INTO `hrip_role_permission` VALUES ('1Fq5IDh6eK1E2X0ShMcS1wAQ2ht1ct1D', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('3RAYoU10VrH4jdlyimPiXqD1x1IqMTN0', 'superAdmin', 'SJ2nY5HEoNvsy0iayBhFZcptP5wuFP8v', '2018-07-14 00:08:00', '1');
 INSERT INTO `hrip_role_permission` VALUES ('4KZQDgjYXGAahrGdAbMhRbOadivmx6rC', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D019', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('5uITGghHdFHo1FWty4Ys3V52Mmvqg8N1', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D006', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('5UPOVtSUh6vljFzm7tdEbsxwkIjvyhUs', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'C002', '2016-04-07 17:35:15', '1');
-INSERT INTO `hrip_role_permission` VALUES ('67YITYFu3wCn8r6nhUBnfsFz3MC5A3Tg', 'superAdmin', 'Ga6cspiuBovzfabHgk17x8gAQdA0ZnEm', '2018-07-10 23:58:30', '1');
 INSERT INTO `hrip_role_permission` VALUES ('6rPrddBrFc87omgMCqALQeQdMFOT4WWw', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'D006', '2016-04-07 17:35:15', '1');
-INSERT INTO `hrip_role_permission` VALUES ('744l0dIVCBD8yIWkNCI04KNIJ1kotESB', 'superAdmin', '4w3fHyS1IG6gI1zbrz6m8ma57LokazJY', '2018-06-18 21:02:14', '1');
-INSERT INTO `hrip_role_permission` VALUES ('7V5IMwubE7rVPIBumUXnPom31Mj4wpUG', 'superAdmin', 'MLh5StqnavfSM7sWHrQZw8Y8Gprx6WfZ', '2018-07-14 00:06:47', '1');
 INSERT INTO `hrip_role_permission` VALUES ('7W6uQRoGYlMfo5jpwE0vjBZz75NwAssr', 'superAdmin', 'UjEm2w4sYVx1XVNxQ0DCbmf1ANbjB5fe', '2016-04-05 16:25:42', '1');
 INSERT INTO `hrip_role_permission` VALUES ('7xtL8vZPMTANg5uPNDn6KaCJF8D80yem', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('85lEMKgWeHtm6eFobxfvzsSr3mbbOToE', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D015', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('8ChCfzBKhJYhrZwvFJmrXR3UguiE5Btp', 'superAdmin', 'AKvC3hCyEHAIGw1odhpVNoNXJ0kETxUA', '2018-06-18 17:44:02', '1');
 INSERT INTO `hrip_role_permission` VALUES ('8HZPxXxwOyhc77cQak0lxSlVmT1LnEGs', 'superAdmin', '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '2015-11-23 10:27:22', '1');
 INSERT INTO `hrip_role_permission` VALUES ('8IktK2x5Y7wXfbBHJ5K3RaPbyE5Kda8v', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'C004', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('8o0V6l47XljuswqJfbsvOYFpgNCqJrTl', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'D007', '2016-04-07 17:35:15', '1');
 INSERT INTO `hrip_role_permission` VALUES ('8OK4zhWFBdHz1BIO7FkiIXtnHlDXgOx7', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D015', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('8oP4pcjv3AZF7eX1F86vRVPZRoiPGWpE', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D017', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('8uSMdFTADjB8jJmmzyOES6NsaRDJMArl', 'superAdmin', 'vyXnmQaLnjjQSNdQ3nWC4WNtBRuirsyV', '2018-06-18 21:09:03', '1');
 INSERT INTO `hrip_role_permission` VALUES ('a3UThtXIgWwISmFq4YdAuKOGvgMTwFqm', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('afDRMIrIpXVLjZuqkYPq5oWJa08TlgiK', 'superAdmin', 'yyr4dvnlFkispmTpZsbNA6FjdjdO4nzM', '2018-06-18 21:07:49', '1');
-INSERT INTO `hrip_role_permission` VALUES ('Ai5yR6UxlwAVA6ynIZv5QKyqDZxj0MRU', 'superAdmin', 'vLrStHizvlA3QJ8AvcmMHRgzVTFJQtnO', '2018-06-18 21:04:16', '1');
-INSERT INTO `hrip_role_permission` VALUES ('aKruqdzw7sYfesBSl0I75SbcCvddGauF', 'superAdmin', 'R00gZGjvetIo1CiCHdLkg0VZln0WtZcJ', '2018-06-18 21:08:27', '1');
-INSERT INTO `hrip_role_permission` VALUES ('AnWZYCXJMQZdb20NhnWZkIwApK2k3LD3', 'superAdmin', 'TMK56MnxHYzIFEtVffY1u8ARYtDhkbzB', '2018-06-18 12:37:56', '1');
-INSERT INTO `hrip_role_permission` VALUES ('b1fLsgph1gN4QFKe1HAcECG8a6s8DV6E', 'superAdmin', 'JApmWcO2SnwRi2ycxIDDfF4uTyQasHWS', '2018-06-18 12:29:06', '1');
 INSERT INTO `hrip_role_permission` VALUES ('B7ZOdavDtN1n2crcxC7vvUvHpH5s3Ao4', 'superAdmin', 'oR1caw6H7nsApTD8THuqz0xAGX0IhMvG', '2015-11-23 10:34:38', '1');
-INSERT INTO `hrip_role_permission` VALUES ('BAmRzdHcrXkn28XjoSYV5VrysGe4h03A', 'superAdmin', 'uLZ61Y8KIDfixruZIWcmMab4cmPGx5MP', '2018-06-18 21:10:39', '1');
-INSERT INTO `hrip_role_permission` VALUES ('bCCiWXheU3pWMLCQJ05ZyKtS8mZEqu40', 'superAdmin', '0Us1kOzN4uDGIzuXq5F7nxAG6hjhawub', '2018-07-14 20:40:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('BFBqfPrtEdWl6gjzz2HnmtlMIt5WTE3x', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D004', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('BrQ5266z8FbrkfV0XqhGvGknlOIfSiMa', 'superAdmin', 'NyJja7vmmWsdBHst5rr2Zau7PjucqY4T', '2018-06-18 20:54:21', '1');
 INSERT INTO `hrip_role_permission` VALUES ('cfdH8q6RpPXRVV16B8O1Ssa8yksENpnj', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D007', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('CP57SynCMBNpoWDI0cwBdIj2S4hL7k5k', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D020', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('cqFMSjdcOYCv4FnQtHVsroQI7sjS5CPv', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D018', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('CtQmOR8eaMshtdCfR2yc8n60HO2ACNnE', 'superAdmin', 'UeljAsr7xIl3jAsaoUfzZY1YwMpaDzpj', '2018-06-18 12:31:06', '1');
 INSERT INTO `hrip_role_permission` VALUES ('D3VeNg2rp1HHjWuwDudCmboFC70irr0J', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D008', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('di7eptZjuRgwHlW5b4FrSqoPYXepKbWX', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D006', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('DLCeFywMCsyIA4UK5nlL6oWf2CxN3apv', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D011', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('dmlSWcCzRSY7WvvMDe1Nn6fGI0yCxLji', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'B001', '2016-04-07 17:35:15', '1');
 INSERT INTO `hrip_role_permission` VALUES ('dVIpaRvOD4CncEk2Tzehy7xeFCuBy5Wa', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('DYyRB0NtS5ohG43wcF7NZQYTSQeowrdR', 'superAdmin', '4BxadSTePjrsIrdt8s3KSPfu3ihVsVfC', '2018-06-18 17:46:19', '1');
-INSERT INTO `hrip_role_permission` VALUES ('DZktvFcD22IHsdaajSFezCupKUmlF45P', 'superAdmin', 'symCqKE4cnDI1OpcPMHWZZGZpQv8SfC8', '2018-07-14 00:06:57', '1');
-INSERT INTO `hrip_role_permission` VALUES ('e1duZqMLr5jjlq2Ef57clZym5WFbY3kO', 'superAdmin', 'PXaDRsV7rhjJdC4WbyCiUrVJQWXRjZfp', '2018-06-18 12:46:53', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ehYwOmJDY3czrI8ACfc5ubjRsRrYXmQz', 'superAdmin', '1RK0xXnvogxW6cWh173psC05IUTLb4tM', '2018-07-14 00:08:40', '1');
-INSERT INTO `hrip_role_permission` VALUES ('eldLmcYXzqVaMmkMjO4Fncn5j8NcVLV8', 'superAdmin', 'nnvDNUwAPiVKl1FqCzItPI80dJqM1p6Z', '2018-06-18 12:32:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('elgM1KAQGGkYrFz5zPdzthflNJidlFSp', 'superAdmin', 'DhmR0OdVOiJ8BtWbSNasWRO7OG6TuITm', '2018-06-18 17:43:27', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ERnGZnAm40EjlIOnJtTCX6y0yWdxWp8i', 'superAdmin', '3KYFxo0cTAk6I8iBUseorwKID8luvvMr', '2018-06-18 22:55:53', '1');
-INSERT INTO `hrip_role_permission` VALUES ('f6ABnthIxrY8VmOFnGf78nL5n0pptQoW', 'superAdmin', 'rFEajOh6HnQoBBRV5rxJGJCOSSHpkknk', '2018-07-14 00:06:16', '1');
-INSERT INTO `hrip_role_permission` VALUES ('fA1CnXZZluJGtp1CHI2gG4FNzTcDz5HL', 'superAdmin', 'mo20ieCloWUJV7kbfICGnh3dOFhXgGPO', '2018-06-18 20:53:35', '1');
-INSERT INTO `hrip_role_permission` VALUES ('FFnwudnddOZcv1FN2imYbyvKpwQhu8uJ', 'superAdmin', '5unUbXTsZqqMVGEzzarSezAYhcrXGmun', '2018-07-14 00:07:46', '1');
-INSERT INTO `hrip_role_permission` VALUES ('fGP5rAeXPR18S4b6YlPAo3kMo1CQtjmk', 'superAdmin', '0S2PpoTliTgtsXGxcYYaTdArEtQQH7eo', '2018-06-18 21:07:12', '1');
-INSERT INTO `hrip_role_permission` VALUES ('FK7jFuxi2tXUr2oZzQIAupBWt3Vsz2Uq', 'superAdmin', 'LIMaBAx5dofdOvWBzOaWALJZtdmqxQRq', '2018-06-18 20:54:07', '1');
 INSERT INTO `hrip_role_permission` VALUES ('FQT4SvpSuPSHj2d2luwDCM8SlEKkQm5j', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'C003', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('fv0fF0oIXjOscaJSgrQnL62SkNDZSgrR', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D003', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('g5J56mxtQtzbqG4A4aQbEJ5hi8fMFFRA', 'superAdmin', 'UJVcyD4dCiozY44srHdVwBXw88zsnHBq', '2018-06-18 12:23:17', '1');
 INSERT INTO `hrip_role_permission` VALUES ('gp8Aj05L031KKWyqjsc0DUz3XsfDgN6t', 'superAdmin', 'BBwm4jY8hZGzhsrEgzW2oUVNCUIquyT7', '2015-11-23 10:38:32', '1');
-INSERT INTO `hrip_role_permission` VALUES ('HMFNCz0v0LUepPxyyFLvs2Av17EMgjPd', 'superAdmin', 'NVw1Q5r0d0YVNAwmTTlOAz3cnvPDW6Wk', '2018-06-18 21:06:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('HzVvY3BEVyPDGfThTXSIolHqsyACQj3g', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D010', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ijTeOycCK364mObJNKqaQCd1kp7Iq2vt', 'superAdmin', 'gHeVE8y6VT7hDjrrWq7FifeYuKpZyVN6', '2018-06-18 12:47:30', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ioqjsWujAoXDeOXqWhJMeDf7rfa8G5jk', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D011', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('IwIx3BvKQfI2LBsJVJbwHbJYQTfpwu17', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D001', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('iYbzrjfT4Fpl2psh6N0RY1gnkzunb5su', 'superAdmin', 'iojw7o5RtZjXItHceh6WhoKT6B4CCW6Y', '2018-07-14 00:05:02', '1');
-INSERT INTO `hrip_role_permission` VALUES ('jIctJPXFFsN5CIZFumFvMELBrmMae70h', 'superAdmin', '4ZXrhSFmVVeumURrEtuJH7wW7y4WEWw8', '2018-07-14 00:08:08', '1');
-INSERT INTO `hrip_role_permission` VALUES ('jpntMwErQvxTk6830NBfylOZHjSXt5mT', 'superAdmin', 'be4r4XMsnybBqGNJSB2icfGSJ8Rx8NMB', '2018-06-18 20:53:18', '1');
 INSERT INTO `hrip_role_permission` VALUES ('jS3Ix2QqsExQMayGWOCFkJFf5Xgqm1RU', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D012', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('Jtg4KrhqLxbsLFQ3NsSki084bAEpwrjH', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D005', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ki7Lx4GrIS02NC7vhU5S4CPhlzsZFxdg', 'superAdmin', 'wpCmNMc4FsAYWsJD6X70yNOi8kYOS7pb', '2016-04-07 11:18:01', '1');
 INSERT INTO `hrip_role_permission` VALUES ('kL5I4CkuDhkRxtxAXIsyXZ7Lh2PRDAYR', 'superAdmin', 'kjVmPRma3O4VpBjLtd61WNDsBMj1K2jq', '2016-04-05 16:22:36', '1');
 INSERT INTO `hrip_role_permission` VALUES ('kRS63LXAHHrmuqID5si6cPEApQ3enZZP', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D003', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('LK2frrJSWwAFandfu8InnGjbULdt6Upq', 'superAdmin', 'BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '2015-11-23 10:37:24', '1');
-INSERT INTO `hrip_role_permission` VALUES ('Lt45f3YnSjBELOlG8YFpSQzvxtSpc5Md', 'superAdmin', 'lauelJCP1gWo0i0NjIFjBiS70e4C12ca', '2018-06-18 12:28:06', '1');
 INSERT INTO `hrip_role_permission` VALUES ('lUJKZAiLkBDTTQTbQjA8waJT5zolecA3', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D018', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('M6omOfMbYZW3tO4ILMIdr0IbQh7jLkF7', 'superAdmin', 'OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '2016-04-02 20:43:56', '1');
 INSERT INTO `hrip_role_permission` VALUES ('MeRIosTbbGtk1P0ptxiHJLsSol1ogdkm', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'OJWDlYsbfAy0Yclg8kaiJxfiKdE8pA7v', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('mhPuKiJbnjdLbsEhd4o0oBNg5XxRvjNU', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'D003', '2016-04-07 17:35:15', '1');
-INSERT INTO `hrip_role_permission` VALUES ('mjYHz20VTZjkhDN8CTibXZQjZQD5juMR', 'superAdmin', 'IvMFCPEwoALX5efs1JMTuEHfbEiecVta', '2018-07-14 20:40:40', '1');
 INSERT INTO `hrip_role_permission` VALUES ('mPgRiEGDGl7tLpsxK7ntRQlR7R3sNjuO', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('nAa8jiHqvwJc0HrT3WvmyayX4UJFrtfx', 'superAdmin', '0YeObhmjTNNGCuWEWUN5vBcsmjOTtylH', '2018-07-14 00:04:45', '1');
-INSERT INTO `hrip_role_permission` VALUES ('NARYU1J6wxRF80OsUEEoKUmbW66J31BK', 'superAdmin', 'ZyEDEqyYF50ppc8bE3F30V8sXzg0hylj', '2018-06-18 20:59:36', '1');
 INSERT INTO `hrip_role_permission` VALUES ('Nf53j0ntRwppR3g1cppJI1qc7JRyxz4s', 'superAdmin', 'KFGL0lWTbrctpHkO8ZjIjSjJI8nHQ8xE', '2016-04-07 11:18:29', '1');
 INSERT INTO `hrip_role_permission` VALUES ('NIzJhJ1gB3Y6AodJWTNKEqUwq4scmLab', 'superAdmin', 'XMHiJy4XnXj0o6NpYcAE5iFDwfC0DyFz', '2016-04-05 16:25:05', '1');
 INSERT INTO `hrip_role_permission` VALUES ('nkcfPoOPI5GuMTSDLscVAs4XiDvFwx0G', 'superAdmin', '37pyRui4B2WAP6E2mzDdFG2MnjYGYD1Z', '2016-04-05 16:23:12', '1');
-INSERT INTO `hrip_role_permission` VALUES ('nOJyMRZZXX2gnMsKr0BgPjmnvGQfW3rg', 'superAdmin', 'ugy2MNaZBnjktDzdNOpmrZD6vYkKKIeM', '2018-06-18 12:25:12', '1');
 INSERT INTO `hrip_role_permission` VALUES ('O1AZEJcNQb4gawcETtHI1dq8sA8WmWoh', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'C001', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('OeyRNhT7emQdTA7cbe0wCjNJbaJMRUM1', 'superAdmin', 'nBzAEwwZjZR8CaKeB08eKqVLM7zx560n', '2018-06-18 12:45:43', '1');
-INSERT INTO `hrip_role_permission` VALUES ('OiEoNbY3U654mgityWHR8gupTJzhQ0nM', 'superAdmin', '277dqzgscaHyQQ0TSS3dBDskJtS1FIbD', '2018-06-18 12:36:17', '1');
-INSERT INTO `hrip_role_permission` VALUES ('Oklj3xaaFjvBV0yzOIyCC0JK7IVFKSdv', 'superAdmin', 'BCQOiPEC3QcuFhjIQKrCyr5FelYrQmIE', '2018-06-18 21:09:27', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ONYCYazdDY5OaXC2jg8nTIhGxsIfSDas', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'C001', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('OOIeSsxMRZLN2uxaUYrAqfaeJ3UXwdTc', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D012', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('opfmxcUDgx1G63hIqYfdsBUVhQLhV57z', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D014', '2016-04-08 14:52:52', '1');
@@ -49620,25 +49419,11 @@ INSERT INTO `hrip_role_permission` VALUES ('opzc3Uyxh7WSmg7HIsBFkHL0bDIbhpuz', '
 INSERT INTO `hrip_role_permission` VALUES ('oQCYUa5fGqaqlubiaq4vUyxLNcxr2i0Y', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D016', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('OQVHibpCefgFldQGuTOFyhmY8XBRRx3j', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'C004', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ortrMOvfNROrxThg4mP22fcK4PXsaO12', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D002', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('oU1ForMGFF4RgRsam6hTelBRxF45Gt2n', 'superAdmin', '7J4UcHNuBPxqodqhjioJHihKsb3xGgOu', '2018-07-14 00:08:51', '1');
-INSERT INTO `hrip_role_permission` VALUES ('OUUGdTtsrZmSMgCa5U6ybPwEvvSVN6TQ', 'superAdmin', '07nFQwhKb6QpuHgv7OEYGgI1ppl0Dza3', '2018-06-18 12:31:53', '1');
 INSERT INTO `hrip_role_permission` VALUES ('OwgIiwgE5OxD2IFRqzokQka7GS8taaSq', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D020', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('oXlE1yDaJs6wtnOT4TqFgE6AiQl51aAT', 'superAdmin', 'SLJK0LfkUZIl7ZubFbvw4f7XruKJiAxA', '2018-06-18 21:03:54', '1');
-INSERT INTO `hrip_role_permission` VALUES ('PG7ndZ7nGu7vMcacTavu0XxzFPkUcnZe', 'superAdmin', 'lwC4DgaeZTugCFVe0WKmLWQ5W3R0YcFw', '2018-06-18 21:10:06', '1');
 INSERT INTO `hrip_role_permission` VALUES ('PpuHTKXqb5I3QZnQtQafBMWT5z0V4Cnu', 'superAdmin', '6dr2SATHp33NZagSCJmzhhbrtPuT3lxr', '2016-04-05 16:20:48', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ptQ4mLp02iRQ18xja1QFsoBt4rylDAxu', 'superAdmin', 'sYFzsHQRcLcVjMYhbRreFDzKU3FkoDHa', '2018-06-18 12:27:03', '1');
-INSERT INTO `hrip_role_permission` VALUES ('PV3LkhnaZq5EsI3CR1RJL4yifRFKmAy7', 'superAdmin', 'LQiNr3f58FUp3i8lfDFQV5CGfElxsaQ4', '2018-06-18 12:33:45', '1');
 INSERT INTO `hrip_role_permission` VALUES ('q2zkjpRd7XAvZMOfhLgzZwIuEfBodyFQ', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D001', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('q4BOeheytUT5C5kalWjkvRMcCUURUGrd', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D016', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('QJbGEIao0vEcVf8gffCsI3wKSkbUaB2M', 'superAdmin', 'gKGSIkAJNt0v568ha8G6msCpZIh32OB2', '2018-07-14 00:06:31', '1');
 INSERT INTO `hrip_role_permission` VALUES ('QsCuBia7Ahc8WVuGuzOKXwFuPh7ipnSZ', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D013', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('RA6PN8hlNYMP5qIDUZcFRAYTANLJrltN', 'superAdmin', 'zxJBnbIMWuJee8VPG3WYKCNRwXv1sNyj', '2018-06-18 12:39:53', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ryDdOZkxbSz1ZumIWQbrHMM2yADeSwtX', 'superAdmin', 'XGgWrNl5SAjW5d1B2JIg8J0f4th0TNSR', '2018-07-14 20:39:51', '1');
-INSERT INTO `hrip_role_permission` VALUES ('RYKE4hliwD0HEZlHJePpZ1DYR88yTXSf', 'superAdmin', 'u3s1NflXXK8z3UDBA8Ii7gsQXJ24ovaJ', '2018-06-18 12:43:37', '1');
-INSERT INTO `hrip_role_permission` VALUES ('S5zzgNLgJjqDKUS1w0bYAZxk6tZbUIrH', 'superAdmin', 'WyG30SMv3p8FnnC6RHoHQkAh45EZXAnS', '2018-06-18 21:01:20', '1');
-INSERT INTO `hrip_role_permission` VALUES ('S8CpowrzxSIAOwYRC1QDAeYPynenqzKU', 'superAdmin', 'T2wWKE3uoqnRKdd2Eyk4JdVl8peCHqqa', '2018-06-18 21:11:06', '1');
-INSERT INTO `hrip_role_permission` VALUES ('SCcSQrjH62qSjA0BUID47f8u8prej7z4', 'superAdmin', 'ORnIfXHz8afqX4FkygFQOc5DDe301YY4', '2018-06-18 17:42:24', '1');
-INSERT INTO `hrip_role_permission` VALUES ('Sg2JHxdE3TA7u1c1Cp0TrO82lctCDSiB', 'superAdmin', 'JhRqQxdGVil8kaNbXpz4cGKu11jf7YTb', '2018-06-18 12:26:28', '1');
 INSERT INTO `hrip_role_permission` VALUES ('sNWff2dkFpVENSDkm3jycE2FvnCDderN', 'superAdmin', 'sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '2015-11-23 10:35:34', '1');
 INSERT INTO `hrip_role_permission` VALUES ('superAdmin1', 'superAdmin', 'B001', '2015-10-12 13:01:19', '1');
 INSERT INTO `hrip_role_permission` VALUES ('superAdmin10', 'superAdmin', 'D006', '2015-10-12 13:01:19', '1');
@@ -49666,8 +49451,6 @@ INSERT INTO `hrip_role_permission` VALUES ('superAdmin7', 'superAdmin', 'D003', 
 INSERT INTO `hrip_role_permission` VALUES ('superAdmin8', 'superAdmin', 'D004', '2015-10-12 13:01:19', '1');
 INSERT INTO `hrip_role_permission` VALUES ('superAdmin9', 'superAdmin', 'D005', '2015-10-12 13:01:19', '1');
 INSERT INTO `hrip_role_permission` VALUES ('sYcuhHBCJfLxMkpcZ0s2IYBhgtXf3whx', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', '5efmvhhGW4dzdV0zwnKfXfJRiQfYsk2z', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('SYJN0iP7cSZ2RD2RiLY4zgQgXT2q3EAc', 'superAdmin', 'XiGaQbE72OzlZ1seRbayVGP0hXNKWg3H', '2018-07-14 00:04:25', '1');
-INSERT INTO `hrip_role_permission` VALUES ('tAFjCevwMfsbkOTOiu7kcTYObsLub0a4', 'superAdmin', 'kfnoQC2eKETjNbB6Eq177j6EdRxrliaU', '2018-06-18 17:42:55', '1');
 INSERT INTO `hrip_role_permission` VALUES ('tdfqMBGAaYCpN1OVK3X0JUrSB1PWt3Wt', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'D002', '2016-04-07 17:35:15', '1');
 INSERT INTO `hrip_role_permission` VALUES ('tJWBgt0mJHfIYf7VOOqD4441SPxxe4no', 'hUTMEIDe71dgQCNqwOrBibkDlaGgn8CH', 'D001', '2016-04-07 17:35:15', '1');
 INSERT INTO `hrip_role_permission` VALUES ('tOhiLdFKxRN5eD0CPxjBCciTDUAsQffW', 'superAdmin', 'Mt5A1KRKTgty31DtJ3ik8boG5tFbJvHQ', '2016-04-05 16:24:13', '1');
@@ -49676,32 +49459,19 @@ INSERT INTO `hrip_role_permission` VALUES ('Tryckepj6IpCcwHTZ8SEC2VBPwUvZsYB', '
 INSERT INTO `hrip_role_permission` VALUES ('Tx15fviI2pnZGPPfsDc0vAq53cCdqNDh', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'B001', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('uAvIvMuwviLKjOzgcIHtrwdZz3BFx1lq', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'BW5tnNmuzsEW8kd7zqKHb1TFgOBD3vvu', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('UJi7i6P8NGY5r7Z1spjbqtT7to3bF51l', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D008', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('uqGM0ks0iuKc1nKeRyul2eRyxAsX6Zhs', 'superAdmin', 'RrocphqRDZZpOgbaXvKJQBrk7Waw8gVZ', '2018-07-14 00:08:17', '1');
-INSERT INTO `hrip_role_permission` VALUES ('UVcLiIzN4qEXmqJtbf7B6FpTw8aDiPzT', 'superAdmin', 'WHMPjQxwPWlSoprWaotzszPkjScqLult', '2018-06-18 21:00:51', '1');
-INSERT INTO `hrip_role_permission` VALUES ('vaavGSVetyLmTFYLe8PczjDYHLDqk046', 'superAdmin', 'GpJF6MurZsAxyxdviXvQSVtBlZ8SNHee', '2018-06-18 21:04:53', '1');
-INSERT INTO `hrip_role_permission` VALUES ('ve0WnaLIEJ5ngFAjQ7HC5hWpdATlubMA', 'superAdmin', 'weqzMKSV4GWHe22TIjW8nmeAPisLPsSu', '2018-06-18 12:30:09', '1');
-INSERT INTO `hrip_role_permission` VALUES ('VO1FhMW1PIHkAHDjNfgaAGHQA8f6Uxt3', 'superAdmin', 'cNzEdIPYRxyeU8W20vNqKAYkFmAwy84M', '2018-07-14 00:07:10', '1');
-INSERT INTO `hrip_role_permission` VALUES ('vrsphxJcj0KAYBfBE2VvccubzyqotRmL', 'superAdmin', 'oUHfs18Wg4MfvLseh6fFiE5yFID5ceaA', '2018-06-18 17:45:06', '1');
-INSERT INTO `hrip_role_permission` VALUES ('W34i3mVXxMsYsq0Mt1b4JbSq7hvQqiMq', 'superAdmin', 'pVh4CZytgYFqRSsLTFveOC4emvI1OX63', '2018-06-18 12:44:19', '1');
-INSERT INTO `hrip_role_permission` VALUES ('w3YC6BcktyXF0UBvh0mInocQiJAwKbI2', 'superAdmin', 'E0Hl7uzefZYdNa3nM0CpICFw2XPnpk77', '2018-06-18 17:44:36', '1');
 INSERT INTO `hrip_role_permission` VALUES ('wCEaMLSTOKUzgp0LrGSBaya7HU4tiBKY', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D002', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('WOVlMs7xncPhdcdl4Mx2XLI7ODdHvKSZ', 'superAdmin', 'qYApVUu60zzuXnbm3VaJpCdtpy6y1xit', '2018-06-18 12:34:56', '1');
 INSERT INTO `hrip_role_permission` VALUES ('X2vhnhw5uMzJ2QcXWrMCcAaOgAJsuiNF', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'BBwm4jY8hZGzhsrEgzW2oUVNCUIquyT7', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('XEGRxUMWHPwA15U7rlRXcqBoOQFbZ6tu', 'superAdmin', 'kK21HSCDQUpPYSZj3vDj71qlMtIwEO3P', '2016-04-06 15:49:21', '1');
 INSERT INTO `hrip_role_permission` VALUES ('XK4YLuf3SoiSbykHw8b5RfP3oDA03cBE', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'sXxSfrw0INe83QUH8H0nB7jpVhhXp0ZL', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('xLvkWYEevRJjU3mWSr0IHnUyF5S4fKke', 'superAdmin', 'B4dEoPjPZZho2Pt04l5H6EBHAEqeIg1c', '2018-06-18 12:44:38', '1');
-INSERT INTO `hrip_role_permission` VALUES ('xpKSRXrkR1SOgKmuMz3qmwVPER7UnSTI', 'superAdmin', 'wmokpuP2TcaaaQkx3KmlhsoPzy6ZBNOC', '2018-06-18 21:03:17', '1');
 INSERT INTO `hrip_role_permission` VALUES ('XPU27tlCvGBZbbdFaAWdLqSlRmnLud2h', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'C002', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('xR6FYCf8FSSh0CBMAIqH740ZVdQzepMg', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D009', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('XrhOkKymRgstoLU02EkhCjBDUQ3yChSS', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'C003', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('xu0SKI2b3l2g0TXkouMq3xhC1z3Usk8k', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'C002', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('y8BpXukRlFNkmUc6Zj4dX1e4CuolEWE3', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D005', '2016-04-02 22:31:23', '1');
 INSERT INTO `hrip_role_permission` VALUES ('yRGfbbud1oJaZAK1gMr7kKTizREmCmpE', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'D014', '2016-04-02 22:31:23', '1');
-INSERT INTO `hrip_role_permission` VALUES ('yXipWoR3JYR2QhBseno2J5a3cWSz06uU', 'superAdmin', 'xqEAeu2wA6nZ7ctS2UNBezlLel8xoEqT', '2018-07-14 00:08:29', '1');
 INSERT INTO `hrip_role_permission` VALUES ('YzGEwIVa2SSbFe2BEfQKdeR5WqFG00fq', 'superAdmin', 'JzDypWYwaXUBL2A0HZpTqjl2sOkqd6lX', '2016-04-05 17:28:06', '1');
 INSERT INTO `hrip_role_permission` VALUES ('zAMbimBfIkHQW0VVK4LibD8ipANHhPDC', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D007', '2016-04-08 14:52:52', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ZC4LsyipbaBWY5sFC8z8cYThKEcRsanz', 'iMod3DFnrdkeeobC51m8YcFJJSepTzn3', 'D017', '2016-04-08 14:52:52', '1');
-INSERT INTO `hrip_role_permission` VALUES ('zq1NkWOk7Nr7onUwRCviEB6NNVTaf7z5', 'superAdmin', 'POR6AVordTWmTDYVcZ1lHWxuSq63EdOr', '2018-06-18 12:38:32', '1');
 INSERT INTO `hrip_role_permission` VALUES ('zubsMfLK5nodryjJiOKW8ow7EPelmetk', 'superAdmin', 'hB760SmtOVsb6VMTMP5GS1aSgIgBW1Vb', '2016-04-05 16:23:39', '1');
 INSERT INTO `hrip_role_permission` VALUES ('ZuM65YFhUYYceJEdJ4laawH8aXGaysye', 'zpsWh0iS4FbEFYDRzEJImnYPgM4c5FJI', 'B001', '2016-04-02 22:31:23', '1');
 COMMIT;

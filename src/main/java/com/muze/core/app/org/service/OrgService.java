@@ -61,25 +61,25 @@ public class OrgService {
 		//查询查询机构下的团队ID
 		List<String> _group_id = orgDao.selectDelGroup(_org_id);
 		
-		//删除团队医生
+		//删除团队用户
 		if(_group_id.size()>0)
 		orgDao.delDocGroup(_group_id);
 		
 		//删除团队
 		orgDao.delGroup(_org_id);
 		
-		//查询机构下所有医生ID
+		//查询机构下所有用户ID
 		List<String> _doc_id = orgDao.selectDelDoc(_org_id);
 		
-		//删除医生表
+		//删除用户表
 		if(_doc_id.size()>0)
 		orgDao.delDoc(_doc_id);
 		
-		//删除医生角色表
+		//删除用户角色表
 		if(_doc_id.size()>0)
 		orgDao.delDocRole(_doc_id);
 		
-		//删除医生机构表
+		//删除用户机构表
 		if(_doc_id.size()>0)
 		orgDao.delDocOrg(_doc_id);
 		

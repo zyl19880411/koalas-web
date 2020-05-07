@@ -291,7 +291,7 @@ $(document).ready(function() {
 		        	
 		        },
 		        error:function(XMLHttpRequest, textStatus, errorThrown){
-		        	$.messager.alert('添加失败','医生添加错误!','error')
+		        	$.messager.alert('添加失败','用户添加错误!','error')
 		        }
 		    });
 			
