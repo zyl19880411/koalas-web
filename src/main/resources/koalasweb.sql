@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 07/05/2020 16:17:02
+ Date: 07/05/2020 16:45:40
 */
 
 SET NAMES utf8mb4;
@@ -196,7 +196,7 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 -- Records of QRTZ_SCHEDULER_STATE
 -- ----------------------------
 BEGIN;
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('scheduler', 'zhangyulongdeMacBook-Pro.local1588839419741', 1588839420097, 15000);
+INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('scheduler', 'zhangyulongdeMacBook-Pro.local1588839842451', 1588841135506, 15000);
 COMMIT;
 
 -- ----------------------------
@@ -279,147 +279,6 @@ CREATE TABLE `QRTZ_TRIGGERS` (
 -- Records of QRTZ_TRIGGERS
 -- ----------------------------
 BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for hf_listen
--- ----------------------------
-DROP TABLE IF EXISTS `hf_listen`;
-CREATE TABLE `hf_listen` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `order_id` bigint(20) NOT NULL COMMENT '订单ID',
-  `area` varchar(50) DEFAULT NULL COMMENT '地区',
-  `nj` varchar(10) DEFAULT NULL COMMENT '年级',
-  `listen_subject` varchar(50) DEFAULT NULL COMMENT '试听科目',
-  `listen_time` timestamp NULL DEFAULT NULL COMMENT '试听时间',
-  `teacher` varchar(50) NOT NULL COMMENT '授课老师',
-  `teacher_phone` varchar(11) NOT NULL COMMENT '老师电话',
-  `teacher_info` text COMMENT '老师详情',
-  `if_bounced` tinyint(1) DEFAULT NULL COMMENT '是否跳票',
-  `ifbounced_time` timestamp NULL DEFAULT NULL COMMENT '跳票时间',
-  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '邀约时间',
-  `u_time` timestamp NULL DEFAULT NULL COMMENT '上次更新时间',
-  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `order_id` (`order_id`) USING BTREE,
-  KEY `c_time` (`c_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of hf_listen
--- ----------------------------
-BEGIN;
-INSERT INTO `hf_listen` VALUES (5, 21, '北京海淀区30号', '1', '1', '2018-07-10 00:39:27', '张老师', '13011114521', '部分突然想到官方通过', 1, '2018-07-10 00:54:22', '2018-07-13 12:31:50', NULL, 0);
-INSERT INTO `hf_listen` VALUES (6, 23, '北京海淀区1', '0', '0', '2018-07-15 21:44:42', '张老师', '13011114521', '111', 1, '2018-07-14 20:00:15', '2018-07-14 20:00:15', '2018-07-14 18:52:54', 1);
-INSERT INTO `hf_listen` VALUES (7, 22, '北京海淀区', '11', '8', '2018-07-11 00:55:33', '张老师', '13011114521', '111', 1, '2018-07-11 23:46:45', '2018-07-11 23:47:04', NULL, 1);
-INSERT INTO `hf_listen` VALUES (8, 24, NULL, '3', '4', '2018-07-10 00:08:15', '张老师1', '13011114521', NULL, 0, '2020-05-07 14:27:56', '2020-05-07 14:27:56', '2018-07-13 13:24:03', 1);
-INSERT INTO `hf_listen` VALUES (9, 24, '北京海淀区', '2', '2', '2018-07-11 22:26:15', '张老师', '13522221112', '3', 1, '2018-07-11 23:36:38', '2018-07-11 23:47:04', NULL, 1);
-INSERT INTO `hf_listen` VALUES (10, 21, '111111111111', '2', '3', '2018-07-05 12:32:06', 'aaaa', '11111111111', '111', 1, NULL, '2018-07-13 12:32:16', NULL, 1);
-INSERT INTO `hf_listen` VALUES (11, 20, '111111111111', '1', '1', '2018-06-13 12:35:32', 'aaaa', '11111111111', '1\r\n1\r\n1', 1, NULL, '2018-07-13 12:35:41', NULL, 1);
-INSERT INTO `hf_listen` VALUES (12, 25, '北京海淀区1', '2', '3', '2018-07-03 01:05:35', 'aaaa', '11111111111', '111', 1, NULL, '2018-07-14 01:05:43', NULL, 1);
-INSERT INTO `hf_listen` VALUES (13, 26, '111111111111', '3', '2', '2018-07-14 18:25:06', 'aaaa', '11111111111', '11', 1, '2018-07-14 20:01:19', '2018-07-14 20:01:19', NULL, 1);
-COMMIT;
-
--- ----------------------------
--- Table structure for hf_order
--- ----------------------------
-DROP TABLE IF EXISTS `hf_order`;
-CREATE TABLE `hf_order` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `doc_id` varchar(32) NOT NULL COMMENT '销售ID',
-  `student_id` varchar(20) NOT NULL COMMENT '学生编号',
-  `student_name` varchar(20) NOT NULL COMMENT '学生姓名',
-  `student_phone` char(11) NOT NULL COMMENT '电话号码',
-  `gaokao_year` timestamp NULL DEFAULT NULL COMMENT '高考年份',
-  `love_subject` varchar(50) DEFAULT NULL COMMENT '意向课程',
-  `channel` varchar(32) DEFAULT NULL COMMENT '渠道',
-  `if_listener` tinyint(1) DEFAULT NULL COMMENT '是否试听',
-  `if_success` tinyint(1) DEFAULT NULL COMMENT '是否成单',
-  `if_error` tinyint(1) DEFAULT NULL COMMENT '是否无效数据',
-  `if_introduction` tinyint(1) DEFAULT NULL COMMENT '是否转介绍',
-  `introduction_type` varchar(1) DEFAULT NULL COMMENT '转介绍类型',
-  `introduction_name` varchar(255) DEFAULT NULL COMMENT '转介绍人姓名',
-  `backup` text COMMENT '备注',
-  `u_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  `c_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '录入时间',
-  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `index_doc_id` (`doc_id`) USING BTREE,
-  KEY `index_student_id` (`student_id`) USING BTREE,
-  KEY `c_time` (`c_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of hf_order
--- ----------------------------
-BEGIN;
-INSERT INTO `hf_order` VALUES (18, 'superAdmin', '1234560', '张玉龙', '11111111111', '2018-08-30 00:00:00', '3', '网络', 0, 0, 0, 0, NULL, NULL, '1111', '2018-06-30 14:27:53', '2018-06-30 14:27:36', 1);
-INSERT INTO `hf_order` VALUES (19, 'superAdmin', '123456111', '张玉龙123', '13011117056', '2018-08-11 00:00:00', '2', '111', 0, 1, 1, 1, '1', '厉害呀123456', '111\r\n111', '2018-07-11 23:48:46', '2018-06-30 19:03:17', 1);
-INSERT INTO `hf_order` VALUES (20, 'superAdmin', '1234560111', '张玉龙', '13011117056', NULL, NULL, NULL, 1, 1, 1, 0, NULL, NULL, NULL, NULL, '2018-06-30 19:04:57', 1);
-INSERT INTO `hf_order` VALUES (21, 'superAdmin', '123456', '张启慧', '18519147742', '2018-09-13 00:00:00', '1', '教育联盟', 1, 0, 1, 1, '2', '张玉龙', '高一90/150，学习没方法', '2018-07-13 13:26:02', '2018-07-01 00:37:33', 1);
-INSERT INTO `hf_order` VALUES (22, 'superAdmin', '1111111', '张玉龙', '13011117056', '2018-11-13 00:00:00', '2', NULL, 1, 0, 1, 1, '1', '厉害呀', '1111', '2018-07-13 13:26:22', '2018-07-05 23:49:26', 1);
-INSERT INTO `hf_order` VALUES (23, 'superAdmin', '12345611111', '张玉龙', '13011117056', '2018-09-06 00:00:00', '2', '网络', 1, 0, 1, 1, '1', '111', '111', '2018-07-06 00:03:56', '2018-07-06 00:03:23', 1);
-INSERT INTO `hf_order` VALUES (24, 'superAdmin', '123456789', '测试123', '13000000000', '2018-09-13 00:00:00', '8', '网络获取', 1, 0, 1, 0, NULL, NULL, '123456', '2018-07-13 00:01:18', '2018-07-11 00:08:04', 1);
-INSERT INTO `hf_order` VALUES (25, 'superAdmin', '1111111q', '张玉龙', '13011117056', '2018-08-14 00:00:00', '2', 'kkhu', 1, 0, 1, 0, NULL, NULL, '111', NULL, '2018-07-14 01:05:28', 1);
-INSERT INTO `hf_order` VALUES (26, 'superAdmin', '111111', '张玉龙', '13011117056', '2018-07-14 00:00:00', '3', 'kkhu', 1, 1, 1, 0, NULL, NULL, '1111', NULL, '2018-07-14 18:25:01', 1);
-INSERT INTO `hf_order` VALUES (27, 'superAdmin', '1111111434', '张玉龙', '13011117056', '2018-08-14 00:00:00', '4', 'kkhu', 0, 0, 0, 0, NULL, NULL, '432432', NULL, '2018-07-14 20:02:44', 1);
-INSERT INTO `hf_order` VALUES (28, 'superAdmin', '111111111', '张玉龙', '13011117056', '2018-07-15 00:00:00', '2', 'kkhu', 0, 0, 0, 0, NULL, NULL, '1111', NULL, '2018-07-15 14:41:06', 1);
-INSERT INTO `hf_order` VALUES (29, 'superAdmin', '1111111q11', '张玉龙', '13011117056', '2018-08-15 00:00:00', '2', 'kkhu', 0, 0, 1, 0, NULL, NULL, '11', NULL, '2018-07-15 19:15:32', 1);
-COMMIT;
-
--- ----------------------------
--- Table structure for hf_order_error
--- ----------------------------
-DROP TABLE IF EXISTS `hf_order_error`;
-CREATE TABLE `hf_order_error` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `order_id` bigint(20) DEFAULT NULL COMMENT '订单编号',
-  `error_id` int(11) DEFAULT NULL COMMENT '错误类型',
-  `error_text` text,
-  `c_time` timestamp NULL DEFAULT NULL COMMENT '操作时间',
-  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `order_id` (`order_id`) USING BTREE,
-  KEY `c_time` (`c_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of hf_order_error
--- ----------------------------
-BEGIN;
-INSERT INTO `hf_order_error` VALUES (3, 18, 1, NULL, '2018-06-30 14:27:44', 1);
-INSERT INTO `hf_order_error` VALUES (4, 27, 3, NULL, '2018-07-14 20:03:05', 1);
-INSERT INTO `hf_order_error` VALUES (5, 28, 2, NULL, '2018-07-15 14:41:14', 1);
-COMMIT;
-
--- ----------------------------
--- Table structure for hf_success
--- ----------------------------
-DROP TABLE IF EXISTS `hf_success`;
-CREATE TABLE `hf_success` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `order_id` bigint(20) NOT NULL COMMENT '订单ID',
-  `close_v_time` timestamp NULL DEFAULT NULL COMMENT '关单录音时间',
-  `contract_numbe` varchar(32) DEFAULT NULL COMMENT '合同编号',
-  `class_hour` int(11) DEFAULT NULL COMMENT '课时',
-  `order_money` decimal(15,2) DEFAULT NULL COMMENT '成单金额',
-  `gift` varchar(255) DEFAULT NULL COMMENT '赠品',
-  `pay_status` varchar(10) DEFAULT NULL COMMENT '支付方式',
-  `c_time` timestamp NULL DEFAULT NULL COMMENT '成单时间',
-  `pay_time` timestamp NULL DEFAULT NULL COMMENT '支付时间',
-  `valid` int(11) DEFAULT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `order_id` (`order_id`) USING BTREE,
-  KEY ```c_time``` (`c_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of hf_success
--- ----------------------------
-BEGIN;
-INSERT INTO `hf_success` VALUES (5, 20, '2018-07-04 00:40:16', '1234567', 250, 666.66, '气球', '微信', '2018-07-01 00:40:38', '2018-07-01 00:40:28', 1);
-INSERT INTO `hf_success` VALUES (6, 19, '2018-07-05 23:49:04', '123456', 195, 666.66, '气球', '微信', '2018-07-11 23:49:18', '2018-07-13 23:49:12', 1);
-INSERT INTO `hf_success` VALUES (7, 26, '2018-07-19 00:58:52', '6546546', 305, 666.00, '测试', '支付宝', '2018-07-15 00:59:20', '2018-07-05 00:59:14', 1);
 COMMIT;
 
 -- ----------------------------
@@ -47945,8 +47804,8 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `hrip_doc`;
 CREATE TABLE `hrip_doc` (
-  `DOC_ID` varchar(32) NOT NULL COMMENT '用户编号',
-  `DOC_NAME` varchar(30) DEFAULT NULL COMMENT '用户名称',
+  `DOC_ID` varchar(32) NOT NULL COMMENT '医生编号',
+  `DOC_NAME` varchar(30) DEFAULT NULL COMMENT '医生名称',
   `LOGIN_NAME` varchar(30) DEFAULT NULL COMMENT '登陆名',
   `LOGIN_PWD` varchar(30) DEFAULT NULL COMMENT '登陆密码',
   `GENDER` decimal(1,0) DEFAULT NULL COMMENT '性别',
@@ -47978,7 +47837,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_group_doc`;
 CREATE TABLE `hrip_group_doc` (
   `ID` varchar(32) DEFAULT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
   `GROUP_ID` varchar(32) DEFAULT NULL COMMENT '团队编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
@@ -49078,7 +48937,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_org_doc`;
 CREATE TABLE `hrip_org_doc` (
   `ID` varchar(32) NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
   `ORG_ID` varchar(32) DEFAULT NULL COMMENT '结构编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
@@ -49327,7 +49186,7 @@ COMMIT;
 DROP TABLE IF EXISTS `hrip_role_doc`;
 CREATE TABLE `hrip_role_doc` (
   `ID` varchar(32) NOT NULL COMMENT '编号',
-  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `DOC_ID` varchar(32) DEFAULT NULL COMMENT '医生编号',
   `ROLE_ID` varchar(32) DEFAULT NULL COMMENT '角色编号',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
   `VERSION` varchar(30) DEFAULT NULL COMMENT '版本',
