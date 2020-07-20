@@ -132,8 +132,6 @@ public class UserController extends BaseController{
 			@RequestParam("tel") String tel, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		System.out.println("param" + request.getQueryString());
-
 		PageBounds pageBounds = new PageBounds(Integer.parseInt(request
 				.getParameter("page")), Integer.parseInt(request
 				.getParameter("rows")));
