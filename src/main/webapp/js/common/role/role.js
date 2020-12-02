@@ -189,8 +189,12 @@ $(document).ready(function() {
 		       dataType : 'text',
 		       contentType: 'application/json',
 		       success:function(data,textStatus,XMLHttpRequest){
-	        		$.messager.alert('添加确认','角色权限保存成功!','info');
-	        		$('#roledialog').dialog('close')
+				   if(data=='success'){
+					   $.messager.alert('添加确认','角色权限保存成功!','info');
+				   }else{
+					   $.messager.alert('添加失败','角色权限保存失败','error')
+				   }
+				   $('#roledialog').dialog('close')
 		       },
 		       error:function(XMLHttpRequest, textStatus, errorThrown){
 		         	$.messager.alert('添加失败','角色权限保存失败','error')
