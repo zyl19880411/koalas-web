@@ -117,6 +117,8 @@
 重写sessionDao，将sessionDAO配置打开，这样集群配置就已经打开了，用户登录信息session已经cache就会被redis接管，是不是很方便？
 
 # 四：属性配置说明
+
+##### 1：配置说明
 参数 | 说明
 ---|---
 muze.doc.driver | mysql驱动路径
@@ -137,5 +139,7 @@ muze.session.port | redis 端口
 muze.session.timeout | redis超时时间
 muze.cache.timeout | spring shrio缓存超时时间
 
-
-
+# 五：联系作者
+高级java QQ群：825199617
+博客地址:https://www.cnblogs.com/zyl2016/
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0417/122134_0bd7dd55_536094.png "在这里输入图片标题")
