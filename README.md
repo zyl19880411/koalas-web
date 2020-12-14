@@ -87,3 +87,55 @@
 
 ##### 17：定时任务执行结果页面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151652_c14a4722_536094.png "屏幕截图.png")
+
+# 三：集群环境如何开启
+很多小伙伴想通过redis开启集群环境，通过redis存储cookie和session信息，开始方式如下：在src/main/resources/spring/spring-shiro.xml文件中
+将集群配置打开即可。
+```
+ <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	<property name="realm" ref="myRealm" />
+	<!-- 单机环境下缓存配置 -->
+	<property name="cacheManager" ref="shiroEhcacheManager" />
+	<!-- 集群环境下缓存配置 -->
+	<!-- <property name="cacheManager" ref="customShiroCacheManager" /> -->
+	<property name="sessionManager" ref="sessionManager"/>
+	<property name="rememberMeManager" ref="rememberMeManager"/>
+ </bean>
+```
+按照注释打开cacheManager配置即可，自己选择单机环境或者集群环境。
+
+```
+ <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+	<property name="globalSessionTimeout" value="18000000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+	<property name="sessionIdCookieEnabled" value="true"/>
+	<property name="sessionIdCookie" ref="sessionIdCookie"/>
+	<!--  单机环境下不需要注入 -->
+	<!--  <property name="sessionDAO" ref="customShiroSessionDAO"/> -->
+ </bean>
+```
+重写sessionDao，将sessionDAO配置打开，这样集群配置就已经打开了，用户登录信息session已经cache就会被redis接管，是不是很方便？
+
+# 四：属性配置说明
+参数 | 说明
+---|---
+muze.doc.driver | mysql驱动路径
+muze.doc.url | mysql地址
+muze.doc.username | mysql账号
+muze.doc.password | mysql密码
+muze.doc.initialSize | mysql初始连接数量
+muze.doc.maxActive | mysql最大活动数量
+muze.doc.minIdle | mysql最低闲置连接数量
+muze.doc.maxIdle | mysql最大闲置连接数量
+muze.doc.maxWait | mysql超时最大等待时间
+muze.session.maxActive | redis最大活动数量
+muze.session.maxIdle | redis最大闲置连接数量
+muze.session.minIdle | redis最低闲置连接数量
+muze.session.maxWait | redis超时最大等待时间
+muze.session.host | redis ip
+muze.session.port | redis 端口
+muze.session.timeout | redis超时时间
+muze.cache.timeout | spring shrio缓存超时时间
+
+
+
