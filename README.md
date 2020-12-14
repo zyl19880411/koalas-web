@@ -1,10 +1,31 @@
+ <p align="center">
+  <img src="https://images.gitee.com/uploads/images/2020/1214/160547_0ff80ac0_536094.png" width="300">
+  <br>
+  <a href="https://www.apache.org/licenses/LICENSE-2.0" align="center">
+    <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square">
+  </a>
+  <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE" align="center">
+    <img alt="996icu" src="https://img.shields.io/badge/license-NPL%20(The%20996%20Prohibited%20License)-blue.svg">
+  </a>
+</p>
 
+# 一：项目介绍
 基于spring mvc + spring + mybatis + Spring shrio 基于redis的集群方案
 
 系统权限部分，分成多个机构，其中每个机构也有自己的子机构，子机构继承的部分权限，其中每个机构拥有自己的角色和用户，角色的权限是机构中的权限，用户选择角色只能从对应机构中的角色进行选择，机构中的用户创建子机构对子机构进行授权，创建角色对角色进行授权，创建用户对用户设置角色，系统有一个超级管理员，对机构角色和用户拥有删除功能，其他机构中的管理员只有授权，创建等功能，实现了分级授权的功能，并且每个机构拥有自己的小组，机构下的用户所属其中的小组，从而对小组中的用户进行消息下发，短信下发，邮件下发等提供快捷操作， 集中对应关系是  用户----角色------机构 ，角色-----权限，机构-----权限，机构----子机构，用户----小组-----机构
 
 基于数据库表的spring 定时任务 支持集群部署 可制定执行任务和执行时间,删除添加操作等等，使用方式，下载之后clena install，tomcat7 -run直接可以运行，或者打war包部署到tomcat中，sql文件在resources里面。超级管理员账户:admin,密码123456
 
+##### 1：技术栈
+- [x] thrift 0.8.0
+- [x] spring-core-4.2.5，spring-context-4.2.5，spring-beans-4.2.5等spring源码
+- [x] log4j，slf4j
+- [x] org.apache.commons(v2.0+)
+- [x] io.netty4
+- [x] fastJson
+- [x] zookeeper
+- [x] 点评cat（V3.0.0+ 做数据大盘统计上报等使用，可不配置）
+- [x] AOP，反射代理等
 主页面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/150716_694facf8_536094.png "屏幕截图.png")
 用户管理界面
