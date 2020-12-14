@@ -16,47 +16,74 @@
 
 基于数据库表的spring 定时任务 支持集群部署 可制定执行任务和执行时间,删除添加操作等等，使用方式，下载之后clena install，tomcat7 -run直接可以运行，或者打war包部署到tomcat中，sql文件在resources里面。超级管理员账户:admin,密码123456
 
-##### 1：技术栈
-- [x] thrift 0.8.0
+##### 1：为什么要写这个web框架
+市面上常见的web框架很多，但是随着越来越多的元素加入，复杂的架构设计等因素似使得这些框架和spring一样，虽然号称是轻量级，但是用起来却是让我们很蹩脚，大量的配置，繁杂的API设计，其实，我们根本用不上这些东西！！！ 我也算得上是在很多个互联网企业厮杀过，见过很多很多的内部RPC框架，有些优秀的设计让我非常赞赏，有一天我突然想着，为什么不对这些设计原型进行聚合归类，自己搞一套【轻量级】web框架呢，碍于工作原因，一直没有时间倒腾出空，十一期间工作闲暇，说搞就搞吧，落地不易，希望源码对大家对认识web框架起到推进的作用。东西越写越多，有各种问题欢迎随时拍砖
+
+##### 2：为什么叫koalas
+树袋熊英文翻译，希望考拉 web给那些不太喜欢动手自己去造轮子的人提供可靠的web使用环境
+
+##### 3：技术栈
 - [x] spring-core-4.2.5，spring-context-4.2.5，spring-beans-4.2.5等spring源码
 - [x] log4j，slf4j
-- [x] org.apache.commons(v2.0+)
 - [x] io.netty4
 - [x] fastJson
+- [x] spring shrio
 - [x] zookeeper
-- [x] 点评cat（V3.0.0+ 做数据大盘统计上报等使用，可不配置）
 - [x] AOP，反射代理等
-主页面
+- [x] spring mybatis
+
+# 二：如何安装项目
+将项目下载到本地，如果顺利的话直接直接可以编译通过，在本地先clean install之后 通过tomcat或者jetty脚本来启动koalas-web，脚本在pom文件中已经写好
+在启动之前首先把sql文件执行到mysql中，文件路径src/main/resources/koalasweb.sql
+
+# 三：相关页面以及功能展示
+##### 1：主页面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/150716_694facf8_536094.png "屏幕截图.png")
-用户管理界面
+
+##### 2：用户管理界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/150743_35bff318_536094.png "屏幕截图.png")
-用户添加
+
+##### 3：用户添加界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/150813_5e4be1c7_536094.png "屏幕截图.png")
-用户角色
+
+##### 4：用户角色界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/150957_cfed169d_536094.png "屏幕截图.png")
-角色管理界面
+
+##### 5：角色管理界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151026_aa36addb_536094.png "屏幕截图.png")
-角色添加
+
+##### 6：角色添加界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151041_944797f2_536094.png "屏幕截图.png")
-角色授权界面
+
+##### 7：角色授权界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151103_958af8b4_536094.png "屏幕截图.png")
-菜单管理界面
+
+##### 8：菜单管理界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151225_0c721ffb_536094.png "屏幕截图.png")
-菜单修改界面
+
+##### 9：菜单修改界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151312_cd1efa79_536094.png "屏幕截图.png")
-机构管理界面
+
+##### 10：机构管理界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151337_038bfdff_536094.png "屏幕截图.png")
-机构授权界面
+
+##### 11：机构授权界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151413_f84f2bef_536094.png "屏幕截图.png")
-团队查询界面
+
+##### 12：团队查询界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151435_d7d1c1b0_536094.png "屏幕截图.png")
-系统监控界面
+
+##### 13：系统监控界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151510_b3518a2b_536094.png "屏幕截图.png")
-定时任务界面
+
+##### 14：定时任务界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151535_ad0ccc38_536094.png "屏幕截图.png")
-任务添加界面
+
+##### 15：任务添加界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151556_57aa3968_536094.png "屏幕截图.png")
-表达式生成界面
+
+##### 16：表达式生成界面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151619_a9373b5b_536094.png "屏幕截图.png")
-定时任务执行结果页面
+
+##### 17：定时任务执行结果页面
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0521/151652_c14a4722_536094.png "屏幕截图.png")
